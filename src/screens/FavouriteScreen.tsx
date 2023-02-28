@@ -22,13 +22,13 @@ const FavouriteScreen = ()=> {
          <Post  text="moja appp likacijaa" imgSrc='https://images.squarespace-cdn.com/content/v1/58e2c2712e69cfd46ad23073/1626716913782-U3Q04AVTCDVVV553A4QE/lucky+lous.png'></Post>
         </ScrollView>
       </View>
-        <Modal transparent={true} visible={visible} >
-          <View style={styles.modalView}>
-            <Text>This is a popup!</Text>
-            <Button title="Close" onPress={() => setVisible(false)} />
-          </View>
-        </Modal>
-    </View>
+          <Modal transparent={true} visible={visible} >
+            <View style={styles.modalView}>
+              <Text>This is a popup!</Text>
+              <Button title="Close" onPress={() => setVisible(false)} />
+            </View>
+          </Modal>
+      </View>
   );      
 };
 

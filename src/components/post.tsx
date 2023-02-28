@@ -18,7 +18,9 @@ type postProps = {
   setScrollE:(a:boolean)=>void;
   refi:(a:number)=>void;
   index:number;
+
 };
+
 const Post: React.FC<postProps> =({text,imgSrc,setScrollE,refi,index}) => {
   const [hgh, setHgh] = useState(200)
   const [details, setDetails] = useState([0])
@@ -47,13 +49,7 @@ const Post: React.FC<postProps> =({text,imgSrc,setScrollE,refi,index}) => {
       height:hgh
     },
   }); 
-  const postDetials=()=>{
-      if(details[0]!=0)
-      { 
-        return (<PostDetailsScreen ></PostDetailsScreen>);
-      }
-      return null;
-  };
+ 
   return (
       <View >
           <TouchableOpacity delayPressIn={0} onPress={()=>{
@@ -70,13 +66,8 @@ const Post: React.FC<postProps> =({text,imgSrc,setScrollE,refi,index}) => {
     />
      <Text style={styles.description} >{text}</Text>
       </TouchableOpacity> 
-     <FlatList
-     data={[
-        {key: details[0]}
-      ]}
-      renderItem={({item}) =>{ if(details[0]!=0) return (<PostDetailsScreen ></PostDetailsScreen>); else return <View></View>}}
-    />
-   
+      
+     {details[0]!=0 ? <PostDetailsScreen></PostDetailsScreen> : <View></View>}
       <Kraj hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} ></Kraj>
 </View>
       );

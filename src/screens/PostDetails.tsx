@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
       height: '100%',
       },
     scroll1: {
-      height:445,
+      height:428,
     },
     video:{
         width:'100%',

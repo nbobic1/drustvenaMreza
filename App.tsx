@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {Modal,Button,ScrollView,StyleSheet, Text, View } from 'react-native';
 import LogInScreen from './src/screens/LogInScreen';
 import FeedScreen from './src/screens/feedScreen';
-import PostDetailsScreen from './src/screens/PostDetails';
+import CreateScreen from './src/screens/CreateScreen';
 import FavouriteScreen from './src/screens/FavouriteScreen';
 export default function App() {
   //https://blog.jscrambler.com/getting-started-with-react-navigation-v6-and-typescript-in-react-native
@@ -41,8 +41,8 @@ export default function App() {
         initialParams={{}}
         />
         <Tab.Screen
-          name="PostDetailsScreen"
-          component={PostDetailsScreen}
+          name="Create"
+          component={CreateScreen}
           options={{title: 'Details'}}
         initialParams={{}}
         />
