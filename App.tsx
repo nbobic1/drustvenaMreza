@@ -1,20 +1,52 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 
+import React, { useState } from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import {Modal,Button,ScrollView,StyleSheet, Text, View } from 'react-native';
+import LogInScreen from './src/screens/LogInScreen';
+import FeedScreen from './src/screens/feedScreen';
+import PostDetailsScreen from './src/screens/PostDetails';
+import FavouriteScreen from './src/screens/FavouriteScreen';
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+  //https://blog.jscrambler.com/getting-started-with-react-navigation-v6-and-typescript-in-react-native
+  const Tab = createBottomTabNavigator();
+  return(
+    <NavigationContainer >
+      <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+
+          // You can return any component that you like here!
+          return <Text>{route.name}</Text>;
+      }})}
+      >
+          <Tab.Screen 
+            name="FeedScreen"
+            component={FeedScreen}
+            options={{title: 'Feed'}}
+          initialParams={{}}
+          
+          /><Tab.Screen
+          name="LogInScreen"
+          component={LogInScreen}
+          options={{title: 'LogIn'}}
+        initialParams={{}}
+        />
+        <Tab.Screen
+          name="FavouriteScreen"
+          component={FavouriteScreen}
+          options={{title: 'LogIn'}}
+        initialParams={{}}
+        />
+        <Tab.Screen
+          name="PostDetailsScreen"
+          component={PostDetailsScreen}
+          options={{title: 'Details'}}
+        initialParams={{}}
+        />
+        </Tab.Navigator>
+      </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
