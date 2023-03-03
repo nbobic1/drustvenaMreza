@@ -7,7 +7,7 @@
           
 */
 import React from 'react';
-import {FlatList,Text,StyleSheet, View, ImageBackground, TouchableOpacity} from 'react-native';
+import {Button,FlatList,Text,StyleSheet, View, ImageBackground, TouchableOpacity, Pressable} from 'react-native';
 import {useState} from 'react';
 import PostDetailsScreen from '../screens/PostDetails';
 import Kraj from './KrajBtn';
@@ -52,10 +52,10 @@ const Post: React.FC<postProps> =({text,imgSrc,setScrollE,refi,index}) => {
  
   return (
       <View >
-          <TouchableOpacity delayPressIn={0} onPress={()=>{
-  if(refi!=undefined&&index>=0)
+        <Pressable onPress={()=>{ if(refi!=undefined&&index>=0)
   refi(index);
-  if(hgh==400){setHgh(200); setDetails([0]);setScrollE(true);}else{ setHgh(400); setDetails([1]);setScrollE(false)};}}>
+  if(hgh==400){setHgh(200); setDetails([0]);setScrollE(true);}else{ setHgh(400); setDetails([1]);setScrollE(false)};
+  }} > 
     <FastImage
         style={styles.image}
         source={{
@@ -65,11 +65,13 @@ const Post: React.FC<postProps> =({text,imgSrc,setScrollE,refi,index}) => {
         resizeMode={FastImage.resizeMode.contain}
     />
      <Text style={styles.description} >{text}</Text>
-      </TouchableOpacity> 
-      
+  
+      </Pressable>
      {details[0]!=0 ? <PostDetailsScreen></PostDetailsScreen> : <View></View>}
       <Kraj hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} ></Kraj>
+         
 </View>
+
       );
   };
 
