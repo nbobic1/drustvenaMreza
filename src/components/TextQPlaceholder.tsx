@@ -16,10 +16,11 @@ import FastImage from 'react-native-fast-image'
 type postProps = {
   text: string;
   deleteEnabled: boolean;
+  id:number;
+  removeID:(a:number)=>void;
 };
-const YesNoQPlaceholder:  React.FC<postProps> =({text,deleteEnabled}) => {
+const YesNoQPlaceholder:  React.FC<postProps> =({text,deleteEnabled,id,removeID}) => {
   const [first, setFirst] = useState(text)
-  const [visible, setVisible] = useState(true);
   useEffect(() => {
     // Update the document title using the browser API
     setFirst(text)
@@ -49,14 +50,13 @@ const YesNoQPlaceholder:  React.FC<postProps> =({text,deleteEnabled}) => {
       width:'100%',
       backgroundColor:'white',
       borderWidth:5,
-      opacity:visible ? 1:0,
-      height: visible ? 'auto' : 0,
+     
         },
   }); 
  
   return (
       <View style={styles.root}>
-        <TouchableOpacity disabled={!deleteEnabled} onPress={()=>{setVisible(false); }}>
+        <TouchableOpacity disabled={!deleteEnabled} onPress={()=>{removeID(id) }}>
           <View pointerEvents={deleteEnabled ? 'none':'auto'}>
               <Text>{text}</Text>
               <Text>{first}</Text>

@@ -9,6 +9,7 @@ import YesNoQPlaceholder from '../components/YesNoQPlaceholder';
 import TextQPlaceholder from '../components/TextQPlaceholder';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import ImagePlaceholder from '../components/ImagePlaceholder';
 type RootStackParamList = {
   Home: undefined;
   Profile: { userId: string };
@@ -22,10 +23,11 @@ const CreateScreen = ()=> {
   const fun=(text:string)=> {setEmail(text);};
   type dty={
     type: number;
+    id:number;
   };
- const [DATA, setDATA] = useState<dty[]>([
-  
-]);
+ const [DATA, setDATA] = useState<dty[]>([{type:-1,id:-1}]);
+
+const removeID = (id:number) => {setDATA(DATA.filter(function(a:dty){return a.id != id}))};
     return (
     <View style={styles.container}>
       <View style={styles.feedView}>
@@ -33,14 +35,15 @@ const CreateScreen = ()=> {
             data={DATA}
             renderItem={({item}) =>{
                 if(item.type==2)
-                return (<TextInput placeholder="press to enter your text"></TextInput>)
+                  return (<TextInput placeholder="press to enter your text"></TextInput>)
                 else if(item.type==0)
-                return (<TouchableOpacity style={{height:200,width:'100%',backgroundColor:'white',borderWidth:5}}><Text style={{textAlign:'center',marginTop:90}}>Tap here to choose image</Text></TouchableOpacity>);
+                  return (<ImagePlaceholder deleteEnabled={deleteEnabled} id={item.id} removeID={removeID}></ImagePlaceholder>);
                 else if(item.type==4)
-                return (<YesNoQPlaceholder ></YesNoQPlaceholder>);
+                  return (<YesNoQPlaceholder id={item.id} removeID={removeID} deleteEnabled={deleteEnabled} ></YesNoQPlaceholder>);
                 else if(item.type==5)
-                return (<TextQPlaceholder deleteEnabled={deleteEnabled} text={email}></TextQPlaceholder>);
-                else return(<Text>ldsafdlja</Text>);
+                  return (<TextQPlaceholder id={item.id} removeID={removeID} deleteEnabled={deleteEnabled} text={email}></TextQPlaceholder>);
+                else 
+                  return(<Text>ldsafdlja</Text>);
             }}    
         />
          <View style={styles.singleRow}>
@@ -58,12 +61,12 @@ const CreateScreen = ()=> {
       <Modal transparent={true} visible={visible} >
           <View style={styles.modalView}>
             <Text>This is a popup!</Text>
-            <Button onPress={ ()=>{setDATA([...DATA,{type:0}]);}} title="Image"></Button>
-            <Button onPress={ ()=>{setDATA([...DATA,{type:1}]);}} title="Video"></Button>
-            <Button onPress={ ()=>{setDATA([...DATA,{type:2}]);}} title="Text"></Button>
-            <Button onPress={ ()=>{setDATA([...DATA,{type:3}]);}} title="Giff"></Button>
-            <Button onPress={ ()=>{setDATA([...DATA,{type:4}]);}} title="Yes/No question"></Button>
-            <Button onPress={ ()=>{setDATA([...DATA,{type:5}]);}} title="Text question"></Button>
+            <Button onPress={ ()=>{setDATA([...DATA,{type:0,id:DATA[DATA.length-1].id+1}]);}} title="Image"></Button>
+            <Button onPress={ ()=>{setDATA([...DATA,{type:1,id:DATA[DATA.length-1].id+1}]);}} title="Video"></Button>
+            <Button onPress={ ()=>{setDATA([...DATA,{type:2,id:DATA[DATA.length-1].id+1}]);}} title="Text"></Button>
+            <Button onPress={ ()=>{setDATA([...DATA,{type:3,id:DATA[DATA.length-1].id+1}]);}} title="Giff"></Button>
+            <Button onPress={ ()=>{setDATA([...DATA,{type:4,id:DATA[DATA.length-1].id+1}]);}} title="Yes/No question"></Button>
+            <Button onPress={ ()=>{setDATA([...DATA,{type:5,id:DATA[DATA.length-1].id+1}]);}} title="Text question"></Button>
             <Button title="Close" onPress={() => setVisible(false)} />
           </View>
         </Modal>

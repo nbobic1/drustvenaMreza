@@ -14,7 +14,12 @@ import Kraj from './KrajBtn';
 import FastImage from 'react-native-fast-image'
 
 
-const YesNoQPlaceholder =() => {
+type postProps = {
+  deleteEnabled: boolean;
+  id:number;
+  removeID:(a:number)=>void;
+};
+const YesNoQPlaceholder:React.FC<postProps> =({deleteEnabled,id,removeID}) => {
   const [hgh, setHgh] = useState(200)
   const [details, setDetails] = useState([0])
   const styles = StyleSheet.create({
@@ -66,7 +71,8 @@ const YesNoQPlaceholder =() => {
   }); 
  
   return (
-      <View style={styles.root}>
+      <Pressable disabled={!deleteEnabled} style={styles.root} onPress={()=>{removeID(id)}}>
+        <View pointerEvents={deleteEnabled ? 'none':'auto'}>
       <TextInput style={styles.description} placeholder="Your quesiton..." ></TextInput>
         <View style={styles.singleRow
         }>
@@ -77,7 +83,8 @@ const YesNoQPlaceholder =() => {
             <Text style={styles.btnTxt}>No</Text>
           </Pressable>
       </View>
-        </View> 
+      </View>
+        </Pressable> 
       );
   };
 

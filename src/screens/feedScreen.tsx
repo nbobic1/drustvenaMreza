@@ -58,7 +58,7 @@ const FeedScreen = ()=> {
   return index;
 };
 
-
+const [flatListHeight, setFlatListHeight] = useState(200)
 const [open, setOpen] = useState(false);
 const [value, setValue] = useState([]);
 const [items, setItems] = useState([
@@ -128,8 +128,9 @@ const [items1, setItems1] = useState([
         scrollEnabled={scrollE}
         data={DATA}
         keyExtractor={(item) => item.text}
+        onLayout={(item) =>{setFlatListHeight(item.nativeEvent.layout.height)}}
         renderItem={({item}) =>{
-          return (<Post setScrollE={setScrollE} text={item.text} imgSrc={item.imgSrc} refi={scrollToIndex} index={getItemIndex(item)}></Post>)}}
+          return (<Post flatListHeight={flatListHeight} setScrollE={setScrollE} text={item.text} imgSrc={item.imgSrc} refi={scrollToIndex} index={getItemIndex(item)}></Post>)}}
         
         />
       </View>
