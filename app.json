@@ -22,9 +22,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "cmake": {
-        "version": "3.18.1"
-      },
+     
       "package": "com.nbobic1.diplomskiv2"
     },
     "web": {

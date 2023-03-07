@@ -15,11 +15,13 @@ import FastImage from 'react-native-fast-image'
 
 
 type postProps = {
+  
   deleteEnabled: boolean;
+  reorderEnabled: boolean;
   id:number;
   removeID:(a:number)=>void;
 };
-const YesNoQPlaceholder:React.FC<postProps> =({deleteEnabled,id,removeID}) => {
+const YesNoQPlaceholder:React.FC<postProps> =({deleteEnabled,id,removeID,reorderEnabled}) => {
   const [hgh, setHgh] = useState(200)
   const [details, setDetails] = useState([0])
   const styles = StyleSheet.create({
@@ -71,6 +73,9 @@ const YesNoQPlaceholder:React.FC<postProps> =({deleteEnabled,id,removeID}) => {
   }); 
  
   return (
+    <View pointerEvents={reorderEnabled ? 'none':'auto'}>
+
+    
       <Pressable disabled={!deleteEnabled} style={styles.root} onPress={()=>{removeID(id)}}>
         <View pointerEvents={deleteEnabled ? 'none':'auto'}>
       <TextInput style={styles.description} placeholder="Your quesiton..." ></TextInput>
@@ -85,6 +90,7 @@ const YesNoQPlaceholder:React.FC<postProps> =({deleteEnabled,id,removeID}) => {
       </View>
       </View>
         </Pressable> 
+        </View>
       );
   };
 

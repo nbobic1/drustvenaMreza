@@ -10,6 +10,12 @@ import TextQPlaceholder from '../components/TextQPlaceholder';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import ImagePlaceholder from '../components/ImagePlaceholder';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+import DraggableFlatList, {
+  ScaleDecorator,
+  RenderItemParams,
+} from "react-native-draggable-flatlist";
 type RootStackParamList = {
   Home: undefined;
   Profile: { userId: string };
@@ -20,6 +26,8 @@ const CreateScreen = ()=> {
   const [email, setEmail] = useState("pocetni");
   const [visible, setVisible] = useState(false);
   const [deleteEnabled, setDeleteEnabled] = useState(false);
+  
+  const [reorderEnabled, setReorderEnabled] = useState(false);
   const fun=(text:string)=> {setEmail(text);};
   type dty={
     type: number;
@@ -31,30 +39,81 @@ const removeID = (id:number) => {setDATA(DATA.filter(function(a:dty){return a.id
     return (
     <View style={styles.container}>
       <View style={styles.feedView}>
-        <FlatList
-            data={DATA}
-            renderItem={({item}) =>{
-                if(item.type==2)
-                  return (<TextInput placeholder="press to enter your text"></TextInput>)
-                else if(item.type==0)
-                  return (<ImagePlaceholder deleteEnabled={deleteEnabled} id={item.id} removeID={removeID}></ImagePlaceholder>);
-                else if(item.type==4)
-                  return (<YesNoQPlaceholder id={item.id} removeID={removeID} deleteEnabled={deleteEnabled} ></YesNoQPlaceholder>);
-                else if(item.type==5)
-                  return (<TextQPlaceholder id={item.id} removeID={removeID} deleteEnabled={deleteEnabled} text={email}></TextQPlaceholder>);
-                else 
-                  return(<Text>ldsafdlja</Text>);
-            }}    
-        />
+       
+        <GestureHandlerRootView style={{ flex: 1, backgroundColor: 'seashell' }}>
+    <DraggableFlatList
+      data={DATA}
+      onDragEnd={({ data }) => setDATA(data)}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={
+        ({item,drag,isActive}) =>{
+          if(item.type==2)
+          return( <ScaleDecorator>
+            <TouchableOpacity
+              activeOpacity={1}
+              onLongPress={drag}
+              disabled={isActive}
+            >
+              <TextInput placeholder="press to enter your text"></TextInput>
+            </TouchableOpacity>
+          </ScaleDecorator>);
+          else if(item.type==0)
+            return( <ScaleDecorator>
+              <TouchableOpacity
+                activeOpacity={1}
+                onLongPress={drag}
+                disabled={isActive}
+              >
+                <ImagePlaceholder deleteEnabled={deleteEnabled} id={item.id} removeID={removeID}></ImagePlaceholder>
+              </TouchableOpacity>
+            </ScaleDecorator>);
+            else if(item.type==4)
+            return( <ScaleDecorator>
+              <TouchableOpacity
+                activeOpacity={1}
+                onLongPress={drag}
+                disabled={isActive}
+              >
+                <YesNoQPlaceholder reorderEnabled={reorderEnabled} id={item.id} removeID={removeID} deleteEnabled={deleteEnabled} ></YesNoQPlaceholder>
+              </TouchableOpacity>
+            </ScaleDecorator>);
+        
+          else if(item.type==5)
+          return( <ScaleDecorator>
+            <TouchableOpacity
+              activeOpacity={1}
+              onLongPress={drag}
+              disabled={isActive}
+            >
+              <TextQPlaceholder reorderEnabled={reorderEnabled} id={item.id} removeID={removeID} deleteEnabled={deleteEnabled} text={email}></TextQPlaceholder>
+            </TouchableOpacity>
+          </ScaleDecorator>);
+          else 
+            return( <ScaleDecorator>
+              <TouchableOpacity
+                activeOpacity={1}
+                onLongPress={drag}
+                disabled={isActive}
+              >
+                <Text >{item.id}</Text>
+              </TouchableOpacity>
+            </ScaleDecorator>);
+      }
+      }
+    />
+    </GestureHandlerRootView>
          <View style={styles.singleRow}>
-         <Pressable  style={styles.btn} onPress={()=>{setEmail("proslo kory dete123");setDeleteEnabled(true)}}>
+         <Pressable  style={styles.btn} onPress={()=>{setEmail("proslo kory dete123");setReorderEnabled(false);setDeleteEnabled(true)}}>
             <Text style={styles.btnTxt}>Delete</Text>
           </Pressable>
           <Pressable  style={styles.btn}>
             <Text style={styles.btnTxt}>Save</Text>
           </Pressable>
-          <Pressable style={styles.btn} onPress={()=>{setVisible(true);setDeleteEnabled(false)}} >
+          <Pressable style={styles.btn} onPress={()=>{setVisible(true);setReorderEnabled(false);setDeleteEnabled(false)}} >
             <Text style={styles.btnTxt}>Add</Text>
+          </Pressable>
+          <Pressable style={styles.btn} onPress={()=>{setReorderEnabled(true);setDeleteEnabled(false)}} >
+            <Text style={styles.btnTxt}>Reorder</Text>
           </Pressable>
       </View>
       </View>
