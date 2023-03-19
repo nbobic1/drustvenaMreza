@@ -5,15 +5,7 @@ import React, { useState } from 'react';
 import {Modal,Button,ScrollView,StyleSheet, Text, View } from 'react-native';
 import Post from '../components/post';
 import { useNavigation } from '@react-navigation/native';
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-type RootStackParamList = {
-  Home: undefined;
-  Profile: { userId: string };
-  Feed: { sort: 'latest' | 'top' } | undefined;
-};
 const FavouriteScreen = ()=> {   
-    
-  const navigation = useNavigation();
   const [visible, setVisible] = useState(false);
     return (
     <View style={styles.container}>
@@ -40,39 +32,10 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    
     feedView:{
       backgroundColor:'#f0f',
       height: '93%',
       width: '100%'
-    }
-    ,navBar:{
-      backgroundColor: '#fff',
-      height: '7%',
-      width: '100%',
-      flexDirection: 'row',
-     // flex: 1
-    },
-    navElement:{
-  
-      flexGrow: 1,
-      textAlign: 'center',
-      verticalAlign: 'middle',
-    },
-    img:{
-        width: '100%',
-        height: 200,
-    },
-    description:{
-      textAlign: 'center',
-      fontSize:20
-    }, 
-    modalContainer: {
-     width: '30%',
-      alignItems: 'center',
-      backgroundColor:'#000',
-      justifyContent: 'center',
-    
     },
     modalView: {
       backgroundColor: '#0f0',
@@ -82,14 +45,6 @@ const styles = StyleSheet.create({
       bottom: 100,
       alignSelf: 'center',
       elevation: 5,
-    },
-    modalView2: {
-      
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor:'#036',
-  
     },
   });
   export default FavouriteScreen;
