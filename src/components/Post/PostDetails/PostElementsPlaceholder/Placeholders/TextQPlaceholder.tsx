@@ -16,13 +16,14 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useState, useEffect } from "react";
+import { TextQElement } from "../../../../../utils/DataTypes";
 
 type postProps = {
   text: string;
   deleteEnabled: boolean;
   reorderEnabled: boolean;
   id: number;
-  value:string;
+  value:TextQElement;
   removeID: (a: number) => void;
 };
 const YesNoQPlaceholder: React.FC<postProps> = ({
@@ -73,7 +74,7 @@ const YesNoQPlaceholder: React.FC<postProps> = ({
           <Text>{first}</Text>
           <TextInput
             style={styles.description}
-            value={value}
+            onChangeText={(value1)=>{value.question=value1;}}
             placeholder="Your question..."
           ></TextInput>
           <TextInput placeholder="Your answer..."></TextInput>

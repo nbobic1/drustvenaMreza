@@ -9,6 +9,7 @@ import YesNoQPlaceholder from './PostElementsPlaceholder/Placeholders/YesNoQPlac
 import TextQPlaceholder from './PostElementsPlaceholder/Placeholders/TextQPlaceholder';
 import ImagePlaceholder from './PostElementsPlaceholder/Placeholders/ImagePlaceholder';
 import PostElementPlaceholder from './PostElementsPlaceholder/PostElementPlaceholder';
+import PostElements from './PostElements/PostElements';
 
 type Props = {
   height: number;
@@ -55,7 +56,6 @@ const PostDetailsScreen: React.FC<Props> = ({ height, items, hgh, setHgh, setScr
 
   const video = React.useRef(null);
 
-  console.log("================================", JSON.stringify(items));
   return (
       <View style={styles.feedView}>
        <ScrollView style={styles.scroll1}>
@@ -64,7 +64,7 @@ const PostDetailsScreen: React.FC<Props> = ({ height, items, hgh, setHgh, setScr
    //   style={{backgroundColor:'red'}}
         data={items}
         keyExtractor={(item1) => item1.index.toString()}
-        renderItem={({item})=>{return (<View pointerEvents={'none'}><PostElementPlaceholder element={item}></PostElementPlaceholder></View>)}}
+        renderItem={({item})=>{ return (<View pointerEvents={'none'}><PostElements element={item}></PostElements></View>)}}
         />
        </ScrollView>
         

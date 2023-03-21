@@ -35,7 +35,6 @@ const Post: React.FC<postProps> = ({ data, setScrollE, refi, index, flatListHeig
       marginTop: 16,
     },
   });
-  console.log("post",JSON.stringify(data.items[0].index));
   return (
     <View  >
       <Pressable onPress={() => {
