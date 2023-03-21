@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
-import { Modal, Button, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, TextInput, Modal, Button, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Video, AVPlaybackStatus, ResizeMode } from 'expo-av';
 import FastImage from 'react-native-fast-image'
-import {dty} from "../utils/DataTypes"
+import PostDetailsOptions from './PostDetailsOptions'
+import { PostData, PostElement, VideoElement, ImageElement, TextQElement, YesNoQElement, PostElementType } from "../../../utils/DataTypes"
+import { getMoviesFromApiAsync, sendMoviesFromApiAsync } from '../../../utils/ApiCalls';
+import YesNoQPlaceholder from './PostElementsPlaceholder/Placeholders/YesNoQPlaceholder';//   PostElementPlaceholders/Placeholders/YesNoQPlaceholder';
+import TextQPlaceholder from './PostElementsPlaceholder/Placeholders/TextQPlaceholder';
+import ImagePlaceholder from './PostElementsPlaceholder/Placeholders/ImagePlaceholder';
+import PostElementPlaceholder from './PostElementsPlaceholder/PostElementPlaceholder';
 
 type Props = {
   height: number;
-  item:dty[];
+  items: PostElement[];
+  hgh: any;
+  setHgh: (a: any) => void;
+  setScrollE: (a: boolean) => void;
+  setDetails: (a: any) => void;
 };
-const PostDetailsScreen: React.FC<Props> = ({ height,item }) => {
+const PostDetailsScreen: React.FC<Props> = ({ height, items, hgh, setHgh, setScrollE, setDetails }) => {
 
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
@@ -28,7 +37,7 @@ const PostDetailsScreen: React.FC<Props> = ({ height,item }) => {
     },
     feedView: {
       backgroundColor: '#f0ff41',
-      height: '100%',
+      height: height,
       width: '100%'
     },
     image: {
@@ -43,13 +52,30 @@ const PostDetailsScreen: React.FC<Props> = ({ height,item }) => {
     },
 
   });
-  
-  const video = React.useRef(null);
-  return (
-    <View style={styles.container}>
-      <View style={styles.feedView}>
 
-        <ScrollView style={styles.scroll1} 
+  const video = React.useRef(null);
+
+  console.log("================================", JSON.stringify(items));
+  return (
+      <View style={styles.feedView}>
+       <ScrollView style={styles.scroll1}>
+
+       <FlatList
+   //   style={{backgroundColor:'red'}}
+        data={items}
+        keyExtractor={(item1) => item1.index.toString()}
+        renderItem={({item})=>{return (<View pointerEvents={'none'}><PostElementPlaceholder element={item}></PostElementPlaceholder></View>)}}
+        />
+       </ScrollView>
+        
+        <PostDetailsOptions hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} ></PostDetailsOptions>
+      </View>
+  );
+};
+
+export default PostDetailsScreen;
+/* 
+  <ScrollView style={styles.scroll1} 
     //nestedScrollEnabled={true}  
     >
 
@@ -97,11 +123,5 @@ const PostDetailsScreen: React.FC<Props> = ({ height,item }) => {
             isLooping
             style={styles.video}
           />
-        </ScrollView>
-      </View>
-
-    </View>
-  );
-};
-
-export default PostDetailsScreen;
+        </ScrollView> 
+ */

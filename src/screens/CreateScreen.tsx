@@ -2,15 +2,16 @@
 
 import React, { useState } from 'react';
 import { Pressable, Modal, Button, ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import YesNoQPlaceholder from '../components/YesNoQPlaceholder';
-import TextQPlaceholder from '../components/TextQPlaceholder';
-import ImagePlaceholder from '../components/ImagePlaceholder';
+import YesNoQPlaceholder from '../components/Post/PostDetails/PostElementsPlaceholder/Placeholders/YesNoQPlaceholder';
+import TextQPlaceholder from '../components/Post/PostDetails/PostElementsPlaceholder/Placeholders/TextQPlaceholder';
+import ImagePlaceholder from '../components/Post/PostDetails/PostElementsPlaceholder/Placeholders/ImagePlaceholder';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DraggableFlatList, {
   ScaleDecorator,
   RenderItemParams,
 } from "react-native-draggable-flatlist";
-import { dty } from "../utils/DataTypes"
+import {PostElement,VideoElement,ImageElement,PostElementType ,TextQElement,YesNoQElement} from "../utils/DataTypes"
+import { sendMoviesFromApiAsync } from '../utils/ApiCalls';
 
 const CreateScreen = () => {
 
@@ -20,20 +21,20 @@ const CreateScreen = () => {
   const [reorderEnabled, setReorderEnabled] = useState(false);
   const fun = (text: string) => { setEmail(text); };
 
-  const [DATA, setDATA] = useState<dty[]>([{ type: -1, id: -1, text_questions_url: "" ,answer:""}]);
-  const renderItem = (item: dty) => {
-    if (item.type == 2)
-      <TextInput placeholder="press to enter your text" value={item.text_questions_url}></TextInput>
-    else if (item.type == 0)
-      return (<ImagePlaceholder deleteEnabled={deleteEnabled} id={item.id} removeID={removeID}></ImagePlaceholder>);
-    else if (item.type == 4)
-      return (<YesNoQPlaceholder value={item.text_questions_url} reorderEnabled={reorderEnabled} id={item.id} removeID={removeID} deleteEnabled={deleteEnabled} ></YesNoQPlaceholder>);
-    else if (item.type == 5)
-      return (<TextQPlaceholder value={item.text_questions_url} reorderEnabled={reorderEnabled} id={item.id} removeID={removeID} deleteEnabled={deleteEnabled} text={email}></TextQPlaceholder>);
+  const [DATA, setDATA] = useState<PostElement[]>([{index:-1,url:""}as VideoElement]);
+  const renderItem = (item: PostElement) => {
+    if (item.type== PostElementType.VideoElement)
+      <TextInput placeholder="press to enter your text" value={item.url}></TextInput>
+    else if ( item.type== PostElementType.ImageElement)
+      return (<ImagePlaceholder deleteEnabled={deleteEnabled} id={item.index} removeID={removeID}></ImagePlaceholder>);
+    else if (item.type== PostElementType.YesNoQElement)
+      return (<YesNoQPlaceholder value={item.question} reorderEnabled={reorderEnabled} id={item.index} removeID={removeID} deleteEnabled={deleteEnabled} ></YesNoQPlaceholder>);
+    else if (item.type== PostElementType.TextQElement)
+      return (<TextQPlaceholder value={item.question} reorderEnabled={reorderEnabled} id={item.index} removeID={removeID} deleteEnabled={deleteEnabled} text={email}></TextQPlaceholder>);
     else
       return (<Text>ldsafdlja</Text>);
   };
-  const removeID = (id: number) => { setDATA(DATA.filter(function (a: dty) { return a.id != id })) };
+  const removeID = (index: number) => { setDATA(DATA.filter(function (a: PostElement) { return a.index != index })) };
   return (
     <View style={styles.container}>
       <View style={styles.feedView}>
@@ -41,7 +42,7 @@ const CreateScreen = () => {
           <DraggableFlatList
             data={DATA}
             onDragEnd={({ data }) => setDATA(data)}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item) => item.index.toString()}
             renderItem={
               ({ item, drag, isActive }) => {
 
@@ -63,7 +64,7 @@ const CreateScreen = () => {
           <Pressable style={styles.btn} onPress={() => { setEmail("proslo kory dete123"); setReorderEnabled(false); setDeleteEnabled(true) }}>
             <Text style={styles.btnTxt}>Delete</Text>
           </Pressable>
-          <Pressable style={styles.btn}>
+          <Pressable style={styles.btn} onPress={()=>{sendMoviesFromApiAsync({index:1,imgSrc:"url neki",text:"ovo jen eki tilte",items:JSON.stringify(DATA)}) }} >
             <Text style={styles.btnTxt}>Save</Text>
           </Pressable>
           <Pressable style={styles.btn} onPress={() => { setVisible(true); setReorderEnabled(false); setDeleteEnabled(false) }} >
@@ -77,12 +78,12 @@ const CreateScreen = () => {
       <Modal transparent={true} visible={visible} >
         <View style={styles.modalView}>
           <Text>This is a popup!</Text>
-          <Button onPress={() => { setDATA([...DATA, { type: 0, id: DATA[DATA.length - 1].id + 1, text_questions_url: "" ,answer:""}]); }} title="Image"></Button>
-          <Button onPress={() => { setDATA([...DATA, { type: 1, id: DATA[DATA.length - 1].id + 1, text_questions_url: "",answer:"" }]); }} title="Video"></Button>
-          <Button onPress={() => { setDATA([...DATA, { type: 2, id: DATA[DATA.length - 1].id + 1, text_questions_url: "",answer:"" }]); }} title="Text"></Button>
-          <Button onPress={() => { setDATA([...DATA, { type: 3, id: DATA[DATA.length - 1].id + 1, text_questions_url: "",answer:"" }]); }} title="Giff"></Button>
-          <Button onPress={() => { setDATA([...DATA, { type: 4, id: DATA[DATA.length - 1].id + 1, text_questions_url: "",answer:"" }]); }} title="Yes/No question"></Button>
-          <Button onPress={() => { setDATA([...DATA, { type: 5, id: DATA[DATA.length - 1].id + 1, text_questions_url: "" ,answer:""}]); }} title="Text question"></Button>
+          <Button onPress={() => { setDATA([...DATA,{index: DATA[DATA.length - 1].index + 1,  url:"" ,type:PostElementType.ImageElement}]); }} title="Image"></Button>
+          <Button onPress={() => { setDATA([...DATA, {index:DATA[DATA.length - 1].index + 1, url: "",type:PostElementType.VideoElement }]); }} title="Vindexeo"></Button>
+          <Button onPress={() => { setDATA([...DATA, {index: DATA[DATA.length - 1].index + 1,question: "",answer:"",type:PostElementType.TextQElement}]); }} title="Text"></Button>
+          <Button onPress={() => { setDATA([...DATA, {index: DATA[DATA.length - 1].index + 1,url:"" ,type:PostElementType.VideoElement} ]); }} title="Giff"></Button>
+          <Button onPress={() => { setDATA([...DATA, {index: DATA[DATA.length - 1].index + 1, question: "",answer:false ,type:PostElementType.YesNoQElement}]); }} title="Yes/No question"></Button>
+          <Button onPress={() => { setDATA([...DATA, {index: DATA[DATA.length - 1].index + 1, question:"" ,answer:"",type:PostElementType.TextQElement}]); }} title="Text question"></Button>
           <Button title="Close" onPress={() => setVisible(false)} />
         </View>
       </Modal>

@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {  Text, View } from 'react-native';
 import LogInScreen from './src/screens/LogInScreen';
-import FeedScreen from './src/screens/feedScreen';
+import FeedScreen from './src/screens/FeedScreen';
 import CreateScreen from './src/screens/CreateScreen';
 import FavouriteScreen from './src/screens/FavouriteScreen';
 
@@ -29,7 +29,11 @@ export default function App () {
           tabBarIcon: ({ focused, color, size }) => {
             // You can return any component that you like here!
             return <Text>{route.name}</Text>;
-          }
+            },
+            tabBarLabel:() => {return null},
+            header: ({ navigation, route, options }) => {
+              return (null);
+            }
         })}
       >
         <Tab.Screen

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button, FlatList, Text, StyleSheet, View, ImageBackground, TouchableOpacity, Pressable } from 'react-native';
 import { useState } from 'react';
-import PostDetailsScreen from '../screens/PostDetails';
-import Kraj from './KrajBtn';
+import PostDetailsScreen from './PostDetails/PostDetails';
+import Kraj from '../KrajBtn';
 import FastImage from 'react-native-fast-image'
-import { DataItem } from '../utils/DataTypes';
+import { PostData } from '../../utils/DataTypes';
 
 type postProps = {
-  data:DataItem;
+  data:PostData;
   setScrollE: (a: boolean) => void;
   refi: (a: number) => void;
   index: number;
@@ -35,7 +35,7 @@ const Post: React.FC<postProps> = ({ data, setScrollE, refi, index, flatListHeig
       marginTop: 16,
     },
   });
-    console.group("\npost ope renderam",index)
+  console.log("post",JSON.stringify(data.items[0].index));
   return (
     <View  >
       <Pressable onPress={() => {
@@ -59,8 +59,8 @@ const Post: React.FC<postProps> = ({ data, setScrollE, refi, index, flatListHeig
         />
         <Text style={styles.description} >{data.text}</Text>
       </Pressable>
-      {details[0] != 0 ? <PostDetailsScreen item={data.data} height={flatListHeight - 260}></PostDetailsScreen> : <View></View> /*200 je slika, 30 text ispod nje, 30 back button*/}
-      <Kraj hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} ></Kraj>
+      {details[0] != 0 ? <PostDetailsScreen  hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} items={data.items} height={flatListHeight - 230}></PostDetailsScreen> : <View></View> /*200 je slika, 30 text ispod nje, 30 back button*/}
+      
     </View>
 
   );

@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FlatList, Modal, Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import Post from '../components/post';
+import Post from '../components/Post/Post';
 import DropDownPicker from 'react-native-dropdown-picker'
-import { DataItem } from '../utils/DataTypes';
+import { PostData } from '../utils/DataTypes';
 
 import { getMoviesFromApiAsync, sendMoviesFromApiAsync } from '../utils/ApiCalls';
 import PostList from '../components/PostList';
@@ -36,6 +36,7 @@ const FeedScreen = () => {
     { label: '3', value: 3 },
     { label: '4', value: 4 },
   ]);
+ 
 
   console.log("citav ffeed")
   return (
@@ -83,16 +84,14 @@ const FeedScreen = () => {
         <View style={{ height: '5%',backgroundColor:'yellow' }}>
           <Button onPress={() => {
             console.log("\nuseEffect\n")
-            var a = getMoviesFromApiAsync();
-            console.log(a);
-            console.log("--------------------------------kraj")
+             getMoviesFromApiAsync();
           }} title="popup"></Button>
         </View>
         <View style={{ height: '5%',backgroundColor:'yellow' }}>
           <Button onPress={() => {
-            console.log("\nuseEffect\n")
-            var a = sendMoviesFromApiAsync();
-            console.log(a);
+            console.log("\nuseEffect1111\n")
+            // sendMoviesFromApiAsync().then(() => {console.log("hehehehehehhe")});
+            
             console.log("--------------------------------kraj")
           }} title="psend"></Button>
         </View>

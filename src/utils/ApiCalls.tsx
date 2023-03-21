@@ -1,7 +1,9 @@
+import { PostElement,PostData } from "./DataTypes";
+
 export const getMoviesFromApiAsync = async () => {
-    /*try {
+    try {
       const response = await fetch(
-        'http://192.168.1.3:32769/WeatherForecast', {
+        'http://192.168.1.3:32771/WeatherForecast/GetMovie', {
             method: 'GET',
             headers: {
               Accept: 'text/plain'
@@ -10,14 +12,20 @@ export const getMoviesFromApiAsync = async () => {
           }
       );
       const json = await response.json();
-      console.log("rezutas")
-      console.log("eh sad="+json[0].title);
+      console.log("rezutas"+json.length)
+      console.log("eh sad="+JSON.stringify(JSON.parse(json[0].items)[0]));
+      for(var i=0; i<json.length; i++)
+      {
+        json[i].index=json[i].id;
+        json[i].text=json[i].index.toString();
+        json[i].items=JSON.parse(json[i].items)
+      }
       return json;//array of movies
     } catch (error) {
       console.error(error);
     }
 
-*/
+/*
     var request = new XMLHttpRequest();
 request.onreadystatechange = e => {
   if (request.readyState !== 4) {
@@ -32,30 +40,25 @@ request.onreadystatechange = e => {
 };
 request.open('POST', 'http://192.168.1.3:32769/WeatherForecast/PostMovie',true);
 request.send("fsgsg");
-
+*/
   };
-  export const sendMoviesFromApiAsync = async () => {
+  export const sendMoviesFromApiAsync = async (data:any) => {
     try {
+      console.log(JSON.stringify(data));
         const response = await fetch(
-          'http://192.168.1.3:32769/WeatherForecast/PostMovie', {
+          'http://192.168.1.3:32771/WeatherForecast/PostMovie', {
               method: 'POST',
               headers: {
                 Accept: 'text/plain',
                 "Content-Type": 'application/json',
               },
               mode:'cors',
-              body: JSON.stringify( {
-                id: 0,
-                title: "string",
-                releaseDate: "2023-03-19",
-                genre: "string",
-                price: 0
-              }), 
+              body: JSON.stringify(data), 
             }
         );
         const json = await response.json();
         console.log("rezutas")
-        console.log("eh sad1="+json[0].title);
+        console.log("eh sad1="+json[0]);
         return json;//array of movies
       } catch (error) {
 
