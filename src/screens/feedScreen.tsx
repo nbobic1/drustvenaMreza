@@ -7,12 +7,9 @@ import { PostData } from '../utils/DataTypes';
 import { getMoviesFromApiAsync, sendMoviesFromApiAsync } from '../utils/ApiCalls';
 import PostList from '../components/PostList';
 const FeedScreen = () => {
-
-
-
   const [visible, setVisible] = useState(false);
   const [cols, setCols] = useState(1)
-
+  const [searchText, setSearchText] = useState("");
   const [selectedItem, setSelectedItem] = useState<string>('');
 
   const [open, setOpen] = useState(false);
@@ -36,14 +33,14 @@ const FeedScreen = () => {
     { label: '3', value: 3 },
     { label: '4', value: 4 },
   ]);
- 
+
 
   console.log("citav ffeed")
   return (
     <View style={styles.container}>
       <View style={styles.feedView}>
         <View style={styles.top}>
-          <TextInput placeholder='Search...' style={{ flex: 1, backgroundColor: 'green' }}></TextInput>
+          <TextInput onChangeText={(text) => { setSearchText(text) }} placeholder='Search...' style={{ flex: 1, backgroundColor: 'green' }}></TextInput>
           <View style={{ flex: 1 }}>
             <DropDownPicker
               open={open}
@@ -78,22 +75,8 @@ const FeedScreen = () => {
           </View>
         </View>
         <View
-          style={{height:'85%' }}>
-          <PostList cols={cols}></PostList>
-        </View>
-        <View style={{ height: '5%',backgroundColor:'yellow' }}>
-          <Button onPress={() => {
-            console.log("\nuseEffect\n")
-             getMoviesFromApiAsync();
-          }} title="popup"></Button>
-        </View>
-        <View style={{ height: '5%',backgroundColor:'yellow' }}>
-          <Button onPress={() => {
-            console.log("\nuseEffect1111\n")
-            // sendMoviesFromApiAsync().then(() => {console.log("hehehehehehhe")});
-            
-            console.log("--------------------------------kraj")
-          }} title="psend"></Button>
+          style={{ height: '95%' }}>
+          <PostList searchText={searchText} cols={cols}></PostList>
         </View>
       </View>
       <Modal transparent={true} visible={visible} >
@@ -114,13 +97,13 @@ const FeedScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height:'100%',
+    height: '100%',
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
   top: {
-    height:'5%',
+    height: '5%',
     flexDirection: 'row',
     zIndex: 100
   },

@@ -8,19 +8,22 @@ import YesNoQPlaceholder from './Placeholders/YesNoQPlaceholder';
 
 type Props = {
 element:PostElement;
+deleteEnabled:boolean;
+removeID:(a:number) => void;
+reorderEnabled:boolean;
 };
 
 
-const PostElementPlaceholder =({element}:Props)=>{
+const PostElementPlaceholder =({element,reorderEnabled,deleteEnabled,removeID}:Props)=>{
     console.log("hhhhhhhhhhh=",JSON.stringify(element));
    if (element.type==PostElementType.VideoElement)
     return( <TextInput placeholder="press to enter your text" value={"egasdgagdag"}></TextInput>)
  else if ( element.type==PostElementType.ImageElement)
-     return (<ImagePlaceholder deleteEnabled={false} id={element.index} removeID={(a:number)=>{}}></ImagePlaceholder>);
+     return (<ImagePlaceholder deleteEnabled={deleteEnabled} id={element.index} removeID={removeID} value={element}></ImagePlaceholder>);
    else if (element.type==PostElementType.YesNoQElement)
-     return (<YesNoQPlaceholder value={element.question} reorderEnabled={false} id={element.index} removeID={(a:number)=>{}} deleteEnabled={false} ></YesNoQPlaceholder>);
+     return (<YesNoQPlaceholder value={element} reorderEnabled={reorderEnabled} id={element.index} removeID={removeID} deleteEnabled={deleteEnabled} ></YesNoQPlaceholder>);
    else if (element.type==PostElementType.TextQElement)
-     return (<TextQPlaceholder value={element.question} reorderEnabled={false} id={element.index} removeID={(a:number)=>{}} deleteEnabled={false} text={"fs"}></TextQPlaceholder>);
+     return (<TextQPlaceholder value={element} reorderEnabled={reorderEnabled} id={element.index} removeID={removeID} deleteEnabled={deleteEnabled} text={"fs"}></TextQPlaceholder>);
    else
      return (<Text>ldsafdlja</Text>);
 };

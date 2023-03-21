@@ -2,38 +2,29 @@
 
 import React, { useState } from 'react';
 import { Pressable, Modal, Button, ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import YesNoQPlaceholder from '../components/Post/PostDetails/PostElementsPlaceholder/Placeholders/YesNoQPlaceholder';
-import TextQPlaceholder from '../components/Post/PostDetails/PostElementsPlaceholder/Placeholders/TextQPlaceholder';
-import ImagePlaceholder from '../components/Post/PostDetails/PostElementsPlaceholder/Placeholders/ImagePlaceholder';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DraggableFlatList, {
   ScaleDecorator,
-  RenderItemParams,
 } from "react-native-draggable-flatlist";
 import {PostElement,VideoElement,ImageElement,PostElementType ,TextQElement,YesNoQElement} from "../utils/DataTypes"
-import { sendMoviesFromApiAsync } from '../utils/ApiCalls';
+import { getPexelImages, sendMoviesFromApiAsync } from '../utils/ApiCalls';
+import PostElementPlaceholder from '../components/Post/PostDetails/PostElementsPlaceholder/PostElementPlaceholder';
+import ImageSearcher from '../components/ImageSearcher';
 
 const CreateScreen = () => {
 
   const [email, setEmail] = useState("pocetni");
   const [visible, setVisible] = useState(false);
+  const [title, setTitle] = useState("");
+  const [saveVisible, setSaveVisible] = useState(false);
+  const [pickerVisible, setPickerVisibile] = useState(false);
   const [deleteEnabled, setDeleteEnabled] = useState(false);
   const [reorderEnabled, setReorderEnabled] = useState(false);
   const fun = (text: string) => { setEmail(text); };
+  const [imgSrc, setImgSrc] = useState("");
 
   const [DATA, setDATA] = useState<PostElement[]>([{index:-1,url:""}as VideoElement]);
-  const renderItem = (item: PostElement) => {
-    if (item.type== PostElementType.VideoElement)
-      <TextInput placeholder="press to enter your text" value={item.url}></TextInput>
-    else if ( item.type== PostElementType.ImageElement)
-      return (<ImagePlaceholder deleteEnabled={deleteEnabled} id={item.index} removeID={removeID}></ImagePlaceholder>);
-    else if (item.type== PostElementType.YesNoQElement)
-      return (<YesNoQPlaceholder value={item.question} reorderEnabled={reorderEnabled} id={item.index} removeID={removeID} deleteEnabled={deleteEnabled} ></YesNoQPlaceholder>);
-    else if (item.type== PostElementType.TextQElement)
-      return (<TextQPlaceholder value={item.question} reorderEnabled={reorderEnabled} id={item.index} removeID={removeID} deleteEnabled={deleteEnabled} text={email}></TextQPlaceholder>);
-    else
-      return (<Text>ldsafdlja</Text>);
-  };
+console.log("createScreen->rerender")
   const removeID = (index: number) => { setDATA(DATA.filter(function (a: PostElement) { return a.index != index })) };
   return (
     <View style={styles.container}>
@@ -44,7 +35,7 @@ const CreateScreen = () => {
             onDragEnd={({ data }) => setDATA(data)}
             keyExtractor={(item) => item.index.toString()}
             renderItem={
-              ({ item, drag, isActive }) => {
+              ({ item, drag, isActive}) => {
 
                 return (<ScaleDecorator>
                   <TouchableOpacity
@@ -52,7 +43,7 @@ const CreateScreen = () => {
                     onLongPress={drag}
                     disabled={isActive}
                   >
-                    {renderItem(item)}
+                    <PostElementPlaceholder removeID={removeID} deleteEnabled={deleteEnabled} reorderEnabled={reorderEnabled} element={item}></PostElementPlaceholder>
                   </TouchableOpacity>
                 </ScaleDecorator>);
 
@@ -64,7 +55,7 @@ const CreateScreen = () => {
           <Pressable style={styles.btn} onPress={() => { setEmail("proslo kory dete123"); setReorderEnabled(false); setDeleteEnabled(true) }}>
             <Text style={styles.btnTxt}>Delete</Text>
           </Pressable>
-          <Pressable style={styles.btn} onPress={()=>{sendMoviesFromApiAsync({index:1,imgSrc:"url neki",text:"ovo jen eki tilte",items:JSON.stringify(DATA)}) }} >
+          <Pressable style={styles.btn} onPress={()=>{setSaveVisible(true); setReorderEnabled(false); setDeleteEnabled(false) }} >
             <Text style={styles.btnTxt}>Save</Text>
           </Pressable>
           <Pressable style={styles.btn} onPress={() => { setVisible(true); setReorderEnabled(false); setDeleteEnabled(false) }} >
@@ -87,6 +78,24 @@ const CreateScreen = () => {
           <Button title="Close" onPress={() => setVisible(false)} />
         </View>
       </Modal>
+      <Modal transparent={true} visible={saveVisible} >
+        <View style={styles.modalView}>
+          <Text>Fill post data to save it.</Text>
+          <TextInput onChangeText={(text)=>{setTitle(text)}} placeholder='Title'></TextInput>
+          <Button title="Add cover image" onPress={() => {setPickerVisibile(true)}} />
+          <Button onPress={() => {
+            console.log(title)
+            console.log("saveam==========",JSON.stringify(DATA));
+            sendMoviesFromApiAsync({imgSrc:imgSrc,text:title,items:JSON.stringify(DATA)})
+            setSaveVisible(false)
+            setDATA([{index:-1,url:"",type:PostElementType.ImageElement}])
+          
+             }} title="Save"></Button>
+             
+          <Button title="Close" onPress={() => {setSaveVisible(false);}} />
+        </View>
+      </Modal>
+      <ImageSearcher setImgSrc={setImgSrc} visible={pickerVisible} setVisibile={setPickerVisibile}></ImageSearcher>
     </View>
   );
 };

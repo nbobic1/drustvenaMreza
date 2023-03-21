@@ -22,7 +22,6 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-     
       "package": "com.nbobic1.diplomskiv2"
     },
     "web": {

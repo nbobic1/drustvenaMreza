@@ -7,7 +7,7 @@ TextQElement,
 YesNoQElement
 }
 export type PostData ={
-  index: number;
+  id:number;
   text: string;
   imgSrc: string;
  items: PostElement[];

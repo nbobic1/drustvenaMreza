@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 
+import FastImage from 'react-native-fast-image'
+
 import {Modal,Button,ScrollView,StyleSheet, Text, View } from 'react-native';
 import Posts from '../components/Post/Post';
 import { useNavigation } from '@react-navigation/native';
@@ -10,8 +12,16 @@ const FavouriteScreen = ()=> {
     return (
     <View style={styles.container}>
       <View style={styles.feedView}>
+      
         <ScrollView> 
-         <Post  text="moja appp likacijaa" imgSrc='https://images.squarespace-cdn.com/content/v1/58e2c2712e69cfd46ad23073/1626716913782-U3Q04AVTCDVVV553A4QE/lucky+lous.png'></Post>
+        <FastImage
+        style={{height:200,width:200}}
+            source={{
+              uri: 'https://images.pexels.com/photos/1835008/pexels-photo-1835008.jpeg?auto=compress&cs=tinysrgb&h=130',
+              priority: FastImage.priority.normal,
+            }}
+            resizeMode={FastImage.resizeMode.contain}
+          />
         </ScrollView>
       </View>
           <Modal transparent={true} visible={visible} >

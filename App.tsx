@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Platform, UIManager } from 'react-native'
+import {KeyboardAvoidingView ,Platform, UIManager } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {  Text, View } from 'react-native';
@@ -22,6 +22,8 @@ export default function App () {
   //https://blog.jscrambler.com/getting-started-with-react-navigation-v6-and-typescript-in-react-native
   const Tab = createBottomTabNavigator();
   return (
+    
+    
     <NavigationContainer >
       <Tab.Navigator
         
@@ -61,6 +63,7 @@ export default function App () {
           initialParams={{}}
         />
       </Tab.Navigator>
+      
     </NavigationContainer>
   );
 }

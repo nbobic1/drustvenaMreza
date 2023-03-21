@@ -18,7 +18,7 @@ type postProps = {
   value:YesNoQElement;
   removeID: (a: number) => void;
 };
-const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, reorderEnabled, value }) => {
+const YesNoQ: React.FC<postProps> = ({ deleteEnabled, id, removeID, reorderEnabled, value }) => {
   const [hgh, setHgh] = useState(200)
   const [details, setDetails] = useState([0])
   /*useEffect(()=> {
@@ -88,4 +88,4 @@ console.log("sto ne radiiii=",value.answer);
     </View>
   );
 };
-export default YesNoQPlaceholder;
+export default YesNoQ;
