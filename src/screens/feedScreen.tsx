@@ -1,16 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FlatList, Modal, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import Post from '../components/Post/Post';
 import DropDownPicker from 'react-native-dropdown-picker'
-import { PostData } from '../utils/DataTypes';
 
-import { getMoviesFromApiAsync, sendMoviesFromApiAsync } from '../utils/ApiCalls';
 import PostList from '../components/PostList';
+import { Box, Input } from 'native-base';
 const FeedScreen = () => {
+ 
   const [visible, setVisible] = useState(false);
   const [cols, setCols] = useState(1)
   const [searchText, setSearchText] = useState("");
-  const [selectedItem, setSelectedItem] = useState<string>('');
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState([]);
@@ -24,7 +23,6 @@ const FeedScreen = () => {
 
   ]);
 
-
   const [open1, setOpen1] = useState(false);
   const [value1, setValue1] = useState(0);
   const [items1, setItems1] = useState([
@@ -33,14 +31,14 @@ const FeedScreen = () => {
     { label: '3', value: 3 },
     { label: '4', value: 4 },
   ]);
-
-
   console.log("citav ffeed")
+  // <TextInput onSubmitEditing={(text) => {console.log("subimta"); setSearchText(text.nativeEvent.text) }} placeholder='Search...' style={{ flex: 1, backgroundColor: 'green' }}></TextInput>
+         
   return (
     <View style={styles.container}>
       <View style={styles.feedView}>
         <View style={styles.top}>
-          <TextInput onChangeText={(text) => { setSearchText(text) }} placeholder='Search...' style={{ flex: 1, backgroundColor: 'green' }}></TextInput>
+      <Input mx="3" placeholder="Input" w="30%" />
           <View style={{ flex: 1 }}>
             <DropDownPicker
               open={open}
@@ -76,7 +74,7 @@ const FeedScreen = () => {
         </View>
         <View
           style={{ height: '95%' }}>
-          <PostList searchText={searchText} cols={cols}></PostList>
+          <PostList searchText={searchText}  cols={cols}></PostList>
         </View>
       </View>
       <Modal transparent={true} visible={visible} >
@@ -108,7 +106,7 @@ const styles = StyleSheet.create({
     zIndex: 100
   },
   feedView: {
-    backgroundColor: '#f0f',
+    backgroundColor: 'seashell',
     height: '100%',
     width: '100%',
   },

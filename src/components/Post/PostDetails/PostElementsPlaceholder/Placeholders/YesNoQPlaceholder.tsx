@@ -7,9 +7,11 @@
           
 */
 import React, { useEffect } from 'react';
-import { FlatList, Text, StyleSheet, View, ImageBackground, TouchableOpacity, TextInput, Button, Pressable } from 'react-native';
+import { FlatList, Text, StyleSheet, View, ImageBackground, TouchableOpacity, TextInput,  Pressable } from 'react-native';
 import { useState } from 'react';
 import { PostElement, YesNoQElement } from '../../../../../utils/DataTypes';
+import YesNo from '../../../../YesNo';
+import { Box, Button, Flex, Input, Spacer } from 'native-base';
 
 type postProps = {
   deleteEnabled: boolean;
@@ -17,8 +19,9 @@ type postProps = {
   id: number;
   value:YesNoQElement;
   removeID: (a: number) => void;
+  saveE:boolean;
 };
-const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, reorderEnabled, value }) => {
+const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, reorderEnabled, value,saveE }) => {
   const [hgh, setHgh] = useState(200)
   const [details, setDetails] = useState([0])
   /*useEffect(()=> {
@@ -44,8 +47,6 @@ const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, r
     },
     root: {
       width: '100%',
-      backgroundColor: 'white',
-      borderWidth: 5
     },
     singleRow:
     {
@@ -70,19 +71,14 @@ const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, r
   });
 console.log("sto ne radiiii=",value.answer);
   return (
-    <View pointerEvents={reorderEnabled ? 'none' : 'auto'}>
+    <View pointerEvents={reorderEnabled ? 'none' : 'auto'} >
       <Pressable disabled={!deleteEnabled} style={styles.root} onPress={() => { removeID(id) }}>
         <View pointerEvents={deleteEnabled ? 'none' : 'auto'}>
-          <TextInput style={styles.description} placeholder={value.question} onChangeText={(text)=>{value.question=text}}></TextInput>
-          <View style={styles.singleRow
-          }>
-            <Pressable style={styles.btn} onPress={()=>{console.log(value.question) }} >
-              <Text style={styles.btnTxt}>Yes</Text>
-            </Pressable>
-            <Pressable style={styles.btn}>
-              <Text style={styles.btnTxt}>No</Text>
-            </Pressable>
-          </View>
+          <Box p="3">
+             <Input borderColor="muted.400" focusOutlineColor="info.300" borderWidth={2}  _focus={{bg:'info.50'}} mx="auto" onChangeText={(text:any)=>{value.question=text}} placeholder="Your question..." w="100%" />
+          </Box>
+           <YesNo value={value} saveE={saveE}></YesNo>
+
         </View>
       </Pressable>
     </View>

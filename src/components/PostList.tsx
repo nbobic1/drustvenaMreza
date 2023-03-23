@@ -17,17 +17,18 @@ const [scrollE,setScrollE] = useState(true);
   const scrollToIndex = (index: number) => {
     flatListRef.current?.scrollToIndex({ animated: true, index });
   };
-  const [DATA,setDATA]=useState<PostData[]>([]);
+  const [DATA,setDATA]=useState<PostData[]>([]); 
  const getItemIndex = (item: PostData) => {
   const index = DATA.findIndex((dataItem) => dataItem.id === item.id);
   return index;
 };
-
+console.log("shilcres",searchText)
 useEffect(() => {
+  console.log("dobavljam")
   getMoviesFromApiAsync().then((response) => {
     if(response!=undefined)
     setDATA(response); console.log(JSON.stringify(DATA));})
-},[])
+},[searchText,cols])
 
 return (
              <FlatList

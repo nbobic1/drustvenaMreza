@@ -8,7 +8,6 @@
 */
 import React from "react";
 import {
-  Button,
   TextInput,
   Text,
   StyleSheet,
@@ -17,6 +16,7 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import { TextQElement } from "../../../../../utils/DataTypes";
+import { Box, Button, Center, Input } from "native-base";
 
 type postProps = {
   text: string;
@@ -35,9 +35,14 @@ const YesNoQPlaceholder: React.FC<postProps> = ({
   reorderEnabled,
 }) => {
   const [first, setFirst] = useState(text);
+  
+  const [question, setQuestion] = useState("");
   useEffect(() => {
     setFirst(text);
   });
+  useEffect(() => {
+    value.question=question
+  },[question]);
   const styles = StyleSheet.create({
     description: {
       textAlign: "center",
@@ -56,8 +61,7 @@ const YesNoQPlaceholder: React.FC<postProps> = ({
     },
     root: {
       width: "100%",
-      backgroundColor: "white",
-      borderWidth: 5,
+      
     },
   });
 
@@ -70,21 +74,17 @@ const YesNoQPlaceholder: React.FC<postProps> = ({
         }}
       >
         <View pointerEvents={deleteEnabled ? "none" : "auto"}>
-          <Text>{text}</Text>
-          <Text>{first}</Text>
-          <TextInput
-            style={styles.description}
-            onChangeText={(value1)=>{value.question=value1;}}
-            placeholder="Your question..."
-          ></TextInput>
-          <TextInput placeholder="Your answer..."></TextInput>
-          <Button
-            title="Answer"
-            onPress={() => {
-              console.log("moaj=", deleteEnabled);
-            }}
-          />
-        </View>
+       
+        <Box p="3">
+             <Input borderColor="muted.400" focusOutlineColor="info.300" borderWidth={2}  _focus={{bg:'info.50'}} mx="auto" onChangeText={(value1)=>{setQuestion(value1)}} placeholder="Your question..." w="100%" />
+          </Box>
+          <Box p="3">
+             <Input borderColor="muted.400" focusOutlineColor="info.300" borderWidth={2}  _focus={{bg:'info.50'}} mx="auto" onChangeText={(value1)=>{setQuestion(value1)}} placeholder="Your answer..." w="100%" />
+          </Box>
+          <Center marginBottom="3">
+          <Button width="50%" bgColor="info.500">Answer</Button>
+          </Center>
+          </View>
       </TouchableOpacity>
     </View>
   );

@@ -7,7 +7,7 @@ import LogInScreen from './src/screens/LogInScreen';
 import FeedScreen from './src/screens/FeedScreen';
 import CreateScreen from './src/screens/CreateScreen';
 import FavouriteScreen from './src/screens/FavouriteScreen';
-
+import { NativeBaseProvider } from 'native-base';
 
 //dragable list
 
@@ -23,7 +23,7 @@ export default function App () {
   const Tab = createBottomTabNavigator();
   return (
     
-    
+    <NativeBaseProvider>
     <NavigationContainer >
       <Tab.Navigator
         
@@ -65,5 +65,6 @@ export default function App () {
       </Tab.Navigator>
       
     </NavigationContainer>
+    </NativeBaseProvider>
   );
 }

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     feedView:{
-      backgroundColor:'#f0f',
+      backgroundColor:'seashell',
       height: '93%',
       width: '100%'
     },

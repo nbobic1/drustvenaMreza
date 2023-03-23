@@ -1,7 +1,7 @@
 
 
 import React, { useState } from 'react';
-import { Pressable, Modal, Button, ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { Pressable, Modal,  ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DraggableFlatList, {
   ScaleDecorator,
@@ -10,6 +10,7 @@ import {PostElement,VideoElement,ImageElement,PostElementType ,TextQElement,YesN
 import { getPexelImages, sendMoviesFromApiAsync } from '../utils/ApiCalls';
 import PostElementPlaceholder from '../components/Post/PostDetails/PostElementsPlaceholder/PostElementPlaceholder';
 import ImageSearcher from '../components/ImageSearcher';
+import { Button,Box, Flex } from 'native-base';
 
 const CreateScreen = () => {
 
@@ -43,7 +44,10 @@ console.log("createScreen->rerender")
                     onLongPress={drag}
                     disabled={isActive}
                   >
-                    <PostElementPlaceholder removeID={removeID} deleteEnabled={deleteEnabled} reorderEnabled={reorderEnabled} element={item}></PostElementPlaceholder>
+                    
+         <Box m="2" borderRadius="lg" borderColor="amber.500" borderWidth={2}> 
+                    <PostElementPlaceholder saveE={saveVisible} removeID={removeID} deleteEnabled={deleteEnabled} reorderEnabled={reorderEnabled} element={item}></PostElementPlaceholder>
+                  </Box>
                   </TouchableOpacity>
                 </ScaleDecorator>);
 
@@ -51,38 +55,34 @@ console.log("createScreen->rerender")
             }
           />
         </GestureHandlerRootView>
-        <View style={styles.optionBtnRow}>
-          <Pressable style={styles.btn} onPress={() => { setEmail("proslo kory dete123"); setReorderEnabled(false); setDeleteEnabled(true) }}>
-            <Text style={styles.btnTxt}>Delete</Text>
-          </Pressable>
-          <Pressable style={styles.btn} onPress={()=>{setSaveVisible(true); setReorderEnabled(false); setDeleteEnabled(false) }} >
-            <Text style={styles.btnTxt}>Save</Text>
-          </Pressable>
-          <Pressable style={styles.btn} onPress={() => { setVisible(true); setReorderEnabled(false); setDeleteEnabled(false) }} >
-            <Text style={styles.btnTxt}>Add</Text>
-          </Pressable>
-          <Pressable style={styles.btn} onPress={() => { setReorderEnabled(true); setDeleteEnabled(false) }} >
-            <Text style={styles.btnTxt}>Reorder</Text>
-          </Pressable>
-        </View>
+        <Flex direction='row' justify='space-around' bgColor="coolGray.500">
+          <Button  _text={{color: "black",fontSize:18}} my="3" w="23%" bgColor="amber.500" onPress={() => { setEmail("proslo kory dete123"); setReorderEnabled(false); setDeleteEnabled(true) }}>Delete</Button>
+          <Button  _text={{color: "black",fontSize:18}} my="3" w="23%" bgColor="amber.500" onPress={()=>{setSaveVisible(true); setReorderEnabled(false); setDeleteEnabled(false) }}>Save</Button>
+          <Button  _text={{color: "black",fontSize:18}} my="3" w="23%" bgColor="amber.500" onPress={() => { setVisible(true); setReorderEnabled(false); setDeleteEnabled(false) }}>Add</Button>
+          <Button  _text={{color: "black",fontSize:18}} my="3" w="23%" bgColor="amber.500" onPress={() => { setReorderEnabled(true); setDeleteEnabled(false) }} >Reorder</Button>
+        </Flex>
       </View>
       <Modal transparent={true} visible={visible} >
+<View style={{width:'100%',height:'100%',backgroundColor:'#00000080'}}>
         <View style={styles.modalView}>
-          <Text>This is a popup!</Text>
-          <Button onPress={() => { setDATA([...DATA,{index: DATA[DATA.length - 1].index + 1,  url:"" ,type:PostElementType.ImageElement}]); }} title="Image"></Button>
-          <Button onPress={() => { setDATA([...DATA, {index:DATA[DATA.length - 1].index + 1, url: "",type:PostElementType.VideoElement }]); }} title="Vindexeo"></Button>
-          <Button onPress={() => { setDATA([...DATA, {index: DATA[DATA.length - 1].index + 1,question: "",answer:"",type:PostElementType.TextQElement}]); }} title="Text"></Button>
-          <Button onPress={() => { setDATA([...DATA, {index: DATA[DATA.length - 1].index + 1,url:"" ,type:PostElementType.VideoElement} ]); }} title="Giff"></Button>
-          <Button onPress={() => { setDATA([...DATA, {index: DATA[DATA.length - 1].index + 1, question: "",answer:false ,type:PostElementType.YesNoQElement}]); }} title="Yes/No question"></Button>
-          <Button onPress={() => { setDATA([...DATA, {index: DATA[DATA.length - 1].index + 1, question:"" ,answer:"",type:PostElementType.TextQElement}]); }} title="Text question"></Button>
-          <Button title="Close" onPress={() => setVisible(false)} />
+        <Text>This is a popup!</Text>
+        <Button onPress={() => { setDATA([...DATA,{index: DATA[DATA.length - 1].index + 1,  url:"" ,type:PostElementType.ImageElement}]); }} >Image</Button>
+          <Button onPress={() => { setDATA([...DATA, {index:DATA[DATA.length - 1].index + 1, url: "",type:PostElementType.VideoElement }]); }} >Vindexeo</Button>
+          <Button onPress={() => { setDATA([...DATA, {index: DATA[DATA.length - 1].index + 1,question: "",answer:"",type:PostElementType.TextQElement}]); }} >Text</Button>
+          <Button onPress={() => { setDATA([...DATA, {index: DATA[DATA.length - 1].index + 1,url:"" ,type:PostElementType.VideoElement} ]); }} >Giff</Button>
+          <Button onPress={() => { setDATA([...DATA, {index: DATA[DATA.length - 1].index + 1, question: "",answer:false ,type:PostElementType.YesNoQElement}]); }} >Yes/No question</Button>
+          <Button onPress={() => { setDATA([...DATA, {index: DATA[DATA.length - 1].index + 1, question:"" ,answer:"",type:PostElementType.TextQElement}]); }} >Text question</Button>
+          <Button  onPress={() => setVisible(false)} >Close</Button>
+        </View>
         </View>
       </Modal>
       <Modal transparent={true} visible={saveVisible} >
+        
+<View style={{width:'100%',height:'100%',backgroundColor:'#00000080'}}>
         <View style={styles.modalView}>
           <Text>Fill post data to save it.</Text>
           <TextInput onChangeText={(text)=>{setTitle(text)}} placeholder='Title'></TextInput>
-          <Button title="Add cover image" onPress={() => {setPickerVisibile(true)}} />
+          <Button onPress={() => {setPickerVisibile(true)}} >Add cover image</Button>
           <Button onPress={() => {
             console.log(title)
             console.log("saveam==========",JSON.stringify(DATA));
@@ -90,9 +90,10 @@ console.log("createScreen->rerender")
             setSaveVisible(false)
             setDATA([{index:-1,url:"",type:PostElementType.ImageElement}])
           
-             }} title="Save"></Button>
+             }} >Save</Button>
              
-          <Button title="Close" onPress={() => {setSaveVisible(false);}} />
+          <Button  onPress={() => {setSaveVisible(false);}} >Close</Button>
+        </View>
         </View>
       </Modal>
       <ImageSearcher setImgSrc={setImgSrc} visible={pickerVisible} setVisibile={setPickerVisibile}></ImageSearcher>
@@ -100,6 +101,7 @@ console.log("createScreen->rerender")
   );
 };
 
+          
 
 const styles = StyleSheet.create({
   container: {
@@ -135,7 +137,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   modalView: {//popup
-    backgroundColor: '#0f0',
+    backgroundColor: '#fff',
     borderRadius: 10,
     position: 'absolute',
     padding: 20,

@@ -1,9 +1,10 @@
 //console.log("slikeeeeeeeeeeeeeeeee=", getPexelImages('dog'))
 
-import React, { useState } from 'react'
-import  {Pressable,FlatList,Button,TextInput,Modal,View,Text,StyleSheet} from 'react-native'
+import React, { useState,useRef } from 'react'
+import  {Pressable,FlatList,TextInput,Modal,View,Text,StyleSheet} from 'react-native'
 import { getPexelImages } from '../utils/ApiCalls';
 import FastImage from 'react-native-fast-image'
+import {Button, Center, Input } from 'native-base';
 
 
 type Props = {
@@ -12,20 +13,22 @@ setVisibile: (ard:boolean) => void;
 setImgSrc:( a:string)=>void;
 };
 
-
 const ImageSearcher =({visible,setVisibile,setImgSrc}:Props)=>{
     const [images, setImages] = useState([]);
     const [query, setQuery] = useState("");
     console.log("image=====",images)
+   
 return (
-    <Modal transparent={true} visible={visible} >
+    <Modal transparent={true} visible={visible}>
+<View style={{width:'100%',height:'100%',backgroundColor:'#00000080'}}>
     <View style={styles.modalView}>
-      <Text>Search and pick an image.</Text>
-        <TextInput onChangeText={text=>setQuery(text)} placeholder="Search..."  ></TextInput>
-        <Button onPress={()=>{getPexelImages(query,setImages) }} title="Search"></Button>
+      <Center>Search and pick an image.</Center>
+      <Input bgColor="white" onChangeText={text=>setQuery(text)} placeholder="Search..." rightElement={
+        <Button m="1" onPress={()=>{getPexelImages(query,setImages) }} >Search</Button>}></Input>
+      
         <FlatList
      //   keyExtracotr={(key)=>{return key}}
-     style={{ backgroundColor:'red',height:500,width:300}}
+     style={{ height:500,width:300}}
         numColumns={3}
         data={images}
         renderItem={({item})=>{return (
@@ -41,8 +44,9 @@ return (
           </Pressable>
           )}}
         />
-        <Button onPress={()=>{setVisibile(false) }} title="close"></Button>
+        <Button w="50%" alignSelf='center' onPress={()=>{setVisibile(false) }} >Close</Button>
        
+    </View>
     </View>
   </Modal>
 );
@@ -55,7 +59,7 @@ const styles = StyleSheet.create({
     },
 
     modalView: {//popup
-        backgroundColor: '#0f0',
+        backgroundColor: '#fff',
         borderRadius: 10,
         position: 'absolute',
         padding: 20,

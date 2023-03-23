@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     },
     
     feedView:{
-      backgroundColor:'#f0f',
+      backgroundColor:'seashell',
       height: '93%',
       width: '100%'
     },
