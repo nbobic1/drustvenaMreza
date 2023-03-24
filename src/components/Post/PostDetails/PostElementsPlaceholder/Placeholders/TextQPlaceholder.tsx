@@ -8,6 +8,7 @@
 */
 import React from "react";
 import {
+  Button,
   TextInput,
   Text,
   StyleSheet,
@@ -16,14 +17,13 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import { TextQElement } from "../../../../../utils/DataTypes";
-import { Box, Button, Center, Input } from "native-base";
 
 type postProps = {
   text: string;
   deleteEnabled: boolean;
   reorderEnabled: boolean;
   id: number;
-  value:TextQElement;
+  value: TextQElement;
   removeID: (a: number) => void;
 };
 const YesNoQPlaceholder: React.FC<postProps> = ({
@@ -35,14 +35,14 @@ const YesNoQPlaceholder: React.FC<postProps> = ({
   reorderEnabled,
 }) => {
   const [first, setFirst] = useState(text);
-  
+
   const [question, setQuestion] = useState("");
   useEffect(() => {
     setFirst(text);
   });
   useEffect(() => {
-    value.question=question
-  },[question]);
+    value.question = question
+  }, [question]);
   const styles = StyleSheet.create({
     description: {
       textAlign: "center",
@@ -61,7 +61,7 @@ const YesNoQPlaceholder: React.FC<postProps> = ({
     },
     root: {
       width: "100%",
-      
+
     },
   });
 
@@ -74,17 +74,15 @@ const YesNoQPlaceholder: React.FC<postProps> = ({
         }}
       >
         <View pointerEvents={deleteEnabled ? "none" : "auto"}>
-       
-        <Box p="3">
-             <Input borderColor="muted.400" focusOutlineColor="info.300" borderWidth={2}  _focus={{bg:'info.50'}} mx="auto" onChangeText={(value1)=>{setQuestion(value1)}} placeholder="Your question..." w="100%" />
-          </Box>
-          <Box p="3">
-             <Input borderColor="muted.400" focusOutlineColor="info.300" borderWidth={2}  _focus={{bg:'info.50'}} mx="auto" onChangeText={(value1)=>{setQuestion(value1)}} placeholder="Your answer..." w="100%" />
-          </Box>
-          <Center marginBottom="3">
-          <Button width="50%" bgColor="info.500">Answer</Button>
-          </Center>
-          </View>
+
+          <TextInput onChangeText={(value1) => { setQuestion(value1) }} placeholder="Your question..." />
+
+
+          <TextInput onChangeText={(value1) => { setQuestion(value1) }} placeholder="Your answer..." />
+
+          <Button title="Answer"></Button>
+
+        </View>
       </TouchableOpacity>
     </View>
   );

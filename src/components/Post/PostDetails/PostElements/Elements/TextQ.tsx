@@ -1,11 +1,3 @@
-/*
-{ 
-  <ImageBackground style={styles.image} source={{uri:imgSrc}}>
-        
-          </ImageBackground>  
-              
-          
-*/
 import React from "react";
 import {
   Button,
@@ -19,12 +11,12 @@ import { useState, useEffect } from "react";
 import { TextQElement } from "../../../../../utils/DataTypes";
 
 type postProps = {
-  value:TextQElement;
+  value: TextQElement;
 };
 const YesNoQ: React.FC<postProps> = ({
   value,
 }) => {
- 
+
   const styles = StyleSheet.create({
     description: {
       textAlign: "center",
@@ -50,15 +42,15 @@ const YesNoQ: React.FC<postProps> = ({
 
   return (
     <View style={styles.root}>
-     
-          <Text>{value.question} </Text>
-          <TextInput placeholder="Your answer..."></TextInput>
-          <Button
-            title="Answer"
-            onPress={() => {
-              //provjera odgovora
-            }}
-          />
+
+      <Text>{value.question} </Text>
+      <TextInput placeholder="Your answer..."></TextInput>
+      <Button
+        title="Answer"
+        onPress={() => {
+          //provjera odgovora
+        }}
+      />
     </View>
   );
 };

@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import {KeyboardAvoidingView ,Platform, UIManager } from 'react-native'
+import { KeyboardAvoidingView, Platform, UIManager } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {  Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import LogInScreen from './src/screens/LogInScreen';
 import FeedScreen from './src/screens/FeedScreen';
 import CreateScreen from './src/screens/CreateScreen';
 import FavouriteScreen from './src/screens/FavouriteScreen';
-import { NativeBaseProvider } from 'native-base';
 
 //dragable list
 
@@ -22,20 +21,19 @@ export default function App () {
   //https://blog.jscrambler.com/getting-started-with-react-navigation-v6-and-typescript-in-react-native
   const Tab = createBottomTabNavigator();
   return (
-    
-    <NativeBaseProvider>
+
     <NavigationContainer >
       <Tab.Navigator
-        
+
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             // You can return any component that you like here!
             return <Text>{route.name}</Text>;
-            },
-            tabBarLabel:() => {return null},
-            header: ({ navigation, route, options }) => {
-              return (null);
-            }
+          },
+          tabBarLabel: () => { return null },
+          header: ({ navigation, route, options }) => {
+            return (null);
+          }
         })}
       >
         <Tab.Screen
@@ -63,8 +61,7 @@ export default function App () {
           initialParams={{}}
         />
       </Tab.Navigator>
-      
+
     </NavigationContainer>
-    </NativeBaseProvider>
   );
 }

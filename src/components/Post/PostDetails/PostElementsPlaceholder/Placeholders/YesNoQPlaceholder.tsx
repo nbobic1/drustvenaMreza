@@ -7,21 +7,20 @@
           
 */
 import React, { useEffect } from 'react';
-import { FlatList, Text, StyleSheet, View, ImageBackground, TouchableOpacity, TextInput,  Pressable } from 'react-native';
+import { FlatList, Text, StyleSheet, View, ImageBackground, TouchableOpacity, TextInput, Pressable } from 'react-native';
 import { useState } from 'react';
 import { PostElement, YesNoQElement } from '../../../../../utils/DataTypes';
 import YesNo from '../../../../YesNo';
-import { Box, Button, Flex, Input, Spacer } from 'native-base';
 
 type postProps = {
   deleteEnabled: boolean;
   reorderEnabled: boolean;
   id: number;
-  value:YesNoQElement;
+  value: YesNoQElement;
   removeID: (a: number) => void;
-  saveE:boolean;
+  saveE: boolean;
 };
-const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, reorderEnabled, value,saveE }) => {
+const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, reorderEnabled, value, saveE }) => {
   const [hgh, setHgh] = useState(200)
   const [details, setDetails] = useState([0])
   /*useEffect(()=> {
@@ -69,15 +68,13 @@ const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, r
       textAlign: 'center',
     }
   });
-console.log("sto ne radiiii=",value.answer);
+  console.log("sto ne radiiii=", value.answer);
   return (
     <View pointerEvents={reorderEnabled ? 'none' : 'auto'} >
       <Pressable disabled={!deleteEnabled} style={styles.root} onPress={() => { removeID(id) }}>
         <View pointerEvents={deleteEnabled ? 'none' : 'auto'}>
-          <Box p="3">
-             <Input borderColor="muted.400" focusOutlineColor="info.300" borderWidth={2}  _focus={{bg:'info.50'}} mx="auto" onChangeText={(text:any)=>{value.question=text}} placeholder="Your question..." w="100%" />
-          </Box>
-           <YesNo value={value} saveE={saveE}></YesNo>
+          <TextInput></TextInput>
+          <YesNo value={value} saveE={saveE}></YesNo>
 
         </View>
       </Pressable>

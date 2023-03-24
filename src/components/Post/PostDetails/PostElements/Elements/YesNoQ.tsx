@@ -1,11 +1,3 @@
-/*
-{ 
-  <ImageBackground style={styles.image} source={{uri:imgSrc}}>
-        
-          </ImageBackground>  
-              
-          
-*/
 import React, { useEffect } from 'react';
 import { FlatList, Text, StyleSheet, View, ImageBackground, TouchableOpacity, TextInput, Button, Pressable } from 'react-native';
 import { useState } from 'react';
@@ -15,7 +7,7 @@ type postProps = {
   deleteEnabled: boolean;
   reorderEnabled: boolean;
   id: number;
-  value:YesNoQElement;
+  value: YesNoQElement;
   removeID: (a: number) => void;
 };
 const YesNoQ: React.FC<postProps> = ({ deleteEnabled, id, removeID, reorderEnabled, value }) => {
@@ -68,15 +60,15 @@ const YesNoQ: React.FC<postProps> = ({ deleteEnabled, id, removeID, reorderEnabl
       textAlign: 'center',
     }
   });
-console.log("sto ne radiiii=",value.answer);
+  console.log("sto ne radiiii=", value.answer);
   return (
     <View pointerEvents={reorderEnabled ? 'none' : 'auto'}>
       <Pressable disabled={!deleteEnabled} style={styles.root} onPress={() => { removeID(id) }}>
         <View pointerEvents={deleteEnabled ? 'none' : 'auto'}>
-          <TextInput style={styles.description} placeholder={value.question} onChangeText={(text)=>{value.question=text}}></TextInput>
+          <TextInput style={styles.description} placeholder={value.question} onChangeText={(text) => { value.question = text }}></TextInput>
           <View style={styles.singleRow
           }>
-            <Pressable style={styles.btn} onPress={()=>{console.log(value.question) }} >
+            <Pressable style={styles.btn} onPress={() => { console.log(value.question) }} >
               <Text style={styles.btnTxt}>Yes</Text>
             </Pressable>
             <Pressable style={styles.btn}>

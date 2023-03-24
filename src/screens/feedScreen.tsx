@@ -4,9 +4,8 @@ import Post from '../components/Post/Post';
 import DropDownPicker from 'react-native-dropdown-picker'
 
 import PostList from '../components/PostList';
-import { Box, Input } from 'native-base';
 const FeedScreen = () => {
- 
+
   const [visible, setVisible] = useState(false);
   const [cols, setCols] = useState(1)
   const [searchText, setSearchText] = useState("");
@@ -33,12 +32,12 @@ const FeedScreen = () => {
   ]);
   console.log("citav ffeed")
   // <TextInput onSubmitEditing={(text) => {console.log("subimta"); setSearchText(text.nativeEvent.text) }} placeholder='Search...' style={{ flex: 1, backgroundColor: 'green' }}></TextInput>
-         
+
   return (
     <View style={styles.container}>
       <View style={styles.feedView}>
         <View style={styles.top}>
-      <Input mx="3" placeholder="Input" w="30%" />
+          <TextInput></TextInput>
           <View style={{ flex: 1 }}>
             <DropDownPicker
               open={open}
@@ -74,7 +73,7 @@ const FeedScreen = () => {
         </View>
         <View
           style={{ height: '95%' }}>
-          <PostList searchText={searchText}  cols={cols}></PostList>
+          <PostList searchText={searchText} cols={cols}></PostList>
         </View>
       </View>
       <Modal transparent={true} visible={visible} >
