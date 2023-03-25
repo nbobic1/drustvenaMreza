@@ -12,19 +12,26 @@ type Props = {
 
 const PostElementView = ({ children, mx }: Props) => {
     return (
-        <Container style={styles.root} mx={mx} >
-            {children}
-        </Container>
+        <View style={styles.root}  >
+            <View style={styles.item}>
+
+                {children}
+            </View>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     root: {
-        borderRadius: S.l,
-        borderWidth: S.s,
-        borderColor: C.secundary,
-        padding: S.s,
+        padding: 10,
     },
+    item: {
+        borderRadius: S.l,
+        borderWidth: 0,
+        borderColor: C.secundary,
+        padding: 15,
+        backgroundColor: '#42213133'
+    }
 });
 
 export default PostElementView;

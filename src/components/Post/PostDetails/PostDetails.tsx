@@ -37,7 +37,7 @@ const PostDetailsScreen: React.FC<Props> = ({ height, items, hgh, setHgh, setScr
       marginBottom: 30
     },
     feedView: {
-      backgroundColor: '#f0ff41',
+      backgroundColor: 'seashell',
       height: height,
       width: '100%'
     },
@@ -57,19 +57,19 @@ const PostDetailsScreen: React.FC<Props> = ({ height, items, hgh, setHgh, setScr
   const video = React.useRef(null);
 
   return (
-      <View style={styles.feedView}>
-       <ScrollView style={styles.scroll1}>
+    <View style={styles.feedView}>
+      <ScrollView style={styles.scroll1}>
 
-       <FlatList
-   //   style={{backgroundColor:'red'}}
-        data={items}
-        keyExtractor={(item1) => item1.index.toString()}
-        renderItem={({item})=>{ return (<View pointerEvents={'none'}><PostElements element={item}></PostElements></View>)}}
+        <FlatList
+          //   style={{backgroundColor:'red'}}
+          data={items}
+          keyExtractor={(item1) => item1.index.toString()}
+          renderItem={({ item }) => { return (<View pointerEvents={'none'}><PostElements element={item}></PostElements></View>) }}
         />
-       </ScrollView>
-        
-        <PostDetailsOptions hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} ></PostDetailsOptions>
-      </View>
+      </ScrollView>
+
+      <PostDetailsOptions hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} ></PostDetailsOptions>
+    </View>
   );
 };
 

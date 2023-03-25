@@ -11,16 +11,14 @@ import { getPexelImages, sendMoviesFromApiAsync } from '../utils/ApiCalls';
 import PostElementPlaceholder from '../components/Post/PostDetails/PostElementsPlaceholder/PostElementPlaceholder';
 import ImageSearcher from '../components/ImageSearcher';
 import CreateOptionns from '../components/CreateOptions';
+import PostElementView from '../components/BasicComponents/PostElementView';
 
 const CreateScreen = () => {
 
   const [email, setEmail] = useState("pocetni");
-  const [title, setTitle] = useState("");
-  const [pickerVisible, setPickerVisibile] = useState(false);
   const [deleteEnabled, setDeleteEnabled] = useState(false);
   const [reorderEnabled, setReorderEnabled] = useState(false);
   const fun = (text: string) => { setEmail(text); };
-  const [imgSrc, setImgSrc] = useState("");
 
   const [DATA, setDATA] = useState<PostElement[]>([{ index: -1, url: "" } as VideoElement]);
   console.log("createScreen->rerender")
@@ -44,9 +42,9 @@ const CreateScreen = () => {
                   >
 
                     <View>
-                      <PostElementPlaceholder saveE={false
-                        //</Box>saveVisible
-                      } removeID={removeID} deleteEnabled={deleteEnabled} reorderEnabled={reorderEnabled} element={item}></PostElementPlaceholder>
+                      <PostElementView mx={30} >
+                        <PostElementPlaceholder saveE={false} removeID={removeID} deleteEnabled={deleteEnabled} reorderEnabled={reorderEnabled} element={item}></PostElementPlaceholder>
+                      </PostElementView>
                     </View>
                   </TouchableOpacity>
                 </ScaleDecorator>);
@@ -61,31 +59,11 @@ const CreateScreen = () => {
     </View>
   );
 };
-/*
 
-     
 
-      <Modal transparent={true} visible={saveVisible} >
-<View style={{width:'100%',height:'100%',backgroundColor:'#00000080'}}>
-        <View style={styles.modalView}>
-          <Text>Fill post data to save it.</Text>
-          <TextInput onChangeText={(text)=>{setTitle(text)}} placeholder='Title'></TextInput>
-          <Button onPress={() => {setPickerVisibile(true)}} >Add cover image</Button>
-          <Button onPress={() => {
-            console.log(title)
-            console.log("saveam==========",JSON.stringify(DATA));
-            sendMoviesFromApiAsync({imgSrc:imgSrc,text:title,items:JSON.stringify(DATA)})
-            setSaveVisible(false)
-            setDATA([{index:-1,url:"",type:PostElementType.ImageElement}])
-          
-             }} >Save</Button>
-             
-          <Button  onPress={() => {setSaveVisible(false);}} >Close</Button>
-        </View>
-        </View>
-      </Modal>
-      <ImageSearcher setImgSrc={setImgSrc} visible={pickerVisible} setVisibile={setPickerVisibile}></ImageSearcher>
-*/
+
+
+
 
 
 const styles = StyleSheet.create({
@@ -97,7 +75,7 @@ const styles = StyleSheet.create({
   },
 
   feedView: {
-    backgroundColor: '#f0f',
+    backgroundColor: 'seashell',
     height: '100%',
     width: '100%'
   },

@@ -27,7 +27,7 @@ const ImagePlaceholder = ({ deleteEnabled, id, removeID, value, reorderEnabled }
     <View pointerEvents={reorderEnabled ? "none" : "auto"}>
       <Pressable disabled={!deleteEnabled} style={styles.root} onPress={() => { removeID(id) }}>
         <Pressable disabled={deleteEnabled} onPress={() => { setVisible(true) }}>
-          {imgSrc == "" ? <Text>Tap to add an image</Text> :
+          {imgSrc == "" ? <Text style={{ alignSelf: 'center', textAlignVertical: "center", height: '100%' }}>Tap to add an image</Text> :
             <FastImage
               style={styles.image}
               source={{
@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 150,
-    width: 150
+    width: 150,
+    alignSelf: 'center',
   },
 });
 export default ImagePlaceholder

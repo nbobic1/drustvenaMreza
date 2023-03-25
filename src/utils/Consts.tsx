@@ -24,6 +24,6 @@ export const C = {
 export const S = {
   s: 2,
   m: 4,
-  l: 30,
+  l: 20,
   // your colors
 }

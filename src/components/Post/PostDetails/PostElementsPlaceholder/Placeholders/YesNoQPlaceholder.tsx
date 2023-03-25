@@ -11,6 +11,7 @@ import { FlatList, Text, StyleSheet, View, ImageBackground, TouchableOpacity, Te
 import { useState } from 'react';
 import { PostElement, YesNoQElement } from '../../../../../utils/DataTypes';
 import YesNo from '../../../../YesNo';
+import InputV1 from '../../../../BasicComponents/InputV1';
 
 type postProps = {
   deleteEnabled: boolean;
@@ -73,7 +74,7 @@ const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, r
     <View pointerEvents={reorderEnabled ? 'none' : 'auto'} >
       <Pressable disabled={!deleteEnabled} style={styles.root} onPress={() => { removeID(id) }}>
         <View pointerEvents={deleteEnabled ? 'none' : 'auto'}>
-          <TextInput></TextInput>
+          <InputV1 ph='Enter your question...'></InputV1>
           <YesNo value={value} saveE={saveE}></YesNo>
 
         </View>

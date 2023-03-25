@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Button, View } from 'react-native';
 import { YesNoQElement } from '../utils/DataTypes';
+import ButtonV1 from './BasicComponents/ButtonV1';
+import Row from './BasicComponents/Row';
 
 
 type Props = {
@@ -15,10 +17,10 @@ const YesNo = ({ value, saveE }: Props) => {
         value.answer = btn;
     }, [saveE])
     return (
-        <View >
-            <Button onPress={() => { setBtn(!btn) }} title="Yes"></Button>
-            <Button onPress={() => { setBtn(!btn) }} title="No" ></Button>
-        </View>
+        <Row >
+            <ButtonV1 onPress={() => { setBtn(!btn) }} title="Yes"></ButtonV1>
+            <ButtonV1 onPress={() => { setBtn(!btn) }} title="No" ></ButtonV1>
+        </Row>
     );
 };
 

@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { FlatList, Text, StyleSheet, View, ImageBackground, TouchableOpacity, TextInput, Button, Pressable } from 'react-native';
 import { useState } from 'react';
 import { PostElement, YesNoQElement } from '../../../../../utils/DataTypes';
+import Row from '../../../../BasicComponents/Row';
+import ButtonV1 from '../../../../BasicComponents/ButtonV1';
 
 type postProps = {
   deleteEnabled: boolean;
@@ -19,64 +21,17 @@ const YesNoQ: React.FC<postProps> = ({ deleteEnabled, id, removeID, reorderEnabl
   },[saveEnabled])
   */const styles = StyleSheet.create({
 
-    description: {
-      textAlign: 'center',
-      backgroundColor: '#00FFFF8f',
-      fontSize: 25,
-    },
-    image: {
-      width: '100%',
-      height: 200,
-      flexDirection: 'column-reverse',
-    },
-    text: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      marginTop: 16,
-    },
-    root: {
-      width: '100%',
-      backgroundColor: 'white',
-      borderWidth: 5
-    },
-    singleRow:
-    {
-      flexDirection: 'row',
-    },
 
-    btn: {
-      flex: 1,
-      backgroundColor: 'blue',
-      color: 'white',
-      borderWidth: 3,
-      borderColor: 'yellow',
-      height: 40,
-
-    },
-    btnTxt: {
-      verticalAlign: 'middle',
-      color: 'white',
-      height: '100%',
-      textAlign: 'center',
-    }
   });
   console.log("sto ne radiiii=", value.answer);
   return (
-    <View pointerEvents={reorderEnabled ? 'none' : 'auto'}>
-      <Pressable disabled={!deleteEnabled} style={styles.root} onPress={() => { removeID(id) }}>
-        <View pointerEvents={deleteEnabled ? 'none' : 'auto'}>
-          <TextInput style={styles.description} placeholder={value.question} onChangeText={(text) => { value.question = text }}></TextInput>
-          <View style={styles.singleRow
-          }>
-            <Pressable style={styles.btn} onPress={() => { console.log(value.question) }} >
-              <Text style={styles.btnTxt}>Yes</Text>
-            </Pressable>
-            <Pressable style={styles.btn}>
-              <Text style={styles.btnTxt}>No</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Pressable>
+    <View >
+      <Text style={{ alignSelf: 'center' }}>{value.question}</Text>
+      <Row >
+        <ButtonV1 onPress={() => { }} title="Yes"></ButtonV1>
+        <ButtonV1 onPress={() => { }} title="No" ></ButtonV1>
+      </Row>
+
     </View>
   );
 };

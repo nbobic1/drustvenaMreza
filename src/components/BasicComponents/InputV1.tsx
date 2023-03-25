@@ -13,10 +13,11 @@ type Props = {
     bW?: number;
     bC?: string;
     ph?: string;
+    onChangeText?: (value: string) => void;
 };
 
 
-const InputV1 = ({ mx, my, px, w, bR, bW, bC, ph }: Props) => {
+const InputV1 = ({ mx, my, px, w, bR, bW, bC, ph, onChangeText }: Props) => {
     const [outlineColor, setOutlineColor] = useState(bC ? bC : C.primary);
     const styles = StyleSheet.create({
         root: {
@@ -28,8 +29,8 @@ const InputV1 = ({ mx, my, px, w, bR, bW, bC, ph }: Props) => {
         input: {
             borderColor: outlineColor,
             backgroundColor: outlineColor == C.primary ? C.white : C.popS,
-            paddingLeft: px ? px : S.m,
-            paddingRight: px ? px : S.m,
+            paddingLeft: px ? px : S.l,
+            paddingRight: px ? px : S.l,
             width: w ? w : '100%',
             borderWidth: bW ? bW : S.s,
             borderRadius: bR ? bR : S.s,
@@ -37,7 +38,7 @@ const InputV1 = ({ mx, my, px, w, bR, bW, bC, ph }: Props) => {
     });
     return (
         <View style={styles.root}>
-            <TextInput style={styles.input} onFocus={() => { setOutlineColor(C.secundary) }} onEndEditing={() => { setOutlineColor(C.primary) }} placeholder={ph ? ph : ""}></TextInput>
+            <TextInput onChangeText={onChangeText} style={styles.input} onFocus={() => { setOutlineColor(C.secundary) }} onEndEditing={() => { setOutlineColor(C.primary) }} placeholder={ph ? ph : ""}></TextInput>
         </View>
     );
 };

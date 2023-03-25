@@ -17,6 +17,8 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import { TextQElement } from "../../../../../utils/DataTypes";
+import InputV1 from "../../../../BasicComponents/InputV1";
+import ButtonV1 from "../../../../BasicComponents/ButtonV1";
 
 type postProps = {
   text: string;
@@ -75,12 +77,12 @@ const YesNoQPlaceholder: React.FC<postProps> = ({
       >
         <View pointerEvents={deleteEnabled ? "none" : "auto"}>
 
-          <TextInput onChangeText={(value1) => { setQuestion(value1) }} placeholder="Your question..." />
+          <InputV1 onChangeText={(value1) => { setQuestion(value1) }} ph="Your question..." />
 
 
-          <TextInput onChangeText={(value1) => { setQuestion(value1) }} placeholder="Your answer..." />
+          <InputV1 onChangeText={(value1) => { setQuestion(value1) }} ph="Your answer..." />
 
-          <Button title="Answer"></Button>
+          <ButtonV1 w={'50%'} title="Answer"></ButtonV1>
 
         </View>
       </TouchableOpacity>

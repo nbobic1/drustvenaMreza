@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { Text, View, StyleSheet, Modal, Pressable } from 'react-native'
+import { sendMoviesFromApiAsync } from '../utils/ApiCalls';
 import { PostElement, PostElementType } from '../utils/DataTypes';
 import Button from './BasicComponents/ButtonV1';
+import InputV1 from './BasicComponents/InputV1';
 import Row from './BasicComponents/Row';
+import ImageSearcher from './ImageSearcher';
 
 
 type Props = {
@@ -16,6 +19,9 @@ type Props = {
 const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: Props) => {
   const [visible, setVisible] = useState(false);
   const [saveVisible, setSaveVisible] = useState(false);
+  const [pickerVisible, setPickerVisible] = useState(false);
+  const [title, setTitle] = useState("");
+  const [imgSrc, setImgSrc] = useState("");
   return (
     <View style={styles.root}>
       <Row >
@@ -39,6 +45,28 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: 
           </View>
         </View>
       </Modal>
+      <Modal transparent={true} visible={saveVisible} >
+        <View style={{ width: '100%', height: '100%', backgroundColor: '#00000080' }}>
+          <View style={styles.modalView}>
+            <Text>Fill post data to save it.</Text>
+            <InputV1 onChangeText={(text) => { setTitle(text) }} ph='Title'></InputV1>
+            <Button onPress={() => { setPickerVisible(true) }} title="Add cover image" ></Button>
+            <Button onPress={() => {
+              console.log(title)
+              console.log("saveam==========", JSON.stringify(DATA));
+              sendMoviesFromApiAsync({ imgSrc: imgSrc, text: title, items: JSON.stringify(DATA) })
+              setSaveVisible(false)
+              setDATA([{ index: -1, url: "", type: PostElementType.ImageElement }])
+
+            }}
+              title="Save" ></Button>
+
+            <Button onPress={() => { setSaveVisible(false); }} title="Close" ></Button>
+          </View>
+        </View>
+      </Modal>
+      <ImageSearcher setImgSrc={setImgSrc} visible={pickerVisible} setVisibile={setPickerVisible}></ImageSearcher>
+
     </View>
   );
 };
