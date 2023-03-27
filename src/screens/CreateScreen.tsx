@@ -6,12 +6,11 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DraggableFlatList, {
   ScaleDecorator,
 } from "react-native-draggable-flatlist";
-import { PostElement, VideoElement, ImageElement, PostElementType, TextQElement, YesNoQElement } from "../utils/DataTypes"
-import { getPexelImages, sendMoviesFromApiAsync } from '../utils/ApiCalls';
+import { PostElement, VideoElement, ImageElement, PostElementType, TextQElement, YesNoQElement, TextElement } from "../utils/DataTypes"
 import PostElementPlaceholder from '../components/Post/PostDetails/PostElementsPlaceholder/PostElementPlaceholder';
-import ImageSearcher from '../components/ImageSearcher';
 import CreateOptionns from '../components/CreateOptions';
 import PostElementView from '../components/BasicComponents/PostElementView';
+import { C } from '../utils/Consts';
 
 const CreateScreen = () => {
 
@@ -20,13 +19,13 @@ const CreateScreen = () => {
   const [reorderEnabled, setReorderEnabled] = useState(false);
   const fun = (text: string) => { setEmail(text); };
 
-  const [DATA, setDATA] = useState<PostElement[]>([{ index: -1, url: "" } as VideoElement]);
+  const [DATA, setDATA] = useState<PostElement[]>([{ index: 0, type: PostElementType.TextElement, text: "" } as TextElement]);
   console.log("createScreen->rerender")
   const removeID = (index: number) => { setDATA(DATA.filter(function (a: PostElement) { return a.index != index })) };
   return (
     <View style={styles.container}>
       <View style={styles.feedView}>
-        <GestureHandlerRootView style={{ flex: 1, backgroundColor: 'seashell' }}>
+        <GestureHandlerRootView style={{ flex: 1, backgroundColor: C.bg, paddingVertical: 10 }}>
           <DraggableFlatList
             data={DATA}
             onDragEnd={({ data }) => setDATA(data)}
@@ -43,7 +42,7 @@ const CreateScreen = () => {
 
                     <View>
                       <PostElementView mx={30} >
-                        <PostElementPlaceholder saveE={false} removeID={removeID} deleteEnabled={deleteEnabled} reorderEnabled={reorderEnabled} element={item}></PostElementPlaceholder>
+                        <PostElementPlaceholder removeID={removeID} deleteEnabled={deleteEnabled} reorderEnabled={reorderEnabled} element={item}></PostElementPlaceholder>
                       </PostElementView>
                     </View>
                   </TouchableOpacity>
@@ -69,13 +68,13 @@ const CreateScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: C.bg,
     alignItems: 'center',
     justifyContent: 'center',
   },
 
   feedView: {
-    backgroundColor: 'seashell',
+    backgroundColor: C.bg,
     height: '100%',
     width: '100%'
   },
@@ -100,7 +99,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   modalView: {//popup
-    backgroundColor: '#fff',
+    backgroundColor: C.pop,
     borderRadius: 10,
     position: 'absolute',
     padding: 20,

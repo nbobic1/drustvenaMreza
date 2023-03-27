@@ -23,14 +23,15 @@ const PostElementView = ({ children, mx }: Props) => {
 
 const styles = StyleSheet.create({
     root: {
-        padding: 10,
+        paddingHorizontal: 2 * S.m,
+        paddingVertical: S.m,
     },
     item: {
         borderRadius: S.l,
         borderWidth: 0,
         borderColor: C.secundary,
-        padding: 15,
-        backgroundColor: '#42213133'
+        padding: 12,
+        backgroundColor: C.white
     }
 });
 

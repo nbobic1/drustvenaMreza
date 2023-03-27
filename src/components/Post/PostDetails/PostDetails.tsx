@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, TextInput, Modal, Button, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Video, AVPlaybackStatus, ResizeMode } from 'expo-av';
 import FastImage from 'react-native-fast-image'
 import PostDetailsOptions from './PostDetailsOptions'
 import { PostData, PostElement, VideoElement, ImageElement, TextQElement, YesNoQElement, PostElementType } from "../../../utils/DataTypes"
-import { getMoviesFromApiAsync, sendMoviesFromApiAsync } from '../../../utils/ApiCalls';
-import YesNoQPlaceholder from './PostElementsPlaceholder/Placeholders/YesNoQPlaceholder';//   PostElementPlaceholders/Placeholders/YesNoQPlaceholder';
-import TextQPlaceholder from './PostElementsPlaceholder/Placeholders/TextQPlaceholder';
-import ImagePlaceholder from './PostElementsPlaceholder/Placeholders/ImagePlaceholder';
-import PostElementPlaceholder from './PostElementsPlaceholder/PostElementPlaceholder';
 import PostElements from './PostElements/PostElements';
+import { C } from '../../../utils/Consts';
 
 type Props = {
   height: number;
@@ -37,7 +32,7 @@ const PostDetailsScreen: React.FC<Props> = ({ height, items, hgh, setHgh, setScr
       marginBottom: 30
     },
     feedView: {
-      backgroundColor: 'seashell',
+      backgroundColor: C.bg,
       height: height,
       width: '100%'
     },
@@ -54,7 +49,6 @@ const PostDetailsScreen: React.FC<Props> = ({ height, items, hgh, setHgh, setScr
 
   });
 
-  const video = React.useRef(null);
 
   return (
     <View style={styles.feedView}>
@@ -64,7 +58,7 @@ const PostDetailsScreen: React.FC<Props> = ({ height, items, hgh, setHgh, setScr
           //   style={{backgroundColor:'red'}}
           data={items}
           keyExtractor={(item1) => item1.index.toString()}
-          renderItem={({ item }) => { return (<View pointerEvents={'none'}><PostElements element={item}></PostElements></View>) }}
+          renderItem={({ item }) => { return (<PostElements element={item}></PostElements>) }}
         />
       </ScrollView>
 

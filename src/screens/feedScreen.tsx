@@ -4,6 +4,9 @@ import Post from '../components/Post/Post';
 import DropDownPicker from 'react-native-dropdown-picker'
 
 import PostList from '../components/PostList';
+import { C } from '../utils/Consts';
+import { onChange } from 'react-native-reanimated';
+import InputV1 from '../components/BasicComponents/InputV1';
 const FeedScreen = () => {
 
   const [visible, setVisible] = useState(false);
@@ -22,22 +25,13 @@ const FeedScreen = () => {
 
   ]);
 
-  const [open1, setOpen1] = useState(false);
-  const [value1, setValue1] = useState(0);
-  const [items1, setItems1] = useState([
-    { label: '1', value: 1 },
-    { label: '2', value: 2 },
-    { label: '3', value: 3 },
-    { label: '4', value: 4 },
-  ]);
   console.log("citav ffeed")
-  // <TextInput onSubmitEditing={(text) => {console.log("subimta"); setSearchText(text.nativeEvent.text) }} placeholder='Search...' style={{ flex: 1, backgroundColor: 'green' }}></TextInput>
 
   return (
     <View style={styles.container}>
       <View style={styles.feedView}>
         <View style={styles.top}>
-          <TextInput></TextInput>
+          <InputV1 f={2} onChangeText={(text) => { console.log("subimta"); setSearchText(text) }} ph='Search...' />
           <View style={{ flex: 1 }}>
             <DropDownPicker
               open={open}
@@ -54,25 +48,9 @@ const FeedScreen = () => {
               badgeDotColors={["#e76f51", "#00b4d8", "#e9c46a", "#e76f51", "#8ac926", "#00b4d8", "#e9c46a"]}
             />
           </View>
-          <View style={{ flex: 1 }}>
-            <DropDownPicker
-              open={open1}
-              value={value1}
-              items={items1}
-              setOpen={setOpen1}
-              setValue={setValue1}
-              setItems={setItems1}
-              style={{ position: 'relative', zIndex: 0 }}
-              placeholder="Layout"
-              theme="DARK"
-              mode="BADGE"
-              onChangeValue={(item) => { setCols(item); }}
-              badgeDotColors={["#e76f51", "#00b4d8", "#e9c46a", "#e76f51", "#8ac926", "#00b4d8", "#e9c46a"]}
-            />
-          </View>
         </View>
         <View
-          style={{ height: '95%' }}>
+          style={{ height: '93%' }}>
           <PostList searchText={searchText} cols={cols}></PostList>
         </View>
       </View>
@@ -95,17 +73,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: '100%',
-    backgroundColor: '#fff',
+    backgroundColor: C.bg,
     alignItems: 'center',
     justifyContent: 'center',
   },
   top: {
-    height: '5%',
+    height: '7%',
     flexDirection: 'row',
-    zIndex: 100
+    zIndex: 100,
   },
   feedView: {
-    backgroundColor: 'seashell',
+    backgroundColor: C.bg,
     height: '100%',
     width: '100%',
   },

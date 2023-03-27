@@ -1,10 +1,10 @@
 //console.log("slikeeeeeeeeeeeeeeeee=", getPexelImages('dog'))
 
 import React, { useState, useRef } from 'react'
-import { Pressable, FlatList, TextInput, Modal, View, Text, StyleSheet, Button } from 'react-native'
+import { Pressable, FlatList, TextInput, View, Text, StyleSheet, Button, KeyboardAvoidingView } from 'react-native'
 import { getPexelImages } from '../utils/ApiCalls';
 import FastImage from 'react-native-fast-image'
-
+import Modal from 'react-native-modal';
 
 type Props = {
   visible: boolean;
@@ -18,38 +18,39 @@ const ImageSearcher = ({ visible, setVisibile, setImgSrc }: Props) => {
   console.log("image=====", images)
 
   return (
-    <Modal transparent={true} visible={visible}>
-      <View style={{ width: '100%', height: '100%', backgroundColor: '#00000080' }}>
-        <View style={styles.modalView}>
-          <Text>Search and pick an image.</Text>
-          <TextInput onChangeText={text => setQuery(text)} placeholder="Search..." />
-          <Button onPress={() => { getPexelImages(query, setImages) }} title="Search" ></Button>
+    <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={-200} >
+      <Modal isVisible={visible} propagateSwipe={true} >
+        <View style={{ width: '100%', height: '100%', backgroundColor: '#00000080' }}>
+          <View style={styles.modalView}>
+            <Text>Search and pick an image.</Text>
+            <TextInput onChangeText={text => setQuery(text)} placeholder="Search..." />
+            <Button onPress={() => { getPexelImages(query, setImages) }} title="Search" ></Button>
 
-          <FlatList
-            //   keyExtracotr={(key)=>{return key}}
-            style={{ height: 500, width: 300 }}
-            numColumns={3}
-            data={images}
-            renderItem={({ item }) => {
-              return (
-                <Pressable onPress={() => { setImgSrc(item); setVisibile(false) }} >
-                  <FastImage
-                    style={styles.image}
-                    source={{
-                      uri: item,
-                      priority: FastImage.priority.normal,
-                    }}
-                    resizeMode={FastImage.resizeMode.contain}
-                  />
-                </Pressable>
-              )
-            }}
-          />
-          <Button onPress={() => { setVisibile(false) }} title="Close"></Button>
-
+            <FlatList
+              //   keyExtracotr={(key)=>{return key}}
+              style={{ height: 100, width: 300 }}
+              numColumns={3}
+              data={images}
+              renderItem={({ item }) => {
+                return (
+                  <Pressable onPress={() => { setImgSrc(item); setVisibile(false) }} >
+                    <FastImage
+                      style={styles.image}
+                      source={{
+                        uri: item,
+                        priority: FastImage.priority.normal,
+                      }}
+                      resizeMode={FastImage.resizeMode.contain}
+                    />
+                  </Pressable>
+                )
+              }}
+            />
+            <Button onPress={() => { setVisibile(false) }} title="Close"></Button>
+          </View>
         </View>
-      </View>
-    </Modal>
+      </Modal>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -60,14 +61,14 @@ const styles = StyleSheet.create({
   },
 
   modalView: {//popup
+    flex: 1,
     backgroundColor: '#fff',
     borderRadius: 10,
-    position: 'absolute',
     padding: 20,
-    bottom: 100,
     alignSelf: 'center',
     elevation: 5,
     rowGap: 10,
+    margin: 100,
   },
 });
 

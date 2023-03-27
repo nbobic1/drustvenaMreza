@@ -19,9 +19,8 @@ type postProps = {
   id: number;
   value: YesNoQElement;
   removeID: (a: number) => void;
-  saveE: boolean;
 };
-const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, reorderEnabled, value, saveE }) => {
+const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, reorderEnabled, value }) => {
   const [hgh, setHgh] = useState(200)
   const [details, setDetails] = useState([0])
   /*useEffect(()=> {
@@ -74,8 +73,8 @@ const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, r
     <View pointerEvents={reorderEnabled ? 'none' : 'auto'} >
       <Pressable disabled={!deleteEnabled} style={styles.root} onPress={() => { removeID(id) }}>
         <View pointerEvents={deleteEnabled ? 'none' : 'auto'}>
-          <InputV1 ph='Enter your question...'></InputV1>
-          <YesNo value={value} saveE={saveE}></YesNo>
+          <InputV1 onChangeText={(text) => { value.question = text }} ph='Enter your question...'></InputV1>
+          <YesNo value={value} ></YesNo>
 
         </View>
       </Pressable>

@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  Button,
-  TextInput,
   Text,
   StyleSheet,
   View,
-  TouchableOpacity,
+  Keyboard
 } from "react-native";
-import { useState, useEffect } from "react";
+import FeedScreen from "../../../../../screens/FeedScreen";
 import { TextQElement } from "../../../../../utils/DataTypes";
+import ButtonV1 from "../../../../BasicComponents/ButtonV1";
+import InputV1 from "../../../../BasicComponents/InputV1";
+import Feedback from "./Feedback";
 
 type postProps = {
   value: TextQElement;
@@ -16,41 +17,34 @@ type postProps = {
 const YesNoQ: React.FC<postProps> = ({
   value,
 }) => {
-
+  const [answer, setAnswer] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [text, setText] = useState("");
   const styles = StyleSheet.create({
-    description: {
-      textAlign: "center",
-      backgroundColor: "#00FFFF8f",
-      fontSize: 25,
-    },
-    image: {
-      width: "100%",
-      height: 200,
-      flexDirection: "column-reverse",
-    },
-    text: {
-      fontSize: 18,
-      fontWeight: "bold",
-      marginTop: 16,
-    },
-    root: {
-      width: "100%",
-      backgroundColor: "white",
-      borderWidth: 5,
-    },
+
   });
 
   return (
-    <View style={styles.root}>
-
-      <Text>{value.question} </Text>
-      <TextInput placeholder="Your answer..."></TextInput>
-      <Button
+    <View >
+      <Text style={{ alignSelf: 'center' }}>{value.question} </Text>
+      <InputV1 onChangeText={setAnswer} ph="Your answer..."></InputV1>
+      <ButtonV1
+        w={'50%'}
         title="Answer"
         onPress={() => {
+          Keyboard.dismiss();
           //provjera odgovora
+          if (answer == value.answer) {
+            setText("Correct answer");
+            setVisible(true);
+          }
+          else {
+            setText("Wrong answer");
+            setVisible(true);
+          }
         }}
       />
+      <Feedback text={text} visible={visible} setVisible={setVisible}></Feedback>
     </View>
   );
 };

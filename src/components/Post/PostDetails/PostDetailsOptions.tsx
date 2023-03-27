@@ -1,5 +1,6 @@
 import React from 'react'
 import { Pressable, Text, View, StyleSheet } from 'react-native'
+import { C } from '../../../utils/Consts';
 import ButtonV1 from '../../BasicComponents/ButtonV1';
 import Row from '../../BasicComponents/Row';
 
@@ -16,10 +17,10 @@ type Props = {
 const PostDetailsOptions = ({ hgh, setHgh, setScrollE, setDetails }: Props) => {
   return (
     <Row>
-      <ButtonV1 title='Comment'></ButtonV1>
-      <ButtonV1 title='Save'></ButtonV1>
-      <ButtonV1 title='Edit'></ButtonV1>
-      <ButtonV1 title='Back' onPress={() => { setHgh(200); setDetails([0]); setScrollE(true) }} ></ButtonV1>
+      <ButtonV1 bg={C.primary} title='Comment'></ButtonV1>
+      <ButtonV1 bg={C.primary} title='Save'></ButtonV1>
+      <ButtonV1 bg={C.primary} title='Edit'></ButtonV1>
+      <ButtonV1 bg={C.primary} title='Back' onPress={() => { setHgh(200); setDetails([0]); setScrollE(true) }} ></ButtonV1>
 
     </Row>
   );

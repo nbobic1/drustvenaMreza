@@ -1,37 +1,43 @@
 //index mora biti u svim zbog reorder
-export type PostElement = (VideoElement | ImageElement | TextQElement | YesNoQElement);
+export type PostElement = (TextElement | VideoElement | ImageElement | TextQElement | YesNoQElement);
 export enum PostElementType {
-VideoElement,
-ImageElement,
-TextQElement,
-YesNoQElement
+  VideoElement,
+  ImageElement,
+  TextQElement,
+  YesNoQElement,
+  TextElement,
 }
-export type PostData ={
-  id:number;
+export type PostData = {
+  id: number;
   text: string;
   imgSrc: string;
- items: PostElement[];
+  items: PostElement[];
 };
-export type VideoElement ={
+export type VideoElement = {
   index: number;
   url: string;
-  type:PostElementType.VideoElement;
+  type: PostElementType.VideoElement;
 };
-export type ImageElement= {
+export type ImageElement = {
   index: number;
   url: string;
-  type:PostElementType.ImageElement;
+  type: PostElementType.ImageElement;
 };
-export type YesNoQElement ={
+export type YesNoQElement = {
   index: number;
   question: string;
   answer: boolean;
-  type:PostElementType.YesNoQElement;
+  type: PostElementType.YesNoQElement;
 };
-export type TextQElement={
-  type:PostElementType.TextQElement;
+export type TextQElement = {
+  type: PostElementType.TextQElement;
   index: number;
   question: string;
   answer: string;
+}
+export type TextElement = {
+  type: PostElementType.TextElement;
+  index: number;
+  text: string;
 }
 

@@ -1,12 +1,9 @@
 import { PostElement, PostData } from "./DataTypes";
 
-
-
-
 export const getMoviesFromApiAsync = async () => {
   try {
     const response = await fetch(
-      'http://192.168.1.3:32771/WeatherForecast/GetMovie', {
+      'http://192.168.1.3:32777/WeatherForecast/GetMovie', {
       method: 'GET',
       headers: {
         Accept: 'text/plain'
@@ -46,7 +43,7 @@ export const sendMoviesFromApiAsync = async (data: any) => {
   try {
     console.log(JSON.stringify(data));
     const response = await fetch(
-      'http://192.168.1.3:32771/WeatherForecast/PostMovie', {
+      'http://192.168.1.3:32777/WeatherForecast/PostMovie', {
       method: 'POST',
       headers: {
         Accept: 'text/plain',

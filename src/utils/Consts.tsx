@@ -1,11 +1,15 @@
 export const C = {
   white: '#fff',
   black: '#000',
-  primary: '#232303',
-  secundary: '#400ff0',
+  primary: '#1C6CCA',//-'#e57239', //'#60BF4D',
+  primaryLight: '#39ACE5',
+  secundary: '#B8B8B8',
+  bg: '#D8E3EF',
+  bgV2: '#323F46',
+  focusBg: '#B7EFAC',
   //buttons
-  btn: '#000',
-  btnT: '#000',
+  btn: '#E1EBF5',
+  btnT: '#B7EFAC',
 
   //input
   i: '#000',
@@ -23,7 +27,7 @@ export const C = {
 }
 export const S = {
   s: 2,
-  m: 4,
+  m: 8,
   l: 20,
   // your colors
 }

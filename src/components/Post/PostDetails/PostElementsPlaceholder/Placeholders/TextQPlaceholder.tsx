@@ -17,8 +17,9 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import { TextQElement } from "../../../../../utils/DataTypes";
-import InputV1 from "../../../../BasicComponents/InputV1";
+import InputV2 from "../../../../BasicComponents/InputV2";
 import ButtonV1 from "../../../../BasicComponents/ButtonV1";
+import { S } from "../../../../../utils/Consts";
 
 type postProps = {
   text: string;
@@ -38,13 +39,15 @@ const YesNoQPlaceholder: React.FC<postProps> = ({
 }) => {
   const [first, setFirst] = useState(text);
 
+  const [answer, setAnswer] = useState("");
   const [question, setQuestion] = useState("");
   useEffect(() => {
     setFirst(text);
   });
   useEffect(() => {
     value.question = question
-  }, [question]);
+    value.answer = answer
+  }, [question, answer]);
   const styles = StyleSheet.create({
     description: {
       textAlign: "center",
@@ -77,12 +80,12 @@ const YesNoQPlaceholder: React.FC<postProps> = ({
       >
         <View pointerEvents={deleteEnabled ? "none" : "auto"}>
 
-          <InputV1 onChangeText={(value1) => { setQuestion(value1) }} ph="Your question..." />
+          <InputV2 onChangeText={(value1) => { setQuestion(value1) }} ph="Your question..." />
 
 
-          <InputV1 onChangeText={(value1) => { setQuestion(value1) }} ph="Your answer..." />
+          <InputV2 my={10} onChangeText={(value1) => { setAnswer(value1) }} ph="Your answer..." />
 
-          <ButtonV1 w={'50%'} title="Answer"></ButtonV1>
+          <ButtonV1 w={'50%'} v={2} title="Answer"></ButtonV1>
 
         </View>
       </TouchableOpacity>

@@ -7,6 +7,8 @@ import LogInScreen from './src/screens/LogInScreen';
 import FeedScreen from './src/screens/FeedScreen';
 import CreateScreen from './src/screens/CreateScreen';
 import FavouriteScreen from './src/screens/FavouriteScreen';
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { C } from './src/utils/Consts';
 
 //dragable list
 
@@ -28,7 +30,21 @@ export default function App () {
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             // You can return any component that you like here!
-            return <Text>{route.name}</Text>;
+            var t = C.primary;
+            if (!focused)
+              t = "black";
+            if (route.name === "LogIn") {
+              return <Ionicons name="person-circle-outline" size={24} color={t} />;
+            }
+            else if (route.name === "Feed") {
+              return <MaterialIcons name="grid-on" size={24} color={t} />;
+            }
+            else if (route.name === "Create") {
+              return (<Ionicons name="create" size={24} color={t} />);
+            }
+            else {
+              return (<Ionicons name="heart" size={24} color={t} />);
+            }
           },
           tabBarLabel: () => { return null },
           header: ({ navigation, route, options }) => {
@@ -37,19 +53,14 @@ export default function App () {
         })}
       >
         <Tab.Screen
-          name="FeedScreen"
+          name="Feed"
           component={FeedScreen}
           options={{ title: 'Feed' }}
           initialParams={{}}
 
-        /><Tab.Screen
-          name="LogInScreen"
-          component={LogInScreen}
-          options={{ title: 'LogIn' }}
-          initialParams={{}}
         />
         <Tab.Screen
-          name="FavouriteScreen"
+          name="Favourite"
           component={FavouriteScreen}
           options={{ title: 'LogIn' }}
           initialParams={{}}
@@ -58,6 +69,12 @@ export default function App () {
           name="Create"
           component={CreateScreen}
           options={{ title: 'Details' }}
+          initialParams={{}}
+        />
+        <Tab.Screen
+          name="LogIn"
+          component={LogInScreen}
+          options={{ title: 'LogIn' }}
           initialParams={{}}
         />
       </Tab.Navigator>

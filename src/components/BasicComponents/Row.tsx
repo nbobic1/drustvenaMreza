@@ -7,21 +7,32 @@ type Props = {
     children: ReactNode;
     mx?: number;
     px?: number;
-    w?: number;
+    py?: number;
+    w?: any;
     bR?: number;
     bW?: number;
+    g?: number;
+    f?: number;
     bC?: string;
+    bg?: string;
 };
 
 
-const Row = ({ children, mx, w, bC, bR, bW, px }: Props) => {
+const Row = ({ g, children, f, mx, w, bg, bC, bR, bW, px, py }: Props) => {
 
     const styles = StyleSheet.create({
         root: {
+            width: w ? w : '100%',
             flexDirection: 'row',
             justifyContent: 'space-between',
-            gap: 10,
-            padding: 10,
+            gap: g ? g : 10,
+            borderColor: bC ? bC : C.white,
+            borderWidth: bW ? bW : 0,
+            alignSelf: 'center',
+            borderRadius: bR ? bR : 0,
+            backgroundColor: bg ? bg : '#fff',
+            paddingHorizontal: px ? px : 10,
+            paddingVertical: py ? py : 10,
         },
     });
     return (

@@ -5,21 +5,21 @@ import FastImage from 'react-native-fast-image'
 
 
 type Props = {
-  value:ImageElement;
+  value: ImageElement;
 };
 
 
-const Image = ({ value}: Props) => {
+const Image = ({ value }: Props) => {
   return (
 
     <FastImage
-    style={styles.image}
-    source={{
-      uri: value.url,
-      priority: FastImage.priority.normal,
-    }}
-    resizeMode={FastImage.resizeMode.contain}
-  />
+      style={styles.image}
+      source={{
+        uri: value.url,
+        priority: FastImage.priority.normal,
+      }}
+      resizeMode={FastImage.resizeMode.contain}
+    />
   );
 };
 
@@ -29,10 +29,11 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: 'white',
     borderWidth: 5
-  },   
-  image:{
-    height:150,
-    width:150
-},
+  },
+  image: {
+    height: 150,
+    width: 150,
+    alignSelf: 'center'
+  },
 });
 export default Image

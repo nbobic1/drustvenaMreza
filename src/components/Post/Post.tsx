@@ -5,9 +5,10 @@ import PostDetailsScreen from './PostDetails/PostDetails';
 import Kraj from '../KrajBtn';
 import FastImage from 'react-native-fast-image'
 import { PostData } from '../../utils/DataTypes';
+import { C, S } from '../../utils/Consts';
 
 type postProps = {
-  data:PostData;
+  data: PostData;
   setScrollE: (a: boolean) => void;
   refi: (a: number) => void;
   index: number;
@@ -18,9 +19,12 @@ const Post: React.FC<postProps> = ({ data, setScrollE, refi, index, flatListHeig
   const [hgh, setHgh] = useState(200)
   const [details, setDetails] = useState([0])
   const styles = StyleSheet.create({
+    root: {
+      marginVertical: S.m,
+    },
     description: {
       textAlign: 'center',
-      backgroundColor: '#00FFFF8f',
+      backgroundColor: C.white,
       fontSize: 25,
       height: 30,
     },
@@ -36,17 +40,19 @@ const Post: React.FC<postProps> = ({ data, setScrollE, refi, index, flatListHeig
     },
   });
   return (
-    <View  >
+    <View style={styles.root} >
       <Pressable onPress={() => {
         if (refi != undefined && index >= 0)
           refi(index);
-        if (hgh == 400) { setHgh(200); 
+        if (hgh == 400) {
+          setHgh(200);
           setDetails([0]);
-           setScrollE(true); 
-        } else { setHgh(400); 
-          setDetails([1]); 
+          setScrollE(true);
+        } else {
+          setHgh(400);
+          setDetails([1]);
           setScrollE(false)
-         };
+        };
       }} >
         <FastImage
           style={styles.image}
@@ -58,8 +64,8 @@ const Post: React.FC<postProps> = ({ data, setScrollE, refi, index, flatListHeig
         />
         <Text style={styles.description} >{data.text}</Text>
       </Pressable>
-      {details[0] != 0 ? <PostDetailsScreen  hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} items={data.items} height={flatListHeight - 230}></PostDetailsScreen> : <View></View> /*200 je slika, 30 text ispod nje, 30 back button*/}
-      
+      {details[0] != 0 ? <PostDetailsScreen hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} items={data.items} height={flatListHeight - 230}></PostDetailsScreen> : <View></View> /*200 je slika, 30 text ispod nje, 30 back button*/}
+
     </View>
 
   );

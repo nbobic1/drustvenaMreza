@@ -8,7 +8,7 @@ import { Modal, Button, ScrollView, StyleSheet, Text, View } from 'react-native'
 import Posts from '../components/Post/Post';
 import { useNavigation } from '@react-navigation/native';
 import PostElementView from '../components/BasicComponents/PostElementView';
-import { S } from '../utils/Consts';
+import { C, S } from '../utils/Consts';
 import InputV1 from '../components/BasicComponents/InputV1';
 const FavouriteScreen = () => {
   const [visible, setVisible] = useState(false);
@@ -43,7 +43,7 @@ const FavouriteScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: C.bg,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   modalView: {
-    backgroundColor: '#0f0',
+    backgroundColor: C.pop,
     borderRadius: 10,
     position: 'absolute',
     padding: 20,
