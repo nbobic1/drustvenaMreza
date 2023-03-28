@@ -6,8 +6,6 @@ import FastImage from 'react-native-fast-image'
 
 import { Modal, Button, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Posts from '../components/Post/Post';
-import { useNavigation } from '@react-navigation/native';
-import PostElementView from '../components/BasicComponents/PostElementView';
 import { C, S } from '../utils/Consts';
 import InputV1 from '../components/BasicComponents/InputV1';
 const FavouriteScreen = () => {

@@ -69,7 +69,7 @@ const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, r
     <View pointerEvents={reorderEnabled ? 'none' : 'auto'} >
       <Pressable disabled={!deleteEnabled} style={styles.root} onPress={() => { removeID(id) }}>
         <View pointerEvents={deleteEnabled ? 'none' : 'auto'}>
-          <InputV2 setVisible={setVisible} initialValue={value.question} value={value} onChangeText={(text) => { value.question = text }} ph='Enter your question...'></InputV2>
+          <InputV2 textS={value.style} setVisible={setVisible} initialValue={value.question} value={value} onChangeText={(text) => { value.question = text }} ph='Enter your question...'></InputV2>
           <YesNo value={value} ></YesNo>
 
         </View>

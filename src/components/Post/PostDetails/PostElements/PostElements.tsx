@@ -22,7 +22,7 @@ const PostElements = ({ element }: Props) => {
   else if (element.type == PostElementType.TextQElement)
     return (<TextQ value={element}></TextQ>);
   else if (element.type == PostElementType.TextElement)
-    return (<Text>{element.text}</Text>);
+    return (<Text style={element.style}>{element.text}</Text>);
   else
     return (<Text>ldsafdlja</Text>);
 };

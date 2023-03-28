@@ -26,7 +26,7 @@ const YesNoQ: React.FC<postProps> = ({
 
   return (
     <View >
-      <Text style={{ alignSelf: 'center' }}>{value.question} </Text>
+      <Text style={value.style}>{value.question} </Text>
       <InputV1 onChangeText={setAnswer} ph="Your answer..."></InputV1>
       <ButtonV1
         w={'50%'}

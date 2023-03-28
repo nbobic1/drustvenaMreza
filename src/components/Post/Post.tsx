@@ -64,7 +64,7 @@ const Post: React.FC<postProps> = ({ data, setScrollE, refi, index, flatListHeig
         />
         <Text style={styles.description} >{data.text}</Text>
       </Pressable>
-      {details[0] != 0 ? <PostDetailsScreen hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} items={data.items} height={flatListHeight - 230}></PostDetailsScreen> : <View></View> /*200 je slika, 30 text ispod nje, 30 back button*/}
+      {details[0] != 0 ? <PostDetailsScreen hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} items={data.items} height={flatListHeight - 230 - S.m}></PostDetailsScreen> : <View></View> /*200 je slika, 30 text ispod nje, 30 back button*/}
 
     </View>
 

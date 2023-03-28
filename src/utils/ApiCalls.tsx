@@ -3,7 +3,7 @@ import { PostElement, PostData } from "./DataTypes";
 export const getMoviesFromApiAsync = async () => {
   try {
     const response = await fetch(
-      'http://192.168.1.3:32777/WeatherForecast/GetMovie', {
+      'http://192.168.1.3:32771/WeatherForecast/GetMovie', {
       method: 'GET',
       headers: {
         Accept: 'text/plain'
@@ -12,14 +12,18 @@ export const getMoviesFromApiAsync = async () => {
     }
     );
     const json = await response.json();
-    console.log("rezutas" + json.length)
-    console.log("eh sad=" + JSON.stringify(JSON.parse(json[0].items)[0]));
     for (var i = 0; i < json.length; i++) {
-      json[i].items = JSON.parse(json[i].items)
+      try {
+
+        json[i].items = JSON.parse(json[i].items)
+      }
+      catch (e) {
+      }
     }
+    console.log("dakljakkkkkkkkkkk")
     return json;//array of movies
   } catch (error) {
-    console.error(JSON.stringify(error));
+    console.error("error",);
   }
 
   /*
@@ -43,7 +47,7 @@ export const sendMoviesFromApiAsync = async (data: any) => {
   try {
     console.log(JSON.stringify(data));
     const response = await fetch(
-      'http://192.168.1.3:32777/WeatherForecast/PostMovie', {
+      'http://192.168.1.3:32771/WeatherForecast/PostMovie', {
       method: 'POST',
       headers: {
         Accept: 'text/plain',
@@ -55,7 +59,7 @@ export const sendMoviesFromApiAsync = async (data: any) => {
     );
     const json = await response.json();
     console.log("rezutas")
-    console.log("eh sad1=" + json[0]);
+    console.log("eh sad1=" + json);
     return json;//array of movies
   } catch (error) {
 

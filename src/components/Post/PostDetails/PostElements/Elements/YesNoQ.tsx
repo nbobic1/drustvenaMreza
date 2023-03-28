@@ -5,6 +5,7 @@ import { PostElement, YesNoQElement } from '../../../../../utils/DataTypes';
 import Row from '../../../../BasicComponents/Row';
 import ButtonV1 from '../../../../BasicComponents/ButtonV1';
 import Feedback from './Feedback';
+import { C } from '../../../../../utils/Consts';
 
 type postProps = {
   value: YesNoQElement;
@@ -16,8 +17,8 @@ const YesNoQ: React.FC<postProps> = ({ value }) => {
   console.log("sto ne radiiii=", value.answer);
   return (
     <View >
-      <Text style={{ alignSelf: 'center' }}>{value.question}</Text>
-      <Row >
+      <Text style={value.style}>{value.question}</Text>
+      <Row bg={C.bg} >
         <ButtonV1 onPress={() => {
           if (value.answer) {
             setText("Correct answer");
