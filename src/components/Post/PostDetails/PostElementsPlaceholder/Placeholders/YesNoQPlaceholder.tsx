@@ -11,7 +11,7 @@ import { FlatList, Text, StyleSheet, View, ImageBackground, TouchableOpacity, Te
 import { useState } from 'react';
 import { PostElement, YesNoQElement } from '../../../../../utils/DataTypes';
 import YesNo from '../../../../YesNo';
-import InputV1 from '../../../../BasicComponents/InputV1';
+import InputV2 from '../../../../BasicComponents/InputV2';
 
 type postProps = {
   deleteEnabled: boolean;
@@ -19,15 +19,11 @@ type postProps = {
   id: number;
   value: YesNoQElement;
   removeID: (a: number) => void;
+  setVisible: (a: boolean) => void;
 };
-const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, reorderEnabled, value }) => {
-  const [hgh, setHgh] = useState(200)
-  const [details, setDetails] = useState([0])
-  /*useEffect(()=> {
-    if (updateElement!=undefined)
-    updateElement(value)
-  },[saveEnabled])
-  */const styles = StyleSheet.create({
+const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, reorderEnabled, value, setVisible }) => {
+
+  const styles = StyleSheet.create({
 
     description: {
       textAlign: 'center',
@@ -73,7 +69,7 @@ const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, r
     <View pointerEvents={reorderEnabled ? 'none' : 'auto'} >
       <Pressable disabled={!deleteEnabled} style={styles.root} onPress={() => { removeID(id) }}>
         <View pointerEvents={deleteEnabled ? 'none' : 'auto'}>
-          <InputV1 onChangeText={(text) => { value.question = text }} ph='Enter your question...'></InputV1>
+          <InputV2 setVisible={setVisible} initialValue={value.question} value={value} onChangeText={(text) => { value.question = text }} ph='Enter your question...'></InputV2>
           <YesNo value={value} ></YesNo>
 
         </View>

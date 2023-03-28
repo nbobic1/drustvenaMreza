@@ -14,11 +14,12 @@ type Props = {
     f?: number;
     bC?: string;
     ph?: string;
+    fontS?: number;
     onChangeText?: (value: string) => void;
 };
 
 
-const InputV1 = ({ mx, my, px, w, f, bR, bW, bC, ph, onChangeText }: Props) => {
+const InputV1 = ({ mx, my, px, w, f, bR, bW, bC, ph, onChangeText, fontS }: Props) => {
     const [outlineColor, setOutlineColor] = useState(bC ? bC : C.secundary);
     const [input, setInput] = useState("")
     const ref = useRef(null)
@@ -41,6 +42,7 @@ const InputV1 = ({ mx, my, px, w, f, bR, bW, bC, ph, onChangeText }: Props) => {
             alignSelf: 'center',
             borderWidth: bW ? bW : S.s,
             borderRadius: bR ? bR : S.m,
+            fontSize: fontS ? fontS : 18,
         }
     });
     const [backHandler, setBackHandler] = useState<NativeEventSubscription>()

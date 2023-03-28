@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import InputWithLable from '../components/inputWithLable'
-import { C } from '../utils/Consts';
+import { Text, StyleSheet, View } from 'react-native';
+import InputV1 from '../components/BasicComponents/InputV1';
+import { C, S } from '../utils/Consts';
 
 const LogInScreen = () => {
 
@@ -9,28 +9,20 @@ const LogInScreen = () => {
   const fun = (text: string) => { setEmail(text); };
   return (
     <View style={styles.container}>
-      <View style={styles.feedView}>
-        <InputWithLable text="Email" hint="email" type={false} func={fun}></InputWithLable>
-        <InputWithLable text="Password" hint="passwrd" type={true} func={fun}></InputWithLable>
-      </View>
+      <Text style={{ alignSelf: 'center', marginTop: 5 * S.l, fontSize: 2 * S.l }}>LogIn</Text>
+      <InputV1 f={-1} mx={2 * S.l} ph={"Username"}></InputV1>
 
+      <InputV1 f={-1} mx={2 * S.l} ph={"Password"}></InputV1>
     </View>
+
   );
 };
 
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: '100%',
     backgroundColor: C.bg,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  feedView: {
-    backgroundColor: C.bg,
-    height: '93%',
-    width: '100%'
   },
 });
 export default LogInScreen;

@@ -14,11 +14,11 @@ const YesNo = ({ value }: Props) => {
     const [btn, setBtn] = useState(true);
     return (
         <Row >
-            <ButtonV1 bg={btn ? C.btnT : C.white} v={2} onPress={() => {
+            <ButtonV1 bg={btn ? C.btnT : C.white} v={"empty"} onPress={() => {
                 value.answer = true;
                 setBtn(true);
             }} title="Yes"></ButtonV1>
-            <ButtonV1 bg={btn ? C.white : C.btnT} v={2} onPress={() => {
+            <ButtonV1 bg={btn ? C.white : C.btnT} v={"empty"} onPress={() => {
                 setBtn(false);
                 value.answer = false;
             }} title="No" ></ButtonV1>

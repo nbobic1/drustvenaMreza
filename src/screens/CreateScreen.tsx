@@ -1,7 +1,7 @@
 
 
 import React, { useState } from 'react';
-import { Pressable, Modal, ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { Pressable, Modal, ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DraggableFlatList, {
   ScaleDecorator,
@@ -10,16 +10,18 @@ import { PostElement, VideoElement, ImageElement, PostElementType, TextQElement,
 import PostElementPlaceholder from '../components/Post/PostDetails/PostElementsPlaceholder/PostElementPlaceholder';
 import CreateOptionns from '../components/CreateOptions';
 import PostElementView from '../components/BasicComponents/PostElementView';
-import { C } from '../utils/Consts';
+import { C, S } from '../utils/Consts';
+import FontPicker from '../components/FontPicker/FontPicker';
 
 const CreateScreen = () => {
 
   const [email, setEmail] = useState("pocetni");
   const [deleteEnabled, setDeleteEnabled] = useState(false);
   const [reorderEnabled, setReorderEnabled] = useState(false);
+  const [textSt, setTextSt] = useState(null);
   const fun = (text: string) => { setEmail(text); };
 
-  const [DATA, setDATA] = useState<PostElement[]>([{ index: 0, type: PostElementType.TextElement, text: "" } as TextElement]);
+  const [DATA, setDATA] = useState<PostElement[]>([{ index: 0, type: PostElementType.TextElement, text: "", style: { fontWeight: '500', textDecorationLine: 'none', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } } as TextElement]);
   console.log("createScreen->rerender")
   const removeID = (index: number) => { setDATA(DATA.filter(function (a: PostElement) { return a.index != index })) };
   return (
@@ -42,7 +44,7 @@ const CreateScreen = () => {
 
                     <View>
                       <PostElementView mx={30} >
-                        <PostElementPlaceholder removeID={removeID} deleteEnabled={deleteEnabled} reorderEnabled={reorderEnabled} element={item}></PostElementPlaceholder>
+                        <PostElementPlaceholder setVisible={setTextSt} removeID={removeID} deleteEnabled={deleteEnabled} reorderEnabled={reorderEnabled} element={item}></PostElementPlaceholder>
                       </PostElementView>
                     </View>
                   </TouchableOpacity>
@@ -54,7 +56,7 @@ const CreateScreen = () => {
         </GestureHandlerRootView>
         <CreateOptionns DATA={DATA} setDATA={setDATA} setReorderEnabled={setReorderEnabled} setDeleteEnabled={setDeleteEnabled}></CreateOptionns>
       </View>
-
+      <FontPicker textSt={textSt != null ? textSt.style : null} setTextSt={setTextSt}></FontPicker>
     </View>
   );
 };
@@ -67,10 +69,7 @@ const CreateScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: C.bg,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 
   feedView: {
@@ -98,15 +97,6 @@ const styles = StyleSheet.create({
     height: '100%',
     textAlign: 'center',
   },
-  modalView: {//popup
-    backgroundColor: C.pop,
-    borderRadius: 10,
-    position: 'absolute',
-    padding: 20,
-    bottom: 100,
-    alignSelf: 'center',
-    elevation: 5,
-    rowGap: 10,
-  },
+
 });
 export default CreateScreen;

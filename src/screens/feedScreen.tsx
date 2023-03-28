@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { FlatList, Modal, Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import Post from '../components/Post/Post';
-import DropDownPicker from 'react-native-dropdown-picker'
 
 import PostList from '../components/PostList';
 import { C } from '../utils/Consts';
@@ -32,22 +30,7 @@ const FeedScreen = () => {
       <View style={styles.feedView}>
         <View style={styles.top}>
           <InputV1 f={2} onChangeText={(text) => { console.log("subimta"); setSearchText(text) }} ph='Search...' />
-          <View style={{ flex: 1 }}>
-            <DropDownPicker
-              open={open}
-              value={value}
-              items={items}
-              setOpen={setOpen}
-              setValue={setValue}
-              setItems={setItems}
-              style={{ position: 'relative', zIndex: 0 }}
-              placeholder="Category (All)"
-              theme="DARK"
-              multiple={true}
-              mode="BADGE"
-              badgeDotColors={["#e76f51", "#00b4d8", "#e9c46a", "#e76f51", "#8ac926", "#00b4d8", "#e9c46a"]}
-            />
-          </View>
+
         </View>
         <View
           style={{ height: '93%' }}>

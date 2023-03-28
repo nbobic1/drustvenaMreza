@@ -27,17 +27,20 @@ export type YesNoQElement = {
   index: number;
   question: string;
   answer: boolean;
+  style: any;
   type: PostElementType.YesNoQElement;
 };
 export type TextQElement = {
   type: PostElementType.TextQElement;
   index: number;
   question: string;
+  style: any;
   answer: string;
 }
 export type TextElement = {
   type: PostElementType.TextElement;
   index: number;
+  style: any;
   text: string;
 }
 

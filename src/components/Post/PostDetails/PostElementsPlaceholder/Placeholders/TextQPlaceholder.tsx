@@ -1,16 +1,6 @@
-/*
-{ 
-  <ImageBackground style={styles.image} source={{uri:imgSrc}}>
-        
-          </ImageBackground>  
-              
-          
-*/
+
 import React from "react";
 import {
-  Button,
-  TextInput,
-  Text,
   StyleSheet,
   View,
   TouchableOpacity,
@@ -20,6 +10,7 @@ import { TextQElement } from "../../../../../utils/DataTypes";
 import InputV2 from "../../../../BasicComponents/InputV2";
 import ButtonV1 from "../../../../BasicComponents/ButtonV1";
 import { S } from "../../../../../utils/Consts";
+import InputV1 from "../../../../BasicComponents/InputV1";
 
 type postProps = {
   text: string;
@@ -28,6 +19,7 @@ type postProps = {
   id: number;
   value: TextQElement;
   removeID: (a: number) => void;
+  setVisible: (a: boolean) => void;
 };
 const YesNoQPlaceholder: React.FC<postProps> = ({
   text,
@@ -36,6 +28,7 @@ const YesNoQPlaceholder: React.FC<postProps> = ({
   removeID,
   value,
   reorderEnabled,
+  setVisible
 }) => {
   const [first, setFirst] = useState(text);
 
@@ -80,12 +73,12 @@ const YesNoQPlaceholder: React.FC<postProps> = ({
       >
         <View pointerEvents={deleteEnabled ? "none" : "auto"}>
 
-          <InputV2 onChangeText={(value1) => { setQuestion(value1) }} ph="Your question..." />
+          <InputV2 initialValue={value.question} value={value} textS={value.style} setVisible={setVisible} onChangeText={(value1) => { setQuestion(value1) }} ph="Your question..." />
 
 
-          <InputV2 my={10} onChangeText={(value1) => { setAnswer(value1) }} ph="Your answer..." />
+          <InputV1 my={10} onChangeText={(value1) => { setAnswer(value1) }} ph="Your answer..." />
 
-          <ButtonV1 w={'50%'} v={2} title="Answer"></ButtonV1>
+          <ButtonV1 w={'50%'} v={"empty"} title="Answer"></ButtonV1>
 
         </View>
       </TouchableOpacity>

@@ -18,14 +18,13 @@ const FavouriteScreen = () => {
 
         <ScrollView>
           <FastImage
-            style={{ height: 200, width: 200 }}
+            style={{ height: 200, width: 200, alignSelf: 'center' }}
             source={{
               uri: 'https://images.pexels.com/photos/1835008/pexels-photo-1835008.jpeg?auto=compress&cs=tinysrgb&h=130',
               priority: FastImage.priority.normal,
             }}
             resizeMode={FastImage.resizeMode.contain}
           />
-          <PostElementView mx={S.l}><Text>dsfadf</Text><Text>2aaaaa</Text></PostElementView>
           <InputV1 ></InputV1>
         </ScrollView>
       </View>
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   feedView: {
-    backgroundColor: 'seashell',
+    backgroundColor: C.bg,
     height: '93%',
     width: '100%'
   },

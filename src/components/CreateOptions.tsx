@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Keyboard, Text, View, StyleSheet, Modal, Pressable, KeyboardAvoidingView } from 'react-native'
+import { Keyboard, Text, View, StyleSheet, Modal, } from 'react-native'
 import FastImage from 'react-native-fast-image';
 import { sendMoviesFromApiAsync } from '../utils/ApiCalls';
 import { C, S } from '../utils/Consts';
@@ -40,11 +40,8 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: 
       </Row>
       <Row bg={C.primary} g={-1} px={-1} py={-1} >
         <View style={{ height: 15, borderTopRightRadius: 50, flex: 5, backgroundColor: '#ffffff' }}>
-
         </View>
-
         <View style={{ flex: 3, height: 15, borderTopStartRadius: 50, backgroundColor: 'white' }}>
-
         </View>
       </Row>
       <Modal transparent={true} visible={visible} >
@@ -53,18 +50,17 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: 
             <Text style={{ alignSelf: 'center' }}>Which item would you like to add?</Text>
             <Row py={-1} >
               <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, url: "", type: PostElementType.ImageElement }]); }} title="Image"></ButtonV1>
-              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, url: "", type: PostElementType.VideoElement }]); }} title="Vindexeo"></ButtonV1>
+              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, url: "", type: PostElementType.VideoElement }]); }} title="Video"></ButtonV1>
             </Row>
             <Row py={-1}>
-              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, question: "", answer: "", type: PostElementType.TextQElement }]); }} title="Text"></ButtonV1>
+              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, text: "", type: PostElementType.TextElement, style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } }]); }} title="Text"></ButtonV1>
               <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, url: "", type: PostElementType.VideoElement }]); }} title="Giff"></ButtonV1>
             </Row>
             <Row py={-1} >
-              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, question: "", answer: true, type: PostElementType.YesNoQElement }]); }} title="Yes/No question"></ButtonV1>
-              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, question: "", answer: "", type: PostElementType.TextQElement }]); }} title="Text question"></ButtonV1>
+              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, question: "", answer: true, type: PostElementType.YesNoQElement, style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } }]); }} title="Yes/No question"></ButtonV1>
+              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, question: "", answer: "", type: PostElementType.TextQElement, style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } }]); }} title="Text question"></ButtonV1>
             </Row>
             <ButtonV1 w={'50%'} onPress={() => { setVisible(false); }} title="Close"></ButtonV1>
-
           </View>
         </View>
       </Modal >
@@ -92,7 +88,7 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: 
                   console.log("title=", title)
                   console.log("saveam==========", JSON.stringify(DATA));
                   sendMoviesFromApiAsync({ imgSrc: imgSrc, text: title, items: JSON.stringify(DATA) })
-                  setDATA([{ index: 0, type: PostElementType.TextElement, text: "" } as TextElement])
+                  setDATA([{ index: 0, type: PostElementType.TextElement, text: "", style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } } as TextElement])
                 }
 
               }}

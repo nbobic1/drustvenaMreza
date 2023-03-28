@@ -16,6 +16,7 @@ import {
 import { useState, useEffect } from "react";
 import { TextElement, TextQElement } from "../../../../../utils/DataTypes";
 import InputV1 from "../../../../BasicComponents/InputV1";
+import InputV2 from "../../../../BasicComponents/InputV2";
 
 type postProps = {
     deleteEnabled: boolean;
@@ -23,6 +24,7 @@ type postProps = {
     id: number;
     value: TextElement;
     removeID: (a: number) => void;
+    setVisible: (a: any) => void;
 };
 const TextElementPlaceholder: React.FC<postProps> = ({
     deleteEnabled,
@@ -30,6 +32,7 @@ const TextElementPlaceholder: React.FC<postProps> = ({
     removeID,
     value,
     reorderEnabled,
+    setVisible
 }) => {
     const [text, setText] = useState("");
 
@@ -67,7 +70,7 @@ const TextElementPlaceholder: React.FC<postProps> = ({
                 }}
             >
                 <View pointerEvents={deleteEnabled ? "none" : "auto"}>
-                    <InputV1 onChangeText={(text) => { value.text = text }} ph="Your text..." />
+                    <InputV2 initialValue={value.text} value={value} textS={value.style} setVisible={setVisible} onChangeText={(text) => { value.text = text }} ph="Your text..." />
                 </View>
             </TouchableOpacity>
         </View>

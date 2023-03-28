@@ -15,10 +15,8 @@ type Props = {
 
 
 const ImagePlaceholder = ({ deleteEnabled, id, removeID, value, reorderEnabled }: Props) => {
-
-
   const [visible, setVisible] = useState(false);
-  const [imgSrc, setImgSrc] = useState("");
+  const [imgSrc, setImgSrc] = useState("");  
   useEffect(() => {
     console.log("useEffect")
     value.url = imgSrc;
