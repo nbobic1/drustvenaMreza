@@ -2,9 +2,9 @@ import Slider from '@react-native-community/slider';
 import { Picker } from '@react-native-picker/picker';
 import React, { useState } from 'react'
 import { Text, View, StyleSheet, Modal, KeyboardAvoidingView } from 'react-native'
-import { C, S } from '../../utils/Consts';
-import ButtonV1 from '../BasicComponents/ButtonV1';
-import Row from '../BasicComponents/Row';
+import { C, S } from '../utils/Consts';
+import ButtonV1 from './BasicComponents/ButtonV1';
+import Row from './BasicComponents/Row';
 import { Feather } from '@expo/vector-icons';
 
 
@@ -16,6 +16,7 @@ type Props = {
 
 const FontPicker = ({ textSt, setTextSt }: Props) => {
     const [selectedLanguage, setSelectedLanguage] = useState(textSt != null ? textSt.fontFamily : 'normal');
+    const [align, setAlign] = useState(true);
     console.log("ehhehe=", JSON.stringify(textSt), textSt != null ? textSt.fontSize : null);
     return (
 
@@ -30,9 +31,9 @@ const FontPicker = ({ textSt, setTextSt }: Props) => {
                             <ButtonV1 initialValue={textSt != null ? textSt.textDecorationLine == 'underline' : false} v={"switch"} onPress={() => { if (textSt.textDecorationLine == 'underline') textSt.textDecorationLine = 'none'; else textSt.textDecorationLine = 'underline'; }} title='' ><Text style={{ fontSize: S.l, textDecorationLine: 'underline', textAlign: 'center' }}>U</Text></ButtonV1>
                         </Row>
                         <Row>
-                            <ButtonV1 v={"switch"} onPress={() => { }} title='' ><Feather style={{ alignSelf: 'center' }} name="align-left" size={24} color="black" /></ButtonV1>
-                            <ButtonV1 v={"switch"} onPress={() => { }} title='' ><Feather style={{ alignSelf: 'center' }} name="align-center" size={24} color="black" /></ButtonV1>
-                            <ButtonV1 v={"switch"} onPress={() => { }} title='' ><Feather style={{ alignSelf: 'center' }} name="align-right" size={24} color="black" /></ButtonV1>
+                            <ButtonV1 initialValue={textSt != null ? (textSt.textAlign == 'left') : false} v={"switch1"} onPress={() => { textSt != null ? textSt.textAlign = 'left' : true; setAlign(!align); }} title='' ><Feather style={{ alignSelf: 'center' }} name="align-left" size={24} color="black" /></ButtonV1>
+                            <ButtonV1 initialValue={textSt != null ? (textSt.textAlign == 'center') : false} v={"switch1"} onPress={() => { textSt != null ? textSt.textAlign = 'center' : true; setAlign(!align); }} title='' ><Feather style={{ alignSelf: 'center' }} name="align-center" size={24} color="black" /></ButtonV1>
+                            <ButtonV1 initialValue={textSt != null ? (textSt.textAlign == 'right') : false} v={"switch1"} onPress={() => { textSt != null ? textSt.textAlign = 'right' : true; setAlign(!align); }} title='' ><Feather style={{ alignSelf: 'center' }} name="align-right" size={24} color="black" /></ButtonV1>
                         </Row>
                         <View style={{ flexDirection: 'row', width: '100%', paddingHorizontal: 2 * S.l }}>
                             <Text style={{ fontSize: 15, alignSelf: 'flex-start', verticalAlign: 'middle', height: '100%', }}>A</Text>

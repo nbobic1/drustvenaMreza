@@ -1,9 +1,9 @@
 import { PostElement, PostData } from "./DataTypes";
-
+const HOST = 'http://192.168.1.3:32773';
 export const getMoviesFromApiAsync = async () => {
   try {
     const response = await fetch(
-      'http://192.168.1.3:32771/WeatherForecast/GetMovie', {
+      HOST + '/WeatherForecast/GetMovie', {
       method: 'GET',
       headers: {
         Accept: 'text/plain'
@@ -20,7 +20,6 @@ export const getMoviesFromApiAsync = async () => {
       catch (e) {
       }
     }
-    console.log("dakljakkkkkkkkkkk")
     return json;//array of movies
   } catch (error) {
     console.error("error",);
@@ -47,7 +46,7 @@ export const sendMoviesFromApiAsync = async (data: any) => {
   try {
     console.log(JSON.stringify(data));
     const response = await fetch(
-      'http://192.168.1.3:32771/WeatherForecast/PostMovie', {
+      HOST + '/WeatherForecast/PostMovie', {
       method: 'POST',
       headers: {
         Accept: 'text/plain',
@@ -81,11 +80,12 @@ export const getPexelImages = async (searchQuery: string, setImages: any) => {
     }
     )
     var res = JSON.parse(await response.text())
-    console.log("moaeeeeeeeeeeee", res.photos[0])
-    var res1 = res.photos.map((photo: any) => photo.src.small)
+    if (res.photos) {
+      console.log("moaeeeeeeeeeeee", res ? res.photos[0] : 'null heee')
+      var res1 = res.photos.map((photo: any) => photo.src.small)
 
-    setImages(res1)
-    return res;
+      setImages(res1)
+    } return res;
   } catch (error) {
 
     console.error(error);

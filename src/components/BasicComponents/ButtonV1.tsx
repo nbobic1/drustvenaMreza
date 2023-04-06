@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { Text, View, StyleSheet, ViewStyle, Pressable } from 'react-native'
 import { C, S } from '../../utils/Consts';
 
@@ -16,11 +16,12 @@ type Props = {
     title: string;
     bg?: string;
     f?: number;
+    vAlign?: string;
     onPress?: () => void;
 };
 
 
-const Button = ({ children, mx, w, v, bC, bR, bW, px, f, bg, title, onPress, initialValue }: Props) => {
+const Button = ({ children, mx, w, v, bC, bR, bW, px, f, bg, title, onPress, initialValue, vAlign }: Props) => {
     if (v == "empty") {
         const styles = StyleSheet.create({
             root: {
@@ -36,6 +37,31 @@ const Button = ({ children, mx, w, v, bC, bR, bW, px, f, bg, title, onPress, ini
         });
         return (
             <Pressable onPress={onPress} style={styles.root}>
+                {children ? children :
+                    <Text style={{ alignSelf: 'center', color: C.black }}>{title}</Text>}
+            </Pressable>
+        );
+    }
+    else if (v == "switch1") {
+        const [state, setState] = useState(initialValue);
+        useEffect(() => {
+            setState(!state);
+            setState(initialValue);
+        }, [initialValue])
+        const styles = StyleSheet.create({
+            root: {
+                flex: f ? f : 1,
+                backgroundColor: bg ? bg : C.btn,
+                padding: 10,
+                borderRadius: S.m,
+                width: w ? w : '100%',
+                alignSelf: 'center',
+                borderWidth: 2,
+                borderColor: state ? C.primaryLight : '#ffffff00',
+            },
+        });
+        return (
+            <Pressable onPress={() => { if (onPress != undefined) onPress() }} style={styles.root}>
                 {children ? children :
                     <Text style={{ alignSelf: 'center', color: C.black }}>{title}</Text>}
             </Pressable>

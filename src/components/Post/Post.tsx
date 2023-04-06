@@ -12,15 +12,19 @@ type postProps = {
   setScrollE: (a: boolean) => void;
   refi: (a: number) => void;
   index: number;
+  cols: number;
   flatListHeight: number;
 };
 
-const Post: React.FC<postProps> = ({ data, setScrollE, refi, index, flatListHeight }) => {
+const Post: React.FC<postProps> = ({ data, setScrollE, refi, index, flatListHeight, cols }) => {
   const [hgh, setHgh] = useState(200)
   const [details, setDetails] = useState([0])
   const styles = StyleSheet.create({
     root: {
+      width: cols == 1 ? '95%' : '48%',
+      marginLeft: cols == 1 ? '2.5%' : '1%',
       marginVertical: S.m,
+      backgroundColor: 'red',
     },
     description: {
       textAlign: 'center',
@@ -32,6 +36,7 @@ const Post: React.FC<postProps> = ({ data, setScrollE, refi, index, flatListHeig
       width: '100%',
       height: 200,
       flexDirection: 'column-reverse',
+      alignSelf: 'center'
     },
     text: {
       fontSize: 18,

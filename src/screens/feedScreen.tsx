@@ -29,12 +29,12 @@ const FeedScreen = () => {
     <View style={styles.container}>
       <View style={styles.feedView}>
         <View style={styles.top}>
-          <InputV1 f={2} onChangeText={(text) => { console.log("subimta"); setSearchText(text) }} ph='Search...' />
+          <InputV1 f={2} v={1} search={() => { }} onChangeText={(text) => { console.log("subimta"); setSearchText(text) }} ph='Search...' />
 
         </View>
         <View
           style={{ height: '93%' }}>
-          <PostList searchText={searchText} cols={cols}></PostList>
+          <PostList searchText={searchText} ></PostList>
         </View>
       </View>
       <Modal transparent={true} visible={visible} >

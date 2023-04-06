@@ -66,8 +66,8 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: 
       </Modal >
       <Modal transparent={true} visible={saveVisible} >
         <View style={{ width: '100%', height: '100%', backgroundColor: '#00000080' }}>
-          <View style={[styles.modalView, { width: 200, padding: 20 }]}>
-            <Text style={{ alignSelf: 'center' }}>Fill post data to save it.</Text>
+          <View style={[styles.modalView, { padding: 20 }]}>
+            <Text style={{ alignSelf: 'center', fontSize: 28 }}>Fill post data to save it.</Text>
             {imgSrc == "" ? <View></View> :
               <FastImage
                 style={styles.image}
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     width: 150
   },
   modalView: {//popup
-    backgroundColor: '#fff',
+    backgroundColor: C.white,
     borderRadius: 10,
     position: 'absolute',
     padding: 10,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     gap: 12,
     alignSelf: 'center',
     elevation: 5,
-    width: 350
+    width: '80%'
   },
 });
 

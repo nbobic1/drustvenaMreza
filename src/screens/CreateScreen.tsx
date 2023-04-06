@@ -11,7 +11,7 @@ import PostElementPlaceholder from '../components/Post/PostDetails/PostElementsP
 import CreateOptionns from '../components/CreateOptions';
 import PostElementView from '../components/BasicComponents/PostElementView';
 import { C, S } from '../utils/Consts';
-import FontPicker from '../components/FontPicker/FontPicker';
+import FontPicker from '../components/FontPicker';
 
 const CreateScreen = () => {
 

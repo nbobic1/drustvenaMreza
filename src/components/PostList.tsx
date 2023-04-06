@@ -1,19 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { FlatList, View, StyleSheet } from 'react-native'
+import { FlatList, View, StyleSheet, Dimensions } from 'react-native'
 import { getMoviesFromApiAsync } from '../utils/ApiCalls';
 import { PostData } from '../utils/DataTypes';
 import Post from './Post/Post';
 
 
 type Props = {
-  cols: number;
   searchText: string;
 };
-const PostList = ({ cols, searchText }: Props) => {
+const PostList = ({ searchText }: Props) => {
+
   const [flatListHeight, setFlatListHeight] = useState(200)
   const flatListRef = useRef<FlatList<PostData>>(null);
   const [scrollE, setScrollE] = useState(true);
-
+  const [cols, setCols] = useState(1)
   const scrollToIndex = (index: number) => {
     flatListRef.current?.scrollToIndex({ animated: true, index });
   };
@@ -31,7 +31,12 @@ const PostList = ({ cols, searchText }: Props) => {
         setDATA(response); console.log(JSON.stringify(DATA));
     })
   }, [searchText, cols])
+  useEffect(() => {
+    const { height, width } = Dimensions.get('window');
+    console.log(width, height, 'widnow');
+    setCols(width < 420 ? 1 : 2)
 
+  })
   return (
     <FlatList
       key={cols}
@@ -42,7 +47,7 @@ const PostList = ({ cols, searchText }: Props) => {
       keyExtractor={(item) => item.id.toString()}
       onLayout={(item) => { setFlatListHeight(item.nativeEvent.layout.height) }}
       renderItem={({ item }) => {
-        return (<Post flatListHeight={flatListHeight} setScrollE={setScrollE} data={item} refi={scrollToIndex} index={getItemIndex(item)}></Post>)
+        return (<Post cols={cols} flatListHeight={flatListHeight} setScrollE={setScrollE} data={item} refi={scrollToIndex} index={getItemIndex(item)}></Post>)
       }}
 
     />
