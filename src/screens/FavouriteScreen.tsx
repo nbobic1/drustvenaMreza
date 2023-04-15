@@ -1,62 +1,83 @@
 
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import FastImage from 'react-native-fast-image'
+import { Camera, CameraType } from 'expo-camera';
+import { TouchableOpacity } from 'react-native';
 
 import { Modal, Button, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Posts from '../components/Post/Post';
 import { C, S } from '../utils/Consts';
+import { Video, AVPlaybackStatus, ResizeMode } from 'expo-av';
 import InputV1 from '../components/BasicComponents/InputV1';
 const FavouriteScreen = () => {
   const [visible, setVisible] = useState(false);
+  const [type, setType] = useState(CameraType.back);
+  const [permission, requestPermission] = Camera.useCameraPermissions();
+  const cameraRef = useRef<Camera>(null);
+  if (!permission) {
+    // Camera permissions are still loading
+    return <View />;
+  }
+
+  if (!permission.granted) {
+    // Camera permissions are not granted yet
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+        <Button onPress={requestPermission} title="grant permission" />
+      </View>
+    );
+  }
+
+  function toggleCameraType () {
+    setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
+  }
   return (
     <View style={styles.container}>
-      <View style={styles.feedView}>
-
-        <ScrollView>
-          <FastImage
-            style={{ height: 200, width: 200, alignSelf: 'center' }}
-            source={{
-              uri: 'https://images.pexels.com/photos/1835008/pexels-photo-1835008.jpeg?auto=compress&cs=tinysrgb&h=130',
-              priority: FastImage.priority.normal,
-            }}
-            resizeMode={FastImage.resizeMode.contain}
-          />
-          <InputV1 ></InputV1>
-        </ScrollView>
-      </View>
-      <Modal transparent={true} visible={visible} >
-        <View style={styles.modalView}>
-          <Text>This is a popup!</Text>
-          <Button title="Close" onPress={() => setVisible(false)} />
+      <Camera style={styles.camera} ref={cameraRef} type={type}>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={() => {
+            if (null != cameraRef.current) cameraRef.current.takePictureAsync().then(a => {
+              console.log(a.uri);
+            })
+          }}>
+            <Text style={styles.text}>Click</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+            <Text style={styles.text}>Flip Camera</Text>
+          </TouchableOpacity>
         </View>
-      </Modal>
+      </Camera>
     </View>
   );
-};
-
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: C.bg,
-    alignItems: 'center',
     justifyContent: 'center',
   },
-  feedView: {
-    backgroundColor: C.bg,
-    height: '93%',
-    width: '100%'
+  camera: {
+    flex: 1,
   },
-  modalView: {
-    backgroundColor: C.pop,
-    borderRadius: 10,
-    position: 'absolute',
-    padding: 20,
-    bottom: 100,
-    alignSelf: 'center',
-    elevation: 5,
+  buttonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    margin: 64,
+  },
+  button: {
+    flex: 1,
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
+
 export default FavouriteScreen;

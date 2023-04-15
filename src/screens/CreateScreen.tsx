@@ -34,14 +34,12 @@ const CreateScreen = () => {
             keyExtractor={(item) => item.index.toString()}
             renderItem={
               ({ item, drag, isActive }) => {
-
                 return (<ScaleDecorator>
                   <TouchableOpacity
                     activeOpacity={1}
                     onLongPress={drag}
                     disabled={isActive}
                   >
-
                     <View>
                       <PostElementView mx={30} >
                         <PostElementPlaceholder setVisible={setTextSt} removeID={removeID} deleteEnabled={deleteEnabled} reorderEnabled={reorderEnabled} element={item}></PostElementPlaceholder>
@@ -49,7 +47,6 @@ const CreateScreen = () => {
                     </View>
                   </TouchableOpacity>
                 </ScaleDecorator>);
-
               }
             }
           />

@@ -5,6 +5,7 @@ import ImageSearcher from '../../../../ImageSearcher';
 import FastImage from 'react-native-fast-image'
 import { ImageElement } from '../../../../../utils/DataTypes';
 
+import { Video, AVPlaybackStatus, ResizeMode } from 'expo-av';
 type Props = {
   deleteEnabled: boolean;
   id: number;
@@ -16,7 +17,7 @@ type Props = {
 
 const ImagePlaceholder = ({ deleteEnabled, id, removeID, value, reorderEnabled }: Props) => {
   const [visible, setVisible] = useState(false);
-  const [imgSrc, setImgSrc] = useState("");  
+  const [imgSrc, setImgSrc] = useState("");
   useEffect(() => {
     console.log("useEffect")
     value.url = imgSrc;
@@ -25,11 +26,11 @@ const ImagePlaceholder = ({ deleteEnabled, id, removeID, value, reorderEnabled }
     <View pointerEvents={reorderEnabled ? "none" : "auto"}>
       <Pressable disabled={!deleteEnabled} style={styles.root} onPress={() => { removeID(id) }}>
         <Pressable disabled={deleteEnabled} onPress={() => { setVisible(true) }}>
-          {imgSrc == "" ? <Text style={{ alignSelf: 'center', textAlignVertical: "center", height: '100%' }}>Tap to add an image</Text> :
+          {imgSrc == "1" ? <Text style={{ alignSelf: 'center', textAlignVertical: "center", height: '100%' }}>Tap to add an image</Text> :
             <FastImage
               style={styles.image}
               source={{
-                uri: imgSrc,
+                uri: 'https://lh3.googleusercontent.com/pw/AMWts8DkucTWRaXQmiyVB4bHa00SyjszD67W6T9hlb3w_q3pzgApKkN6KoH13FvM2i8htGYWYqotdeNz3AizyewZA_ExI8qCjjdlxb1wU3_qnMkmU0yDp7zGy80KhwJLdNMSUcJi6XuTfWEOteftPw2YD07FWxYo75lTxpFiXBC746jmdQkYEDzoMr4aRuueMghqkVTSnf5O3tKB1W_pOt3YbH_4EDg1bgXP67QlAUBbs0zXVDYOcvWngAr3pHb35xHBfgNa5VkGhSFKz5tNBDPR5SuuTCTdAo9SB2t42vewqP_SUWQJf-j1_FG984fYDWGOCxeq5DmT_0NUdDhv7md5WMk9DO57aMr080_vOX-Wxuj7vbVTGLtMXIYhIU2EAghgId71TwBtOvUWIHZLKyliSEnhXqIGqZHDN7RkkoagWy9-AcZfFxl1irGimEg3hgpTjFdtTfTKCl5YelrbjYXywauJ3gWl3nK7PutKJ6D4btdD40P_p0m4zLO5-B0IiCIgd4WTweyvTOKr5duJtuRXB3CJmEcdHichkUCjtkivTFSFEdIotNfQHDmM4UWFosiX149SUKqwvOwhGToCgqostNBJyqktEqFmWIsIZCfGKeSHhq-WnMUwZMPo09FjteNH5jeNK5FGLH45DvCX1TvwqdreFarIRb-9CWfu8d2LfP6CWUiujNZ_gP4lFtyeE6liM9Y4dXFpV2chc9x-n9iwzhxi3c0d8EOTLT1kGdc8XNQQkO_KgQKnUHFz6bMGf6CUijj9pU8pVDr3y57DRQVOfNsAo492YpT7n5OA8QCZ5fILyin-K101JZeYixJ1Ec8gZCZ23yZGJ9RlwWyxHI-wz2BKYDMvAD23uMrXw7-Lh8RCUNz35ONVTpB7MlvXWcu0HH6Zlbr8Uc-W9Y8mfRTzROtQg-ViHXJrQj9dA6syLglA6nxvhT5nGPlSdI9X2sZu1mRug_zUe_5EL_89zXWwm1dU-HvREsEzBKRgreFmsoy0qi-s76YsQZgfWDEfg8E8SOftydbsGn7d-Z6G0F6yGiKvNIkyKRJ_vmsBYqA=w436-h969-s-no?authuser=0',
                 priority: FastImage.priority.normal,
               }}
               resizeMode={FastImage.resizeMode.contain}

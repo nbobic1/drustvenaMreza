@@ -112,11 +112,7 @@ android {
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
-  externalNativeBuild {
-       cmake {
-           version "3.18.1"
-       }
-   }
+
     namespace 'com.nbobic1.diplomskiv2'
     defaultConfig {
         applicationId 'com.nbobic1.diplomskiv2'
@@ -150,6 +146,7 @@ android {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.debug
+            shrinkResources (findProperty('android.enableShrinkResourcesInReleaseBuilds')?.toBoolean() ?: false)
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
