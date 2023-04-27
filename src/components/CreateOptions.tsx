@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { Keyboard, Text, View, StyleSheet, Modal, } from 'react-native'
 import FastImage from 'react-native-fast-image';
-import { sendMoviesFromApiAsync } from '../utils/ApiCalls';
+import { MakePosts, sendMoviesFromApiAsync } from '../utils/ApiCalls';
 import { C, S } from '../utils/Consts';
 import { PostElement, PostElementType, TextElement } from '../utils/DataTypes';
 import ButtonV1 from './BasicComponents/ButtonV1';
 import InputV1 from './BasicComponents/InputV1';
 import Row from './BasicComponents/Row';
-import ImageSearcher from './ImageSearcher';
+import ImageSearcher from './ImageSearcher'
+import * as SecureStore from 'expo-secure-store';;
 
 
 type Props = {
@@ -87,7 +88,13 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: 
                   setSaveVisible(false)
                   console.log("title=", title)
                   console.log("saveam==========", JSON.stringify(DATA));
-                  sendMoviesFromApiAsync({ imgSrc: imgSrc, text: title, items: JSON.stringify(DATA) })
+                  //sendMoviesFromApiAsync({ imgSrc: imgSrc, text: title, items: JSON.stringify(DATA) })
+                  SecureStore.getItemAsync('token').then((token) => {
+                    MakePosts(token, { imgSrc: imgSrc, text: title, items: DATA }).then((data) => {
+                      console.log('post maked=', data)
+                    })
+
+                  })
                   setDATA([{ index: 0, type: PostElementType.TextElement, text: "", style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } } as TextElement])
                 }
 

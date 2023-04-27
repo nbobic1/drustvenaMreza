@@ -39,8 +39,10 @@ const FavouriteScreen = () => {
       <Camera style={styles.camera} ref={cameraRef} type={type}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={() => {
-            if (null != cameraRef.current) cameraRef.current.takePictureAsync().then(a => {
-              console.log(a.uri);
+            if (null != cameraRef.current) cameraRef.current.takePictureAsync({ quality: 0 }).then(a => {
+              console.log(a.uri); cameraRef.current?.getSupportedRatiosAsync().then((availablePictureSizes) => { console.log(availablePictureSizes[0]) });
+
+
             })
           }}>
             <Text style={styles.text}>Click</Text>

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { BackHandler, Keyboard, NativeEventSubscription, Pressable, StyleSheet, TextInput, TouchableWithoutFeedback, View } from 'react-native'
+import { BackHandler, Keyboard, NativeEventSubscription, Pressable, StyleSheet, TextInput, View } from 'react-native'
 import { C, S } from '../../utils/Consts';
 import { FontAwesome } from '@expo/vector-icons';
 type Props = {

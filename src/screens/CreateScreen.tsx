@@ -1,7 +1,7 @@
 
 
 import React, { useState } from 'react';
-import { Pressable, Modal, ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { Pressable, Modal, ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, Button } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DraggableFlatList, {
   ScaleDecorator,
@@ -12,6 +12,11 @@ import CreateOptionns from '../components/CreateOptions';
 import PostElementView from '../components/BasicComponents/PostElementView';
 import { C, S } from '../utils/Consts';
 import FontPicker from '../components/FontPicker';
+import { CreateContent, GetPosts, MakePosts } from '../utils/ApiCalls';
+//import * as ImagePicker from 'react-native-image-picker';
+
+import * as SecureStore from 'expo-secure-store';
+import * as ImagePicker from 'expo-image-picker';
 
 const CreateScreen = () => {
 
@@ -27,6 +32,55 @@ const CreateScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.feedView}>
+        <Button title='sadfsaf' onPress={async () => {
+          const options = {
+            title: 'Select Image',
+            storageOptions: {
+              includeBase64: true,
+              mediaType: 'photo',
+            },
+          };
+          var token = await SecureStore.getItemAsync('token')
+          GetPosts(token).then((results) => {
+            console.log(JSON.stringify(results));
+          })
+          /*
+          ImagePicker.launchImageLibrary(options, (response) => {
+            console.log('Response = ', response);
+  
+            if (response.didCancel) {
+              console.log('User cancelled image picker');
+            } else if (response.error) {
+              console.log('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+              console.log('User tapped custom button: ', response.customButton);
+            } else {
+              // You can display the selected image using the following:
+              const source = { uri: response.uri };
+              console.log('uspjelo=', JSON.stringify(response))
+              // Do something with the selected image source
+            }
+          });
+          */
+
+          /*   let result = await ImagePicker.launchImageLibraryAsync({
+               mediaTypes: ImagePicker.MediaTypeOptions.All,
+               allowsEditing: true,
+               aspect: [4, 3],
+               quality: 1,
+               base64: true,
+             });
+   
+             // console.log(result);
+   
+             if (!result.canceled) {
+               console.log(result.assets[0].uri);
+               Moj(result.assets[0].base64, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzNDk4MjY4LCJpYXQiOjE2ODIyMDIyNjgsImp0aSI6IjhlZWY2NWNkMzNhMjQ4MmM4ZGIxZjRmZDJhNGQ4NWYxIiwidXNlcl9pZCI6MiwiZW1haWwiOiJ0ZXN0QHRlc3QxLmNvbSJ9.-A994XOuS0Y7mTW7eEmoewc2d_--frSDorMbnnfMEas')
+             }
+   */
+          // CreateContent(await SecureStore.getItemAsync('token'))
+          MakePosts(await SecureStore.getItemAsync('token'), { text: 'post neki', imgSrc: "https://upload.wikimedia.org/wikipedia/commons/6/65/Blue_morpho_butterfly.jpg" })
+        }}></Button>
         <GestureHandlerRootView style={{ flex: 1, backgroundColor: C.bg, paddingVertical: 10 }}>
           <DraggableFlatList
             data={DATA}

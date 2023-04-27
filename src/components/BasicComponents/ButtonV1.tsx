@@ -6,6 +6,7 @@ import { C, S } from '../../utils/Consts';
 type Props = {
     children?: ReactNode;
     mx?: number;
+    my?: number;
     v?: string;//v=2 bordered not satureted button
     px?: number;
     w?: any;
@@ -21,7 +22,7 @@ type Props = {
 };
 
 
-const Button = ({ children, mx, w, v, bC, bR, bW, px, f, bg, title, onPress, initialValue, vAlign }: Props) => {
+const Button = ({ children, mx, my, w, v, bC, bR, bW, px, f, bg, title, onPress, initialValue, vAlign }: Props) => {
     if (v == "empty") {
         const styles = StyleSheet.create({
             root: {
@@ -33,6 +34,7 @@ const Button = ({ children, mx, w, v, bC, bR, bW, px, f, bg, title, onPress, ini
                 alignSelf: 'center',
                 borderWidth: 2,
                 borderColor: C.primaryLight,
+                marginVertical: my ? my : 0,
             },
         });
         return (
@@ -58,6 +60,7 @@ const Button = ({ children, mx, w, v, bC, bR, bW, px, f, bg, title, onPress, ini
                 alignSelf: 'center',
                 borderWidth: 2,
                 borderColor: state ? C.primaryLight : '#ffffff00',
+                marginVertical: my ? my : 0,
             },
         });
         return (
@@ -79,6 +82,7 @@ const Button = ({ children, mx, w, v, bC, bR, bW, px, f, bg, title, onPress, ini
                 alignSelf: 'center',
                 borderWidth: 2,
                 borderColor: state ? C.primaryLight : '#ffffff00',
+                marginVertical: my ? my : 0,
             },
         });
         return (
@@ -98,6 +102,7 @@ const Button = ({ children, mx, w, v, bC, bR, bW, px, f, bg, title, onPress, ini
                 width: w ? w : '100%',
                 alignSelf: 'center',
                 borderColor: C.primaryLight,
+                marginVertical: my ? my : 0,
             },
         });
         return (
