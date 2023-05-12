@@ -23,7 +23,7 @@ const YesNoQ: React.FC<postProps> = ({
   const styles = StyleSheet.create({
 
   });
-
+  console.log('moja==', JSON.stringify(value))
   return (
     <View >
       <Text style={value.style}>{value.question} </Text>

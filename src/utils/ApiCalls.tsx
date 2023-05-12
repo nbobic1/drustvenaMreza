@@ -1,6 +1,7 @@
 import { PostElement, PostData } from "./DataTypes";
-const HOST = 'http://192.168.1.11:8000';
-var token = 'eyJ0eXAiOiJhdCtKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVWWljbEE4MFd3MXMzZnBWNFQ1TmtIdWpPNE5XM0JYZTM1RUFsOXNBeDBoQ0UwS1oiLCJpc3MiOiJodHRwczpcL1wvYXBpLmZsYXRpY29uLmNvbVwvb2F1dGhcL3Rva2VuIiwiZXhwIjoxNjgwOTY1MjYyLCJpYXQiOjE2ODA4Nzg4NjIsImp0aSI6IjFlZjM2NmZiLTFkNmUtNDBhNC1iNjc0LWUxODA3NWMwYmM5OSIsImNsaWVudF9pZCI6IlVZaWNsQTgwV3cxczNmcFY0VDVOa0h1ak80TlczQlhlMzVFQWw5c0F4MGhDRTBLWiJ9.QwF88kih4iUihlKGLgVHqfhTSy6BlHZr4eOVcBkmkIo';
+const HOST = 'http://192.168.1.3:8000';
+var token = 'eyJ0eXAiOiJhdCtKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVWWljbEE4MFd3MXMzZnBWNFQ1TmtIdWpPNE5XM0JYZTM1RUFsOXNBeDBoQ0UwS1oiLCJpc3MiOiJodHRwczpcL1wvYXBpLmZsYXRpY29uLmNvbVwvb2F1dGhcL3Rva2VuIiwiZXhwIjoxNjgzNzM4OTQ5LCJpYXQiOjE2ODM2NTI1NDksImp0aSI6IjEyOTY5YzZjLWU2ZTEtNDRlNS05NzQ0LWUzMWEyYTMxZTIxZCIsImNsaWVudF9pZCI6IlVZaWNsQTgwV3cxczNmcFY0VDVOa0h1ak80TlczQlhlMzVFQWw5c0F4MGhDRTBLWiJ9.yiryqziiZwGqqKRlpW3ZoMWYiL1WOrYbYxIlHGabyRg';
+/*
 export const getMoviesFromApiAsync = async () => {
   try {
     const response = await fetch(
@@ -56,7 +57,7 @@ export const sendMoviesFromApiAsync = async (data: any) => {
   }
 
 };
-
+*/
 export const getPexelImages = async (searchQuery: string, setImages: any) => {
   try {
     var response = await fetch(
@@ -80,20 +81,7 @@ export const getPexelImages = async (searchQuery: string, setImages: any) => {
 
     console.error(error);
   }
-  /*
 
-  var myHeaders = new Headers();
-myHeaders.append("Authorization", "hoHFTFjXtj3Wo3A1RAKjO2WO4Z30xrIFUy4F7D2asXLLHZsJcvGFuQpt");
-
-fetch("https://api.pexels.com/v1/search?query=cat", {
-method: 'GET',
-headers: myHeaders,
-redirect: 'follow'
-})
-.then(response => response.text())
-.then(result => console.log(result))
-.catch(error => console.log('error', error));
-*/
 };
 
 export const searchForIcons = async (keyword: any) => {
@@ -145,7 +133,7 @@ export const getGiffs = async (query: string) => {
 
   try {
     const response = await fetch(
-      'http://pi.giphy.com/v1/gifs/search?' + new URLSearchParams({
+      'http://api.giphy.com/v1/gifs/search?' + new URLSearchParams({
         api_key: 'yorzqylzWnLBVFHqGjkyQCR0w3Yff5hz',
         q: query
       })
@@ -158,11 +146,11 @@ export const getGiffs = async (query: string) => {
       }
     );
     const json = await response.json();
-    console.log(JSON.stringify(json))
+    console.log("response===gip=", JSON.stringify(json), "\nrespo=", response);
     return json.data.slice(1, 10).map((a: any) => 'https://i.giphy.com/media/' + a.id + '/giphy.mp4');//array of movies
   } catch (error) {
 
-    console.error(error);
+    console.error('err==', error, '\n\n', JSON.stringify(error));
   }
 
 
@@ -190,7 +178,9 @@ export const Login = async (email: string, password: string) => {
     );
     const json = await response.json();
     console.log(JSON.stringify(json))
-    return json.access
+    if (json.access)
+      return json.access;
+    else return null;
   } catch (error) {
 
     console.log('Login errr')
@@ -232,52 +222,121 @@ export const Register = async (username: string, password: string, confirmPasswo
 
 
 };
-export const GetPosts = async (token: string) => {
+export const GetPosts = (token: string | null) => {
   console.log('Posts')
-  try {
-    const response = ''
-    fetch(
-      HOST + '/api/posts'
-      , {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token,
-        },
-      }
-    ).then(response => response.text())
-      .then(result => console.log(result.slice(0, 40000)))
-      .catch(error => console.log('error', error.slice(0, 40000)));// const json = await response.json();
-    //return json.data.slice(1, 10).map((a: any) => 'https://i.giphy.com/media/' + a.id + '/giphy.mp4');//array of movies
-  } catch (error) {
+  return new Promise((resolve, reject) => {
+    try {
+      const response = ''
+      fetch(
+        HOST + '/api/posts'
+        , {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+          },
+        }
+      ).then(response => response.text())
+        .then(result => {
+          console.log(result.slice(0, 40000));
+          var obj = JSON.parse(result)
+          var nizPermisa = []
+          for (var i = 0; i < obj.count; i++) {
+            nizPermisa.push(GetPost(token, obj.results[i].id))
+          }
+          Promise.all(nizPermisa).then(result => {
+            resolve(result)
+          })
+        })
 
-    console.log('Register err')
-    console.error(JSON.stringify(error));
-  }
+        .catch(error => console.log('error', error.slice(0, 40000)));// const json = await response.json();
+      //return json.data.slice(1, 10).map((a: any) => 'https://i.giphy.com/media/' + a.id + '/giphy.mp4');//array of movies
+    } catch (error) {
 
+      console.log('Register err')
+      console.error(JSON.stringify(error));
+    }
+  })
 
 };
 
-export const MakePosts = async (token: string, post: PostData) => {
+export const GetPost = async (token: string | null, id: string) => {
+  console.log('Post1')
+
+  return new Promise((resolve, reject) => {
+    try {
+      const response = ''
+      console.log('pije ve=', token)
+      fetch(
+        HOST + '/api/post/' + id
+        , {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+          },
+        }
+      ).then(response => { console.log('dafaf'); return response.text() })
+        .then(result => {
+          console.log('rss=', result);
+          var tres = JSON.parse(result)
+          tres.content.sort((a, b) => { return a.index - b.index })
+          resolve(tres)
+        })
+
+        .catch(error => {
+          //console.log('error=', JSON.stringify(error.message))
+          reject(error)
+        });// const json = await response.json();
+      //return json.data.slice(1, 10).map((a: any) => 'https://i.giphy.com/media/' + a.id + '/giphy.mp4');//array of movies
+      console.log('ne radiiiii')
+    } catch (error) {
+
+      console.log('Register err')
+      //  console.error(JSON.stringify(error));
+      reject(error)
+    }
+  })
+
+};
+const fileType = (arg: string) => {
+  if (arg.includes("mp4"))
+    return "mp4"
+  else if (arg.includes("png"))
+    return "png"
+  else if (arg.includes("jpeg"))
+    return "jpeg"
+  else if (arg.includes("webp"))
+    return "webp"
+  else if (arg.includes("tiff"))
+    return "tiff"
+  else return "jpg"
+}
+export const MakePosts = (token: string | null, post: PostData) => {
   console.log('Posts')
   var nizPermisa = []
-  for (var i = 0; i < post.items.length; i++) {
-    nizPermisa.push(CreateContent(token, post.items[i]))
-    console.log('for con=', JSON.stringify(post.items[i]))
+  for (var i = 0; i < post.content.length; i++) {
+    nizPermisa.push(CreateContent(token, post.content[i]))
+    console.log('for con=', JSON.stringify(post.content[i]))
   }
   Promise.all(nizPermisa).then(nizId => {
     try {
       var formdata = new FormData();
-      formdata.append("title", post.text);
+      formdata.append("title", post.title);
+      var p = ''
+      p = fileType(post.url)
       formdata.append("url",
         {
-          uri: post.imgSrc,
-          type: 'image/jpeg',
-          name: 'moj1a.jpeg'
+          uri: post.url,
+          type: 'image/' + p,
+          name: 'mojaaa222a.' + p
         })
       console.log('conn idsss=', JSON.stringify(nizId), nizId.toString())
-      formdata.append("content_ids", nizId.toString())
+      for (var i = 0; i < nizId.length; i++)
+        formdata.append("content_ids[" + i + "]", JSON.stringify(nizId[i]))
+
       const response = ''
+      console.log('krece pziv')
       fetch(
         HOST + '/api/post'
         , {
@@ -289,15 +348,18 @@ export const MakePosts = async (token: string, post: PostData) => {
             'Authorization': 'Bearer ' + token,
           },
         }
-      ).then(response => response.text())
-        .then(result => {
-          console.log(result);
-        })
+      )
+      /* .then(response => {
+        console.log('resusssssss'); return response.text()
+      })
+ */        .then(result => {
+        console.log('res=========', result);
+      })
         .catch(error => console.log('error', error));// const json = await response.json();
       //return json.data.slice(1, 10).map((a: any) => 'https://i.giphy.com/media/' + a.id + '/giphy.mp4');//array of movies
     } catch (error) {
 
-      console.log('Register err')
+      console.log('Posts create err')
       console.error(JSON.stringify(error));
     }
   })
@@ -309,7 +371,7 @@ export const MakePosts = async (token: string, post: PostData) => {
 
 
 
-export const CreateContent = async (token: string, element: PostElement) => {
+export const CreateContent = async (token: string | null, element: PostElement) => {
 
   return new Promise((resolve, reject) => {
     try {
@@ -322,15 +384,18 @@ export const CreateContent = async (token: string, element: PostElement) => {
         formdata.append("style", JSON.stringify(element.style));
       }
       if (element.hasOwnProperty("question")) {
+        formdata.append("style", JSON.stringify(element.style));
         formdata.append("question", element.question);
         formdata.append("answer", element.answer);
       }
       if (element.hasOwnProperty("url")) {
+        var p = ''
+        p = fileType(element.url)
         formdata.append("url",
           {
             uri: element.url,
-            type: 'image/jpeg',
-            name: 'moj1a.jpeg'
+            type: 'image/' + p,
+            name: 'elementrl.' + p
           })
       }
       formdata.append("type", element.type.toString());
@@ -348,11 +413,11 @@ export const CreateContent = async (token: string, element: PostElement) => {
         }
       ).then(response => response.text())
         .then(result => {
-          console.log('napravljen content;', JSON.stringify(result));
+          console.log('napravljen content;', JSON.stringify(result).slice(0, 40000));
           resolve(JSON.parse(result).id)//result.id)
         }
         )
-        .catch(error => { console.log('eror  con=', error); throw new Error(error) });// const json = await response.json();
+        .catch(error => { console.log('eror  con=', error.slice(0, 40000)); throw new Error(error) });// const json = await response.json();
 
 
       /*

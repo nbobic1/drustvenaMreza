@@ -13,8 +13,9 @@ type Props = {
   setHgh: (a: any) => void;
   setScrollE: (a: boolean) => void;
   setDetails: (a: any) => void;
+  setExtraData: (a: any) => void;
 };
-const PostDetailsScreen: React.FC<Props> = ({ height, items, hgh, setHgh, setScrollE, setDetails }) => {
+const PostDetailsScreen: React.FC<Props> = ({ setExtraData, height, items, hgh, setHgh, setScrollE, setDetails }) => {
 
   const styles = StyleSheet.create({
     container: {
@@ -49,7 +50,7 @@ const PostDetailsScreen: React.FC<Props> = ({ height, items, hgh, setHgh, setScr
 
   });
 
-
+  console.log('items u details su====', JSON.stringify(items))
   return (
     <View style={styles.feedView}>
       <ScrollView style={styles.scroll1}>
@@ -62,7 +63,7 @@ const PostDetailsScreen: React.FC<Props> = ({ height, items, hgh, setHgh, setScr
         />
       </ScrollView>
 
-      <PostDetailsOptions hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} ></PostDetailsOptions>
+      <PostDetailsOptions setExtraData={setExtraData} items={items} hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} ></PostDetailsOptions>
     </View>
   );
 };

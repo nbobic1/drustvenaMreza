@@ -1,5 +1,3 @@
-
-
 import React, { useState, useRef } from 'react';
 
 import FastImage from 'react-native-fast-image'
@@ -7,10 +5,6 @@ import { Camera, CameraType } from 'expo-camera';
 import { TouchableOpacity } from 'react-native';
 
 import { Modal, Button, ScrollView, StyleSheet, Text, View } from 'react-native';
-import Posts from '../components/Post/Post';
-import { C, S } from '../utils/Consts';
-import { Video, AVPlaybackStatus, ResizeMode } from 'expo-av';
-import InputV1 from '../components/BasicComponents/InputV1';
 const FavouriteScreen = () => {
   const [visible, setVisible] = useState(false);
   const [type, setType] = useState(CameraType.back);
@@ -24,7 +18,7 @@ const FavouriteScreen = () => {
   if (!permission.granted) {
     // Camera permissions are not granted yet
     return (
-      <View style={styles.container}>
+      <View style={styles.containerC}>
         <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
         <Button onPress={requestPermission} title="grant permission" />
       </View>
@@ -35,7 +29,7 @@ const FavouriteScreen = () => {
     setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
   }
   return (
-    <View style={styles.container}>
+    <View style={styles.containerC}>
       <Camera style={styles.camera} ref={cameraRef} type={type}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={() => {
@@ -57,7 +51,7 @@ const FavouriteScreen = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  containerC: {
     flex: 1,
     justifyContent: 'center',
   },

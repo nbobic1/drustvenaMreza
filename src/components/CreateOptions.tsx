@@ -3,7 +3,7 @@ import { Keyboard, Text, View, StyleSheet, Modal, } from 'react-native'
 import FastImage from 'react-native-fast-image';
 import { MakePosts, sendMoviesFromApiAsync } from '../utils/ApiCalls';
 import { C, S } from '../utils/Consts';
-import { PostElement, PostElementType, TextElement } from '../utils/DataTypes';
+import { PostData, PostElement, PostElementType, TextElement } from '../utils/DataTypes';
 import ButtonV1 from './BasicComponents/ButtonV1';
 import InputV1 from './BasicComponents/InputV1';
 import Row from './BasicComponents/Row';
@@ -24,7 +24,6 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: 
   const [pickerVisible, setPickerVisible] = useState(false);
   const [title, setTitle] = useState("");
   const [imgSrc, setImgSrc] = useState("");
-
   return (
     <View style={styles.root}>
       <Row bC={C.primary} bW={2} bR={S.m} w={'93%'}>
@@ -48,14 +47,10 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: 
       <Modal transparent={true} visible={visible} >
         <View style={{ width: '100%', height: '100%', backgroundColor: '#00000080' }}>
           <View style={styles.modalView}>
-            <Text style={{ alignSelf: 'center' }}>Which item would you like to add?</Text>
-            <Row py={-1} >
-              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, url: "", type: PostElementType.ImageElement }]); }} title="Image"></ButtonV1>
-              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, url: "", type: PostElementType.VideoElement }]); }} title="Video"></ButtonV1>
-            </Row>
+            <Text style={{ alignSelf: 'center', textAlign: 'center', fontSize: 25, margin: 20 }}>Which item would you like to add?</Text>
             <Row py={-1}>
+              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, url: "", type: PostElementType.ImageElement }]); }} title="Media"></ButtonV1>
               <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, text: "", type: PostElementType.TextElement, style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } }]); }} title="Text"></ButtonV1>
-              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, url: "", type: PostElementType.VideoElement }]); }} title="Giff"></ButtonV1>
             </Row>
             <Row py={-1} >
               <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, question: "", answer: true, type: PostElementType.YesNoQElement, style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } }]); }} title="Yes/No question"></ButtonV1>
@@ -90,7 +85,7 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: 
                   console.log("saveam==========", JSON.stringify(DATA));
                   //sendMoviesFromApiAsync({ imgSrc: imgSrc, text: title, items: JSON.stringify(DATA) })
                   SecureStore.getItemAsync('token').then((token) => {
-                    MakePosts(token, { imgSrc: imgSrc, text: title, items: DATA }).then((data) => {
+                    MakePosts(token, { url: imgSrc, title: title, content: DATA } as PostData).then((data) => {
                       console.log('post maked=', data)
                     })
 
@@ -117,6 +112,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   image: {
+    alignSelf: 'center',
     height: 150,
     width: 150
   },
@@ -126,6 +122,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     padding: 10,
     bottom: 200,
+    paddingBottom: 23,
     gap: 12,
     alignSelf: 'center',
     elevation: 5,

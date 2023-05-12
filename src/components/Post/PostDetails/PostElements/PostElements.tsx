@@ -13,6 +13,11 @@ type Props = {
 
 const PostElements = ({ element }: Props) => {
   console.log("hhhhhhhhhhh=", JSON.stringify(element));
+  try {
+    if (element.hasOwnProperty("style"))
+      element.style = JSON.parse(element.style);
+  } catch (e) {
+  }
   if (element.type == PostElementType.VideoElement)
     return (<TextInput placeholder="press to enter your text" value={"egasdgagdag"}></TextInput>)
   else if (element.type == PostElementType.ImageElement)

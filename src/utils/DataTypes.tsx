@@ -9,9 +9,9 @@ export enum PostElementType {
 }
 export type PostData = {
   id: number;
-  text: string;
-  imgSrc: string;
-  items: PostElement[];
+  title: string;
+  url: string;
+  content: PostElement[];
 };
 export type VideoElement = {
   index: number;

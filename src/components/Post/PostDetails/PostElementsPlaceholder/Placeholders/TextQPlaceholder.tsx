@@ -32,7 +32,7 @@ const YesNoQPlaceholder: React.FC<postProps> = ({
 }) => {
   const [first, setFirst] = useState(text);
 
-  const [answer, setAnswer] = useState("");
+  const [answer, setAnswer] = useState(value.answer);
   const [question, setQuestion] = useState("");
   useEffect(() => {
     setFirst(text);

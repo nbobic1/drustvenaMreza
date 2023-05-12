@@ -6,22 +6,9 @@ import { C } from '../utils/Consts';
 import { onChange } from 'react-native-reanimated';
 import InputV1 from '../components/BasicComponents/InputV1';
 const FeedScreen = () => {
-
   const [visible, setVisible] = useState(false);
-  const [cols, setCols] = useState(1)
   const [searchText, setSearchText] = useState("");
 
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState([]);
-  const [items, setItems] = useState([
-    { label: 'Autizak', value: 'spain' },
-    // {label: 'Madrid', value: 'madrid', parent: 'spain'},
-    { label: 'Disleksija', value: 'barcelona' },
-
-    { label: 'Diskalkulija', value: 'italy' },
-    { label: 'Disgrafija', value: 'rome' },
-
-  ]);
 
   console.log("citav ffeed")
 
@@ -37,12 +24,7 @@ const FeedScreen = () => {
           <PostList searchText={searchText} ></PostList>
         </View>
       </View>
-      <Modal transparent={true} visible={visible} >
-        <View style={styles.modalView}>
-          <Text>This is a popup!</Text>
-          <Button title="Close" onPress={() => setVisible(false)} />
-        </View>
-      </Modal>
+
 
 
 

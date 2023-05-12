@@ -3,7 +3,6 @@ import { Text, StyleSheet, View, Button } from 'react-native';
 import LogIn from '../components/Account/Login';
 import InputV1 from '../components/BasicComponents/InputV1';
 import { C, S } from '../utils/Consts';
-import { Moj } from '../utils/ApiCalls';
 import Register from '../components/Account/Register';
 type Props = {
   setLogedin: (a: boolean) => void;
