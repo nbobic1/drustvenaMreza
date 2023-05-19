@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react'
 import { BackHandler, Keyboard, NativeEventSubscription, Pressable, StyleSheet, TextInput, View } from 'react-native'
 import { C, S } from '../../utils/Consts';
 import { FontAwesome } from '@expo/vector-icons';
+
+import { Image } from 'react-native';
 type Props = {
     mx?: number;
     my?: number;
@@ -78,7 +80,11 @@ const InputV1 = ({ mx, my, px, w, f, bR, bW, bC, ph, onChangeText, fontS, search
                             onChangeText(input);
                     }}
                     placeholder={ph ? ph : ""}></TextInput>
-                {search && <Pressable onPress={search}><FontAwesome style={{ verticalAlign: 'middle', height: '100%' }} name="search" size={24} color={C.secundary} /></Pressable>}
+                {search && <Pressable onPress={search} style={{ justifyContent: 'center' }}><Image
+                    source={require('../../../assets/search.png')}
+                    fadeDuration={0}
+                    style={{ width: S.i, height: S.i }}
+                /></Pressable>}
             </View>
         </View>
     );

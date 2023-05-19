@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react'
 import { Keyboard, NativeEventSubscription, Pressable, StyleSheet, TextInput, View } from 'react-native'
 import { C, S } from '../../utils/Consts';
 import { FontAwesome5 } from '@expo/vector-icons';
+
+import { Image } from 'react-native';
 type Props = {
     mx?: number;
     my?: number;
@@ -75,7 +77,11 @@ const InputV2 = ({ mx, my, px, w, f, bR, bW, bC, ph, onChangeText, setVisible, t
                 }}
                 placeholder={ph ? ph : ""}></TextInput>
             <Pressable onPress={() => { setVisible(value); }}>
-                <FontAwesome5 name="edit" size={24} color={C.secundary} />
+                <Image
+                    source={require('../../../assets/editing.png')}
+                    fadeDuration={0}
+                    style={{ width: S.i, height: S.i }}
+                />
             </Pressable>
 
 

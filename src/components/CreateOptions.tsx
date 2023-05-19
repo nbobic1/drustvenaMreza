@@ -39,7 +39,7 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: 
         <ButtonV1 onPress={() => { setReorderEnabled(true); setDeleteEnabled(false) }} title="Reorder"></ButtonV1>
       </Row>
       <Row bg={C.primary} g={-1} px={-1} py={-1} >
-        <View style={{ height: 15, borderTopRightRadius: 50, flex: 5, backgroundColor: '#ffffff' }}>
+        <View style={{ height: 15, borderTopRightRadius: 50, flex: 3, backgroundColor: '#ffffff' }}>
         </View>
         <View style={{ flex: 3, height: 15, borderTopStartRadius: 50, backgroundColor: 'white' }}>
         </View>

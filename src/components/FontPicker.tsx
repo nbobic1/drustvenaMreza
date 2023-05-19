@@ -80,7 +80,7 @@ const FontPicker = ({ textSt, setTextSt }: Props) => {
 
 const styles = StyleSheet.create({
     modalView: {//popup
-        marginHorizontal: 3 * S.l,
+        marginHorizontal: S.l,
         backgroundColor: '#fff',
         borderRadius: 10,
         padding: 20,

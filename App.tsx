@@ -9,6 +9,7 @@ import FavouriteScreen from './src/screens/FavouriteScreen';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { C, S } from './src/utils/Consts';
 
+import { Image } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import Profile from './src/components/Account/Profile';
 //dragable list
@@ -33,6 +34,14 @@ export default function App () {
         setLogedin(false);
     })
   }, []);
+  /*
+          <Tab.Screen
+            name="Favourite"
+            component={FavouriteScreen}
+            options={{ title: 'LogIn' }}
+            initialParams={{}}
+          />
+*/
   return (
     logedin ?
       <NavigationContainer >
@@ -45,16 +54,36 @@ export default function App () {
               if (!focused)
                 t = "black";
               if (route.name === "LogIn") {
-                return (<View style={{ height: '100%', justifyContent: 'center' }}><Text style={{ textAlign: 'center' }}><Ionicons name="person-circle-outline" size={S.i} color={t} /></Text></View>);
+                return (<View style={{ height: '100%', justifyContent: 'center' }}><Image
+                  source={require('./assets/user.png')}
+                  fadeDuration={0}
+                  style={{ width: S.i, height: S.i }}
+                /></View>);
               }
               else if (route.name === "Feed") {
-                return (<View style={{ height: '100%', justifyContent: 'center' }}><Text style={{ textAlign: 'center' }}><MaterialIcons name="grid-on" size={S.i} color={t} /></Text></View>);
+                return (<View style={{ height: '100%', justifyContent: 'center' }}>
+                  <Image
+                    source={require('./assets/menu.png')}
+                    fadeDuration={0}
+                    style={{ width: S.i, height: S.i }}
+                  /></View>);
               }
               else if (route.name === "Create") {
-                return (<View style={{ height: '100%', justifyContent: 'center' }}><Text style={{ textAlign: 'center' }}><Ionicons name="create" size={S.i} color={t} /></Text></View>);
+                return (<View style={{ height: '100%', justifyContent: 'center' }}>
+                  <Image
+                    source={require('./assets/editing.png')}
+                    fadeDuration={0}
+                    style={{ width: S.i, height: S.i }}
+                  /></View>);
               }
               else {
-                return (<View style={{ height: '100%', justifyContent: 'center' }}><Text style={{ textAlign: 'center' }}><Ionicons name="heart" size={S.i} color={t} /></Text></View>);
+                return (<View style={{ height: '100%', justifyContent: 'center' }}>
+                  <Image
+                    source={require('./assets/menu.png')}
+                    fadeDuration={0}
+                    style={{ width: S.i, height: S.i }}
+                  />
+                </View>);
               }
 
             },
@@ -72,12 +101,6 @@ export default function App () {
             options={{ title: 'Feed' }}
             initialParams={{}}
 
-          />
-          <Tab.Screen
-            name="Favourite"
-            component={FavouriteScreen}
-            options={{ title: 'LogIn' }}
-            initialParams={{}}
           />
           <Tab.Screen
             name="Create"

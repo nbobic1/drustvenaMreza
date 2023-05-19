@@ -1,33 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Modal, Button, StyleSheet, Text, TextInput, View } from 'react-native';
-
 import PostList from '../components/PostList';
 import { C } from '../utils/Consts';
 import { onChange } from 'react-native-reanimated';
 import InputV1 from '../components/BasicComponents/InputV1';
-const FeedScreen = () => {
+import { PostData } from '../utils/DataTypes';
+import * as SecureStore from 'expo-secure-store';
+import { GetPosts } from '../utils/ApiCalls';
+const FeedScreen = ({ navigation, route }) => {
   const [visible, setVisible] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [DATA, setDATA] = useState<PostData[]>([]);
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', (e: any) => {
+      // Prevent default behavior of leaving the screen
+      console.log('unsubscribe')
+      //e.preventDefault();
 
-
-  console.log("citav ffeed")
+      // Perform your custom actions or show a confirmation prompt
+      // For example, you can show an alert and proceed with navigation based on the user's choice
+      SecureStore.getItemAsync('token').then(token => {
+        GetPosts(token).then(res => {
+          setDATA(res);
+        })
+        //  navigation.dispatch(e.data.action)
+        // navigation.navigate('NextScreen')
+      });
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
       <View style={styles.feedView}>
         <View style={styles.top}>
           <InputV1 f={2} v={1} search={() => { }} onChangeText={(text) => { console.log("subimta"); setSearchText(text) }} ph='Search...' />
-
         </View>
         <View
           style={{ height: '93%' }}>
-          <PostList searchText={searchText} ></PostList>
+          <PostList DATA={DATA} searchText={searchText} ></PostList>
         </View>
       </View>
-
-
-
-
     </View>
   );
 };

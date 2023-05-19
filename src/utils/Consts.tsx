@@ -32,6 +32,6 @@ export const S = {
   m: 8,
   l: 20,
   //icons
-  i: 32,
+  i: 30,
   // your colors
 }

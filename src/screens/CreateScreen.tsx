@@ -27,7 +27,13 @@ const CreateScreen = ({ navigation, route }) => {
   const [deleteEnabled, setDeleteEnabled] = useState(false);
   const [reorderEnabled, setReorderEnabled] = useState(false);
   const [textSt, setTextSt] = useState(null)
-  var dataExtra = route ? route.params.items : undefined
+  var dataExtra = undefined
+  try {
+    dataExtra = route ? JSON.parse(JSON.stringify(route.params.items)) : undefined
+
+  }
+  catch (err) {
+  }
   console.log(JSON.stringify(dataExtra))
   const [DATA, setDATA] = useState<PostElement[]>(dataExtra ? dataExtra :
     [{ index: 0, type: PostElementType.TextElement, text: "", style: { fontWeight: '500', textDecorationLine: 'none', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } } as TextElement]);
