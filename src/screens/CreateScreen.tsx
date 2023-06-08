@@ -11,7 +11,7 @@ import { PostElement, VideoElement, ImageElement, PostElementType, TextQElement,
 import PostElementPlaceholder from '../components/Post/PostDetails/PostElementsPlaceholder/PostElementPlaceholder';
 import CreateOptionns from '../components/CreateOptions';
 import PostElementView from '../components/BasicComponents/PostElementView';
-import { C, S } from '../utils/Consts';
+import { S } from '../utils/Consts';
 import FontPicker from '../components/FontPicker';
 //import * as ImagePicker from 'react-native-image-picker';
 
@@ -22,7 +22,7 @@ import { getTokenForIcons } from '../utils/ApiCalls';
 type Props = {
   dataExtra?: PostElement[];
 };
-const CreateScreen = ({ navigation, route }) => {
+const CreateScreen = ({ navigation, route, C }) => {
 
   const [deleteEnabled, setDeleteEnabled] = useState(false);
   const [reorderEnabled, setReorderEnabled] = useState(false);
@@ -110,8 +110,8 @@ const CreateScreen = ({ navigation, route }) => {
                     disabled={isActive}
                   >
                     <View>
-                      <PostElementView mx={30} >
-                        <PostElementPlaceholder setVisible={setTextSt} removeID={removeID} deleteEnabled={deleteEnabled} reorderEnabled={reorderEnabled} element={item}></PostElementPlaceholder>
+                      <PostElementView C={C} mx={30} >
+                        <PostElementPlaceholder C={C} setVisible={setTextSt} removeID={removeID} deleteEnabled={deleteEnabled} reorderEnabled={reorderEnabled} element={item}></PostElementPlaceholder>
                       </PostElementView>
                     </View>
                   </TouchableOpacity>
@@ -120,9 +120,9 @@ const CreateScreen = ({ navigation, route }) => {
             }
           />
         </GestureHandlerRootView>
-        <CreateOptionns DATA={DATA} setDATA={setDATA} setReorderEnabled={setReorderEnabled} setDeleteEnabled={setDeleteEnabled}></CreateOptionns>
+        <CreateOptionns C={C} DATA={DATA} setDATA={setDATA} setReorderEnabled={setReorderEnabled} setDeleteEnabled={setDeleteEnabled}></CreateOptionns>
       </View>
-      <FontPicker textSt={textSt != null ? textSt.style : null} setTextSt={setTextSt}></FontPicker>
+      <FontPicker C={C} textSt={textSt != null ? textSt.style : null} setTextSt={setTextSt}></FontPicker>
 
     </View>
   );

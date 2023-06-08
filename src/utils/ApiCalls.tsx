@@ -1,6 +1,6 @@
 import { PostElement, PostData } from "./DataTypes";
-const HOST = 'http://192.168.1.3:8000';
-var token = 'eyJ0eXAiOiJhdCtKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVWWljbEE4MFd3MXMzZnBWNFQ1TmtIdWpPNE5XM0JYZTM1RUFsOXNBeDBoQ0UwS1oiLCJpc3MiOiJodHRwczpcL1wvYXBpLmZsYXRpY29uLmNvbVwvb2F1dGhcL3Rva2VuIiwiZXhwIjoxNjgzNzM4OTQ5LCJpYXQiOjE2ODM2NTI1NDksImp0aSI6IjEyOTY5YzZjLWU2ZTEtNDRlNS05NzQ0LWUzMWEyYTMxZTIxZCIsImNsaWVudF9pZCI6IlVZaWNsQTgwV3cxczNmcFY0VDVOa0h1ak80TlczQlhlMzVFQWw5c0F4MGhDRTBLWiJ9.yiryqziiZwGqqKRlpW3ZoMWYiL1WOrYbYxIlHGabyRg';
+const HOST = 'http://192.168.1.4:8000';
+var token = 'eyJ0eXAiOiJhdCtKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVWWljbEE4MFd3MXMzZnBWNFQ1TmtIdWpPNE5XM0JYZTM1RUFsOXNBeDBoQ0UwS1oiLCJpc3MiOiJodHRwczpcL1wvYXBpLmZsYXRpY29uLmNvbVwvb2F1dGhcL3Rva2VuIiwiZXhwIjoxNjg1ODcxOTMyLCJpYXQiOjE2ODU3ODU1MzIsImp0aSI6ImE3ODFiYjNkLTNhODItNGNlNC1hN2VmLTEyZDRmM2E3YWY1MyIsImNsaWVudF9pZCI6IlVZaWNsQTgwV3cxczNmcFY0VDVOa0h1ak80TlczQlhlMzVFQWw5c0F4MGhDRTBLWiJ9.0y6NtNik_Pt7vYcjw-6FfTSgRgfDiCWWtu0m_a6lioc';
 /*
 export const getMoviesFromApiAsync = async () => {
   try {
@@ -87,7 +87,7 @@ export const getPexelImages = async (searchQuery: string, setImages: any) => {
 export const searchForIcons = async (keyword: any) => {
   try {
     const response = await fetch(
-      'https://api.flaticon.com/v3/search/icons?query=' + keyword, {
+      'https://api.flaticon.com/v3/search/icons?iconType=stickers&q=' + keyword, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',

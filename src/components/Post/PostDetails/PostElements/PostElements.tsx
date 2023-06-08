@@ -8,10 +8,11 @@ import YesNoQ from './Elements/YesNoQ';
 
 type Props = {
   element: PostElement;
+  C: any;
 };
 
 
-const PostElements = ({ element }: Props) => {
+const PostElements = ({ element, C }: Props) => {
   console.log("hhhhhhhhhhh=", JSON.stringify(element));
   try {
     if (element.hasOwnProperty("style"))
@@ -23,9 +24,9 @@ const PostElements = ({ element }: Props) => {
   else if (element.type == PostElementType.ImageElement)
     return (<Image value={element} ></Image>);
   else if (element.type == PostElementType.YesNoQElement)
-    return (<YesNoQ value={element}   ></YesNoQ>);
+    return (<YesNoQ C={C} value={element}   ></YesNoQ>);
   else if (element.type == PostElementType.TextQElement)
-    return (<TextQ value={element}></TextQ>);
+    return (<TextQ C={C} value={element}></TextQ>);
   else if (element.type == PostElementType.TextElement)
     return (<Text style={element.style}>{element.text}</Text>);
   else

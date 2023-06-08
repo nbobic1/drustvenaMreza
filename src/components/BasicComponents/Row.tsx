@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import { View, StyleSheet, ViewStyle } from 'react-native'
-import { C, S } from '../../utils/Consts';
+import { S } from '../../utils/Consts';
 
 
 type Props = {
@@ -15,10 +15,11 @@ type Props = {
     f?: number;
     bC?: string;
     bg?: string;
+    C: any;
 };
 
 
-const Row = ({ g, children, f, mx, w, bg, bC, bR, bW, px, py }: Props) => {
+const Row = ({ g, C, children, f, mx, w, bg, bC, bR, bW, px, py }: Props) => {
 
     const styles = StyleSheet.create({
         root: {

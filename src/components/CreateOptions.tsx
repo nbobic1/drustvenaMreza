@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Keyboard, Text, View, StyleSheet, Modal, } from 'react-native'
 import FastImage from 'react-native-fast-image';
-import { MakePosts, sendMoviesFromApiAsync } from '../utils/ApiCalls';
-import { C, S } from '../utils/Consts';
+import { MakePosts, getTokenForIcons } from '../utils/ApiCalls';
+import { S } from '../utils/Consts';
 import { PostData, PostElement, PostElementType, TextElement } from '../utils/DataTypes';
 import ButtonV1 from './BasicComponents/ButtonV1';
 import InputV1 from './BasicComponents/InputV1';
@@ -15,10 +15,41 @@ type Props = {
   setReorderEnabled: (a: boolean) => void;
   setDeleteEnabled: (a: boolean) => void;
   DATA: PostElement[];
+  C: any;
   setDATA: (a: PostElement[]) => void;
 };
 
-const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: Props) => {
+const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled, C }: Props) => {
+
+
+
+  const styles = StyleSheet.create({
+    root: {
+      backgroundColor: C.white,
+      paddingTop: 10,
+    },
+    image: {
+      alignSelf: 'center',
+      height: 150,
+      width: 150
+    },
+    modalView: {//popup
+      backgroundColor: C.white,
+      borderRadius: 10,
+      position: 'absolute',
+      padding: 10,
+      bottom: 200,
+      paddingBottom: 23,
+      gap: 12,
+      alignSelf: 'center',
+      elevation: 5,
+      width: '80%'
+    },
+  });
+
+
+
+
   const [visible, setVisible] = useState(false);
   const [saveVisible, setSaveVisible] = useState(false);
   const [pickerVisible, setPickerVisible] = useState(false);
@@ -26,19 +57,19 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: 
   const [imgSrc, setImgSrc] = useState("");
   return (
     <View style={styles.root}>
-      <Row bC={C.primary} bW={2} bR={S.m} w={'93%'}>
-        <ButtonV1 onPress={() => { setReorderEnabled(false); setDeleteEnabled(true) }} title="Delete"></ButtonV1>
-        <ButtonV1 onPress={() => {
+      <Row C={C} bC={C.primary} bW={2} bR={S.m} w={'93%'}>
+        <ButtonV1 C={C} onPress={() => { setReorderEnabled(false); setDeleteEnabled(true) }} title="Delete"></ButtonV1>
+        <ButtonV1 C={C} onPress={() => {
           Keyboard.dismiss(); setSaveVisible(true);
           setReorderEnabled(false); setDeleteEnabled(false);
         }} title="Save"></ButtonV1>
-        <ButtonV1 onPress={() => {
+        <ButtonV1 C={C} onPress={() => {
           setVisible(true); setReorderEnabled(false);
           setDeleteEnabled(false)
         }} title="Add"></ButtonV1>
-        <ButtonV1 onPress={() => { setReorderEnabled(true); setDeleteEnabled(false) }} title="Reorder"></ButtonV1>
+        <ButtonV1 C={C} onPress={() => { setReorderEnabled(true); setDeleteEnabled(false) }} title="Reorder"></ButtonV1>
       </Row>
-      <Row bg={C.primary} g={-1} px={-1} py={-1} >
+      <Row C={C} bg={C.primary} g={-1} px={-1} py={-1} >
         <View style={{ height: 15, borderTopRightRadius: 50, flex: 3, backgroundColor: '#ffffff' }}>
         </View>
         <View style={{ flex: 3, height: 15, borderTopStartRadius: 50, backgroundColor: 'white' }}>
@@ -48,15 +79,15 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: 
         <View style={{ width: '100%', height: '100%', backgroundColor: '#00000080' }}>
           <View style={styles.modalView}>
             <Text style={{ alignSelf: 'center', textAlign: 'center', fontSize: 25, margin: 20 }}>Which item would you like to add?</Text>
-            <Row py={-1}>
-              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, url: "", type: PostElementType.ImageElement }]); }} title="Media"></ButtonV1>
-              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, text: "", type: PostElementType.TextElement, style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } }]); }} title="Text"></ButtonV1>
+            <Row C={C} py={-1}>
+              <ButtonV1 C={C} onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, url: "", type: PostElementType.ImageElement }]); }} title="Media"></ButtonV1>
+              <ButtonV1 C={C} onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, text: "", type: PostElementType.TextElement, style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } }]); }} title="Text"></ButtonV1>
             </Row>
-            <Row py={-1} >
-              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, question: "", answer: true, type: PostElementType.YesNoQElement, style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } }]); }} title="Yes/No question"></ButtonV1>
-              <ButtonV1 onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, question: "", answer: "", type: PostElementType.TextQElement, style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } }]); }} title="Text question"></ButtonV1>
+            <Row C={C} py={-1} >
+              <ButtonV1 C={C} onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, question: "", answer: true, type: PostElementType.YesNoQElement, style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } }]); }} title="Yes/No question"></ButtonV1>
+              <ButtonV1 C={C} onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, question: "", answer: "", type: PostElementType.TextQElement, style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } }]); }} title="Text question"></ButtonV1>
             </Row>
-            <ButtonV1 w={'50%'} onPress={() => { setVisible(false); }} title="Close"></ButtonV1>
+            <ButtonV1 C={C} w={'50%'} onPress={() => { setVisible(false); }} title="Close"></ButtonV1>
           </View>
         </View>
       </Modal >
@@ -74,11 +105,11 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: 
                 resizeMode={FastImage.resizeMode.contain}
               />
             }
-            <InputV1 onChangeText={(text) => { setTitle(text) }} ph='Title'></InputV1>
-            <ButtonV1 onPress={() => { setPickerVisible(true) }} title="Add cover image" ></ButtonV1>
+            <InputV1 C={C} onChangeText={(text) => { setTitle(text) }} ph='Title'></InputV1>
+            <ButtonV1 C={C} onPress={() => { setPickerVisible(true) }} title="Add cover image" ></ButtonV1>
 
-            <Row px={-1}>
-              <ButtonV1 onPress={() => {
+            <Row C={C} px={-1}>
+              <ButtonV1 C={C} onPress={() => {
                 if (!Keyboard.isVisible()) {
                   setSaveVisible(false)
                   console.log("title=", title)
@@ -95,39 +126,15 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled }: 
 
               }}
                 title="Save" ></ButtonV1>
-              <ButtonV1 onPress={() => { setSaveVisible(false); }} title="Close" ></ButtonV1>
+              <ButtonV1 C={C} onPress={() => { setSaveVisible(false); }} title="Close" ></ButtonV1>
             </Row>
           </View>
         </View>
       </Modal>
-      <ImageSearcher setImgSrc={setImgSrc} visible={pickerVisible} setVisibile={setPickerVisible}></ImageSearcher>
+      <ImageSearcher C={C} setImgSrc={setImgSrc} visible={pickerVisible} setVisibile={setPickerVisible}></ImageSearcher>
 
     </View >
   );
 };
-
-const styles = StyleSheet.create({
-  root: {
-    backgroundColor: C.white,
-    paddingTop: 10,
-  },
-  image: {
-    alignSelf: 'center',
-    height: 150,
-    width: 150
-  },
-  modalView: {//popup
-    backgroundColor: C.white,
-    borderRadius: 10,
-    position: 'absolute',
-    padding: 10,
-    bottom: 200,
-    paddingBottom: 23,
-    gap: 12,
-    alignSelf: 'center',
-    elevation: 5,
-    width: '80%'
-  },
-});
 
 export default CreateOptionns;

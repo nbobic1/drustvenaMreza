@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import { View, StyleSheet, ViewStyle } from 'react-native'
-import { C, S } from '../../utils/Consts';
+import { S } from '../../utils/Consts';
 
 
 type Props = {
@@ -12,10 +12,11 @@ type Props = {
     bW?: number;
     bC?: string;
     style?: ViewStyle;
+    C: any;
 };
 
 
-const Container = ({ children, mx, w, style, bC, bR, bW, px }: Props) => {
+const Container = ({ C, children, mx, w, style, bC, bR, bW, px }: Props) => {
 
     const styles = StyleSheet.create({
         root: {

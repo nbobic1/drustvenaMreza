@@ -2,7 +2,7 @@ import Slider from '@react-native-community/slider';
 import { Picker } from '@react-native-picker/picker';
 import React, { useState } from 'react'
 import { Text, View, StyleSheet, Modal, KeyboardAvoidingView } from 'react-native'
-import { C, S } from '../utils/Consts';
+import { S } from '../utils/Consts';
 import ButtonV1 from './BasicComponents/ButtonV1';
 import Row from './BasicComponents/Row';
 import { Feather } from '@expo/vector-icons';
@@ -11,10 +11,11 @@ import { Feather } from '@expo/vector-icons';
 type Props = {
     textSt: any;
     setTextSt: (a: any) => void;
+    C: any;
 };
 
 
-const FontPicker = ({ textSt, setTextSt }: Props) => {
+const FontPicker = ({ textSt, setTextSt, C }: Props) => {
     const [selectedLanguage, setSelectedLanguage] = useState(textSt != null ? textSt.fontFamily : 'normal');
     const [align, setAlign] = useState(true);
     console.log("ehhehe=", JSON.stringify(textSt), textSt != null ? textSt.fontSize : null);
@@ -25,15 +26,15 @@ const FontPicker = ({ textSt, setTextSt }: Props) => {
                 <View style={{ width: '100%', height: '100%', backgroundColor: C.popS, justifyContent: 'center' }}>
                     <View style={styles.modalView}>
                         <Text style={{ textAlign: 'center', fontSize: 20 }}>Adjust text</Text>
-                        <Row>
-                            <ButtonV1 initialValue={textSt != null ? textSt.fontWeight == 'bold' : false} v={"switch"} onPress={() => { if (textSt.fontWeight == 'bold') textSt.fontWeight = '500'; else textSt.fontWeight = 'bold'; }} title=''><Text style={{ fontSize: S.l, fontWeight: 'bold', textAlign: 'center' }}>B</Text></ButtonV1>
-                            <ButtonV1 initialValue={textSt != null ? textSt.fontStyle == 'italic' : false} v={"switch"} onPress={() => { if (textSt.fontStyle == 'normal') textSt.fontStyle = 'italic'; else textSt.fontStyle = 'normal'; }} title='' ><Text style={{ fontSize: S.l, fontStyle: 'italic', textAlign: 'center' }}>I</Text></ButtonV1>
-                            <ButtonV1 initialValue={textSt != null ? textSt.textDecorationLine == 'underline' : false} v={"switch"} onPress={() => { if (textSt.textDecorationLine == 'underline') textSt.textDecorationLine = 'none'; else textSt.textDecorationLine = 'underline'; }} title='' ><Text style={{ fontSize: S.l, textDecorationLine: 'underline', textAlign: 'center' }}>U</Text></ButtonV1>
+                        <Row C={C}>
+                            <ButtonV1 C={C} initialValue={textSt != null ? textSt.fontWeight == 'bold' : false} v={"switch"} onPress={() => { if (textSt.fontWeight == 'bold') textSt.fontWeight = '500'; else textSt.fontWeight = 'bold'; }} title=''><Text style={{ fontSize: S.l, fontWeight: 'bold', textAlign: 'center' }}>B</Text></ButtonV1>
+                            <ButtonV1 C={C} initialValue={textSt != null ? textSt.fontStyle == 'italic' : false} v={"switch"} onPress={() => { if (textSt.fontStyle == 'normal') textSt.fontStyle = 'italic'; else textSt.fontStyle = 'normal'; }} title='' ><Text style={{ fontSize: S.l, fontStyle: 'italic', textAlign: 'center' }}>I</Text></ButtonV1>
+                            <ButtonV1 C={C} initialValue={textSt != null ? textSt.textDecorationLine == 'underline' : false} v={"switch"} onPress={() => { if (textSt.textDecorationLine == 'underline') textSt.textDecorationLine = 'none'; else textSt.textDecorationLine = 'underline'; }} title='' ><Text style={{ fontSize: S.l, textDecorationLine: 'underline', textAlign: 'center' }}>U</Text></ButtonV1>
                         </Row>
-                        <Row>
-                            <ButtonV1 initialValue={textSt != null ? (textSt.textAlign == 'left') : false} v={"switch1"} onPress={() => { textSt != null ? textSt.textAlign = 'left' : true; setAlign(!align); }} title='' ><Feather style={{ alignSelf: 'center' }} name="align-left" size={24} color="black" /></ButtonV1>
-                            <ButtonV1 initialValue={textSt != null ? (textSt.textAlign == 'center') : false} v={"switch1"} onPress={() => { textSt != null ? textSt.textAlign = 'center' : true; setAlign(!align); }} title='' ><Feather style={{ alignSelf: 'center' }} name="align-center" size={24} color="black" /></ButtonV1>
-                            <ButtonV1 initialValue={textSt != null ? (textSt.textAlign == 'right') : false} v={"switch1"} onPress={() => { textSt != null ? textSt.textAlign = 'right' : true; setAlign(!align); }} title='' ><Feather style={{ alignSelf: 'center' }} name="align-right" size={24} color="black" /></ButtonV1>
+                        <Row C={C}>
+                            <ButtonV1 C={C} initialValue={textSt != null ? (textSt.textAlign == 'left') : false} v={"switch1"} onPress={() => { textSt != null ? textSt.textAlign = 'left' : true; setAlign(!align); }} title='' ><Feather style={{ alignSelf: 'center' }} name="align-left" size={24} color="black" /></ButtonV1>
+                            <ButtonV1 C={C} initialValue={textSt != null ? (textSt.textAlign == 'center') : false} v={"switch1"} onPress={() => { textSt != null ? textSt.textAlign = 'center' : true; setAlign(!align); }} title='' ><Feather style={{ alignSelf: 'center' }} name="align-center" size={24} color="black" /></ButtonV1>
+                            <ButtonV1 C={C} initialValue={textSt != null ? (textSt.textAlign == 'right') : false} v={"switch1"} onPress={() => { textSt != null ? textSt.textAlign = 'right' : true; setAlign(!align); }} title='' ><Feather style={{ alignSelf: 'center' }} name="align-right" size={24} color="black" /></ButtonV1>
                         </Row>
                         <View style={{ flexDirection: 'row', width: '100%', paddingHorizontal: 2 * S.l }}>
                             <Text style={{ fontSize: 15, alignSelf: 'flex-start', verticalAlign: 'middle', height: '100%', }}>A</Text>
@@ -69,7 +70,7 @@ const FontPicker = ({ textSt, setTextSt }: Props) => {
                             <Picker.Item style={{ fontFamily: 'monospace' }} label="Monospace" value="monospace" />
                         </Picker>
 
-                        <ButtonV1 f={-1} w={100} onPress={() => { setTextSt(null); }} title="Close"></ButtonV1>
+                        <ButtonV1 C={C} f={-1} w={100} onPress={() => { setTextSt(null); }} title="Close"></ButtonV1>
 
                     </View>
                 </View>

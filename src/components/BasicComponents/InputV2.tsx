@@ -19,9 +19,10 @@ type Props = {
     onChangeText?: (value: string) => void;
     setVisible: (a: any) => void;
     value: any;
+    C: any;
 };
 
-const InputV2 = ({ mx, my, px, w, f, bR, bW, bC, ph, onChangeText, setVisible, textS, value, initialValue }: Props) => {
+const InputV2 = ({ C, mx, my, px, w, f, bR, bW, bC, ph, onChangeText, setVisible, textS, value, initialValue }: Props) => {
     const [outlineColor, setOutlineColor] = useState(bC ? bC : C.secundary);
     const [input, setInput] = useState(initialValue)
     const ref = useRef(null)

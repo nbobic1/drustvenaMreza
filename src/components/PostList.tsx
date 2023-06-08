@@ -7,8 +7,9 @@ import Post from './Post/Post';
 type Props = {
   searchText: string;
   DATA: any;
+  C: any;
 };
-const PostList = ({ searchText, DATA }: Props) => {
+const PostList = ({ searchText, DATA, C }: Props) => {
 
   const [flatListHeight, setFlatListHeight] = useState(200)
   const flatListRef = useRef<FlatList<PostData>>(null);
@@ -47,7 +48,7 @@ const PostList = ({ searchText, DATA }: Props) => {
       onLayout={(item) => { setFlatListHeight(item.nativeEvent.layout.height) }}
       renderItem={({ item }) => {
         console.log('id=', item.id)
-        return (<Post cols={cols} flatListHeight={flatListHeight} setScrollE={setScrollE} data={item} refi={scrollToIndex} index={getItemIndex(item)}></Post>)
+        return (<Post C={C} cols={cols} flatListHeight={flatListHeight} setScrollE={setScrollE} data={item} refi={scrollToIndex} index={getItemIndex(item)}></Post>)
       }}
 
     />

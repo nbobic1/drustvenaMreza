@@ -25,6 +25,7 @@ type postProps = {
     value: TextElement;
     removeID: (a: number) => void;
     setVisible: (a: any) => void;
+    C: any;
 };
 const TextElementPlaceholder: React.FC<postProps> = ({
     deleteEnabled,
@@ -32,7 +33,7 @@ const TextElementPlaceholder: React.FC<postProps> = ({
     removeID,
     value,
     reorderEnabled,
-    setVisible
+    setVisible, C
 }) => {
     const [text, setText] = useState("");
 
@@ -70,7 +71,7 @@ const TextElementPlaceholder: React.FC<postProps> = ({
                 }}
             >
                 <View pointerEvents={deleteEnabled ? "none" : "auto"}>
-                    <InputV2 initialValue={value.text} value={value} textS={value.style} setVisible={setVisible} onChangeText={(text) => { value.text = text }} ph="Your text..." />
+                    <InputV2 C={C} initialValue={value.text} value={value} textS={value.style} setVisible={setVisible} onChangeText={(text) => { value.text = text }} ph="Your text..." />
                 </View>
             </TouchableOpacity>
         </View>

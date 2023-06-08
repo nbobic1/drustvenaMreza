@@ -6,7 +6,7 @@ import { getGiffs, getPexelImages, searchForIcons } from '../utils/ApiCalls';
 import FastImage from 'react-native-fast-image'
 import InputV1 from './BasicComponents/InputV1';
 import ButtonV1 from './BasicComponents/ButtonV1';
-import { C, S } from '../utils/Consts';
+import { S } from '../utils/Consts';
 import { Video, AVPlaybackStatus, ResizeMode } from 'expo-av';
 import * as ImagePicker from 'expo-image-picker';
 import Row from './BasicComponents/Row';
@@ -16,16 +16,17 @@ type Props = {
   visible: boolean;
   setVisibile: (ard: boolean) => void;
   setImgSrc: (a: string) => void;
+  C: any;
 };
 
-const ImageSearcher = ({ visible, setVisibile, setImgSrc }: Props) => {
+const ImageSearcher = ({ visible, setVisibile, C, setImgSrc }: Props) => {
   const [showCamera, setShowCamera] = useState(false);
   const [images, setImages] = useState([]);
   const [query, setQuery] = useState("");
   console.log("image=====", images)
   const [btn, setBtn] = useState("Image");
   if (showCamera) {
-    return (<MyCamera close={setVisibile} setShowCamera={setShowCamera} showCamera={showCamera} setImg={setImgSrc}></MyCamera>)
+    return (<MyCamera C={C} close={setVisibile} setShowCamera={setShowCamera} showCamera={showCamera} setImg={setImgSrc}></MyCamera>)
 
   }
   else
@@ -40,21 +41,21 @@ const ImageSearcher = ({ visible, setVisibile, setImgSrc }: Props) => {
               }}>
                 <View style={{ flexGrow: 0, flexShrink: 0, }}>
                   <Text style={{ fontSize: S.l, textAlign: 'center' }}>Search and pick an image</Text>
-                  <InputV1 f={-1} onChangeText={text => setQuery(text)} search={() => {
+                  <InputV1 C={C} f={-1} onChangeText={text => setQuery(text)} search={() => {
                     console.log('searcham', query, btn)
                     if (btn == 'Image') getPexelImages(query, setImages);
                     else if (btn == 'Icon') { searchForIcons(query).then(a => setImages(a)) }
                     else if (btn == 'Giff') { getGiffs(query).then(a => setImages(a)) }
                   }} ph="Search..." />
-                  <Row g={3}>
-                    <ButtonV1 bg={btn != 'Image' ? C.white : C.primaryLight} v={"empty"} onPress={() => {
+                  <Row C={C} g={3}>
+                    <ButtonV1 C={C} bg={btn != 'Image' ? C.white : C.primaryLight} v={"empty"} onPress={() => {
                       setBtn('Image');
                     }} title="Image"></ButtonV1>
-                    <ButtonV1 bg={btn != 'Icon' ? C.white : C.primaryLight} v={"empty"} onPress={() => {
+                    <ButtonV1 C={C} bg={btn != 'Icon' ? C.white : C.primaryLight} v={"empty"} onPress={() => {
                       setBtn('Icon');
                     }} title="Icon" ></ButtonV1>
 
-                    <ButtonV1 bg={btn != 'Giff' ? C.white : C.primaryLight} v={"empty"} onPress={() => {
+                    <ButtonV1 C={C} bg={btn != 'Giff' ? C.white : C.primaryLight} v={"empty"} onPress={() => {
                       setBtn('Giff');
                     }} title="Giff" ></ButtonV1>
                   </Row></View>
@@ -95,8 +96,8 @@ const ImageSearcher = ({ visible, setVisibile, setImgSrc }: Props) => {
                     }}
                   /></View>
                 <View style={{ flexGrow: 0, flexShrink: 0, flexDirection: 'row', gap: S.s }}>
-                  <ButtonV1 f={-1} onPress={() => { setShowCamera(true) }} title="Camera"></ButtonV1>
-                  <ButtonV1 f={-1} onPress={async () => {
+                  <ButtonV1 C={C} f={-1} onPress={() => { setShowCamera(true) }} title="Camera"></ButtonV1>
+                  <ButtonV1 C={C} f={-1} onPress={async () => {
                     let result = await ImagePicker.launchImageLibraryAsync({
                       mediaTypes: ImagePicker.MediaTypeOptions.All,
                       allowsEditing: true,
@@ -113,7 +114,7 @@ const ImageSearcher = ({ visible, setVisibile, setImgSrc }: Props) => {
                       // Moj(result.assets[0].base64, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzNDk4MjY4LCJpYXQiOjE2ODIyMDIyNjgsImp0aSI6IjhlZWY2NWNkMzNhMjQ4MmM4ZGIxZjRmZDJhNGQ4NWYxIiwidXNlcl9pZCI6MiwiZW1haWwiOiJ0ZXN0QHRlc3QxLmNvbSJ9.-A994XOuS0Y7mTW7eEmoewc2d_--frSDorMbnnfMEas')
                     }
                   }} title="Galery"></ButtonV1>
-                  <ButtonV1 f={-1} onPress={() => { setVisibile(false) }} title="Close"></ButtonV1>
+                  <ButtonV1 C={C} f={-1} onPress={() => { setVisibile(false) }} title="Close"></ButtonV1>
                 </View>
               </View>
             </View>

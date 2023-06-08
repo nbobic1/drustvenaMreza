@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { BackHandler, Keyboard, NativeEventSubscription, Pressable, StyleSheet, TextInput, View } from 'react-native'
-import { C, S } from '../../utils/Consts';
+import { S } from '../../utils/Consts';
 import { FontAwesome } from '@expo/vector-icons';
 
 import { Image } from 'react-native';
@@ -18,10 +18,11 @@ type Props = {
     fontS?: number;
     search?: () => void,
     onChangeText?: (value: string) => void;
+    C: any;
 };
 
 
-const InputV1 = ({ mx, my, px, w, f, bR, bW, bC, ph, onChangeText, fontS, search, v }: Props) => {
+const InputV1 = ({ C, mx, my, px, w, f, bR, bW, bC, ph, onChangeText, fontS, search, v }: Props) => {
     const [outlineColor, setOutlineColor] = useState(bC ? bC : C.secundary);
     const [input, setInput] = useState("")
     const ref = useRef(null)

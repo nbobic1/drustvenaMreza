@@ -4,7 +4,6 @@ import FastImage from 'react-native-fast-image'
 import PostDetailsOptions from './PostDetailsOptions'
 import { PostData, PostElement, VideoElement, ImageElement, TextQElement, YesNoQElement, PostElementType } from "../../../utils/DataTypes"
 import PostElements from './PostElements/PostElements';
-import { C } from '../../../utils/Consts';
 
 type Props = {
   height: number;
@@ -14,8 +13,9 @@ type Props = {
   setScrollE: (a: boolean) => void;
   setDetails: (a: any) => void;
   setExtraData: (a: any) => void;
+  C: any;
 };
-const PostDetailsScreen: React.FC<Props> = ({ setExtraData, height, items, hgh, setHgh, setScrollE, setDetails }) => {
+const PostDetailsScreen: React.FC<Props> = ({ C, setExtraData, height, items, hgh, setHgh, setScrollE, setDetails }) => {
 
   const styles = StyleSheet.create({
     container: {
@@ -59,11 +59,11 @@ const PostDetailsScreen: React.FC<Props> = ({ setExtraData, height, items, hgh, 
           //   style={{backgroundColor:'red'}}
           data={items}
           keyExtractor={(item1) => item1.index.toString()}
-          renderItem={({ item }) => { return (<PostElements element={item}></PostElements>) }}
+          renderItem={({ item }) => { return (<PostElements C={C} element={item}></PostElements>) }}
         />
       </ScrollView>
 
-      <PostDetailsOptions setExtraData={setExtraData} items={items} hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} ></PostDetailsOptions>
+      <PostDetailsOptions C={C} setExtraData={setExtraData} items={items} hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} ></PostDetailsOptions>
     </View>
   );
 };

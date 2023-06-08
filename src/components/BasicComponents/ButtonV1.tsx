@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Text, View, StyleSheet, ViewStyle, Pressable } from 'react-native'
-import { C, S } from '../../utils/Consts';
+import { S } from '../../utils/Consts';
 
 
 type Props = {
@@ -19,10 +19,11 @@ type Props = {
     f?: number;
     vAlign?: string;
     onPress?: () => void;
+    C: any;
 };
 
 
-const Button = ({ children, mx, my, w, v, bC, bR, bW, px, f, bg, title, onPress, initialValue, vAlign }: Props) => {
+const Button = ({ C, children, mx, my, w, v, bC, bR, bW, px, f, bg, title, onPress, initialValue, vAlign }: Props) => {
     if (v == "empty") {
         const styles = StyleSheet.create({
             root: {

@@ -12,10 +12,11 @@ type Props = {
   removeID: (a: number) => void;
   value: ImageElement;
   reorderEnabled: boolean;
+  C: any;
 };
 
 
-const ImagePlaceholder = ({ deleteEnabled, id, removeID, value, reorderEnabled }: Props) => {
+const ImagePlaceholder = ({ C, deleteEnabled, id, removeID, value, reorderEnabled }: Props) => {
   const [visible, setVisible] = useState(false);
   const [imgSrc, setImgSrc] = useState(value.url);
   useEffect(() => {
@@ -48,7 +49,7 @@ const ImagePlaceholder = ({ deleteEnabled, id, removeID, value, reorderEnabled }
               />
           }
         </Pressable>
-        <ImageSearcher visible={visible} setImgSrc={setImgSrc} setVisibile={setVisible}></ImageSearcher>
+        <ImageSearcher C={C} visible={visible} setImgSrc={setImgSrc} setVisibile={setVisible}></ImageSearcher>
       </Pressable>
     </View >
   );

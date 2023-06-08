@@ -10,18 +10,21 @@ type Props = {
     setShowCamera: (k: boolean) => void;
     setImg: (k: string) => void;
     close: (k: boolean) => void;
+    C: any;
 };
-const MyCamera = ({ showCamera, setShowCamera, setImg, close }: Props) => {
+const MyCamera = ({ showCamera, C, setShowCamera, setImg, close }: Props) => {
     const [visible, setVisible] = useState(false);
     const [type, setType] = useState(CameraType.back);
     const [permission, requestPermission] = Camera.useCameraPermissions();
     const cameraRef = useRef<Camera>(null);
-    if (!permission || !showCamera) {
+    if (!showCamera) {
         // Camera permissions are still loading
+        console.log("Camera no permision", showCamera, permission);
+        setShowCamera(false);
         return <View />;
     }
 
-    if (!permission.granted) {
+    if (permission && !permission.granted) {
         // Camera permissions are not granted yet
         return (
             <View style={styles.containerC}>

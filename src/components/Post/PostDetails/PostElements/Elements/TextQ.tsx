@@ -13,9 +13,10 @@ import Feedback from "./Feedback";
 
 type postProps = {
   value: TextQElement;
+  C: any;
 };
 const YesNoQ: React.FC<postProps> = ({
-  value,
+  value, C
 }) => {
   const [answer, setAnswer] = useState("");
   const [visible, setVisible] = useState(false);
@@ -27,8 +28,8 @@ const YesNoQ: React.FC<postProps> = ({
   return (
     <View >
       <Text style={value.style}>{value.question} </Text>
-      <InputV1 onChangeText={setAnswer} ph="Your answer..."></InputV1>
-      <ButtonV1
+      <InputV1 C={C} onChangeText={setAnswer} ph="Your answer..."></InputV1>
+      <ButtonV1 C={C}
         w={'50%'}
         title="Answer"
         onPress={() => {
@@ -44,7 +45,7 @@ const YesNoQ: React.FC<postProps> = ({
           }
         }}
       />
-      <Feedback text={text} visible={visible} setVisible={setVisible}></Feedback>
+      <Feedback C={C} text={text} visible={visible} setVisible={setVisible}></Feedback>
     </View>
   );
 };

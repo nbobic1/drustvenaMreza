@@ -5,7 +5,7 @@ import PostDetailsScreen from './PostDetails/PostDetails';
 import Kraj from '../KrajBtn';
 import FastImage from 'react-native-fast-image'
 import { PostData } from '../../utils/DataTypes';
-import { C, S } from '../../utils/Consts';
+import { S } from '../../utils/Consts';
 import CreateScreen from '../../screens/CreateScreen';
 
 type postProps = {
@@ -15,9 +15,10 @@ type postProps = {
   index: number;
   cols: number;
   flatListHeight: number;
+  C: any;
 };
 
-const Post: React.FC<postProps> = ({ data, setScrollE, refi, index, flatListHeight, cols }) => {
+const Post: React.FC<postProps> = ({ C, data, setScrollE, refi, index, flatListHeight, cols }) => {
   const [hgh, setHgh] = useState(200)
   const [details, setDetails] = useState([0])
   const [extraData, setExtraData] = useState(undefined);
@@ -73,7 +74,7 @@ const Post: React.FC<postProps> = ({ data, setScrollE, refi, index, flatListHeig
           />
           <Text style={styles.description} >{data.title}</Text>
         </Pressable>
-        {details[0] != 0 ? <PostDetailsScreen setExtraData={setExtraData} hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} items={data.content} height={flatListHeight - 230 - S.m}></PostDetailsScreen> : <View></View> /*200 je slika, 30 text ispod nje, 30 back button*/}
+        {details[0] != 0 ? <PostDetailsScreen C={C} setExtraData={setExtraData} hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} items={data.content} height={flatListHeight - 230 - S.m}></PostDetailsScreen> : <View></View> /*200 je slika, 30 text ispod nje, 30 back button*/}
 
       </View>
 
@@ -82,4 +83,4 @@ const Post: React.FC<postProps> = ({ data, setScrollE, refi, index, flatListHeig
   );
 };
 
-export default Post;
+export default Post

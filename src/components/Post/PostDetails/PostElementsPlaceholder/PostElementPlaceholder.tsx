@@ -13,19 +13,20 @@ type Props = {
   removeID: (a: number) => void;
   reorderEnabled: boolean;
   setVisible: (a: any) => void;
+  C: any;
 };
 
-const PostElementPlaceholder = ({ setVisible, element, reorderEnabled, deleteEnabled, removeID }: Props) => {
+const PostElementPlaceholder = ({ setVisible, C, element, reorderEnabled, deleteEnabled, removeID }: Props) => {
   if (element.type == PostElementType.VideoElement)
     return (<TextInput placeholder="press to enter your text" value={"egasdgagdag"}></TextInput>)
   else if (element.type == PostElementType.ImageElement)
-    return (<ImagePlaceholder deleteEnabled={deleteEnabled} id={element.index} reorderEnabled={reorderEnabled} removeID={removeID} value={element}></ImagePlaceholder>);
+    return (<ImagePlaceholder C={C} deleteEnabled={deleteEnabled} id={element.index} reorderEnabled={reorderEnabled} removeID={removeID} value={element}></ImagePlaceholder>);
   else if (element.type == PostElementType.YesNoQElement)
-    return (<YesNoQPlaceholder setVisible={setVisible} value={element} reorderEnabled={reorderEnabled} id={element.index} removeID={removeID} deleteEnabled={deleteEnabled} ></YesNoQPlaceholder>);
+    return (<YesNoQPlaceholder C={C} setVisible={setVisible} value={element} reorderEnabled={reorderEnabled} id={element.index} removeID={removeID} deleteEnabled={deleteEnabled} ></YesNoQPlaceholder>);
   else if (element.type == PostElementType.TextQElement)
-    return (<TextQPlaceholder setVisible={setVisible} value={element} reorderEnabled={reorderEnabled} id={element.index} removeID={removeID} deleteEnabled={deleteEnabled} text={"fs"}></TextQPlaceholder>);
+    return (<TextQPlaceholder C={C} setVisible={setVisible} value={element} reorderEnabled={reorderEnabled} id={element.index} removeID={removeID} deleteEnabled={deleteEnabled} text={"fs"}></TextQPlaceholder>);
   else if (element.type == PostElementType.TextElement)
-    return (<TextElementPlaceholder setVisible={setVisible} value={element} reorderEnabled={reorderEnabled} id={element.index} removeID={removeID} deleteEnabled={deleteEnabled} ></TextElementPlaceholder>);
+    return (<TextElementPlaceholder C={C} setVisible={setVisible} value={element} reorderEnabled={reorderEnabled} id={element.index} removeID={removeID} deleteEnabled={deleteEnabled} ></TextElementPlaceholder>);
 
   else
     return (

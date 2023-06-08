@@ -20,6 +20,7 @@ type postProps = {
   value: TextQElement;
   removeID: (a: number) => void;
   setVisible: (a: boolean) => void;
+  C: any;
 };
 const YesNoQPlaceholder: React.FC<postProps> = ({
   text,
@@ -28,7 +29,7 @@ const YesNoQPlaceholder: React.FC<postProps> = ({
   removeID,
   value,
   reorderEnabled,
-  setVisible
+  setVisible, C
 }) => {
   const [first, setFirst] = useState(text);
 
@@ -73,12 +74,12 @@ const YesNoQPlaceholder: React.FC<postProps> = ({
       >
         <View pointerEvents={deleteEnabled ? "none" : "auto"}>
 
-          <InputV2 initialValue={value.question} value={value} textS={value.style} setVisible={setVisible} onChangeText={(value1) => { setQuestion(value1) }} ph="Your question..." />
+          <InputV2 C={C} initialValue={value.question} value={value} textS={value.style} setVisible={setVisible} onChangeText={(value1) => { setQuestion(value1) }} ph="Your question..." />
 
 
-          <InputV1 my={10} onChangeText={(value1) => { setAnswer(value1) }} ph="Your answer..." />
+          <InputV1 C={C} my={10} onChangeText={(value1) => { setAnswer(value1) }} ph="Your answer..." />
 
-          <ButtonV1 w={'50%'} v={"empty"} title="Answer"></ButtonV1>
+          <ButtonV1 C={C} w={'50%'} v={"empty"} title="Answer"></ButtonV1>
 
         </View>
       </TouchableOpacity>

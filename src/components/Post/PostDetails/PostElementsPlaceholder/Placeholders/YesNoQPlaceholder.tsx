@@ -20,8 +20,9 @@ type postProps = {
   value: YesNoQElement;
   removeID: (a: number) => void;
   setVisible: (a: boolean) => void;
+  C: any;
 };
-const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, reorderEnabled, value, setVisible }) => {
+const YesNoQPlaceholder: React.FC<postProps> = ({ C, deleteEnabled, id, removeID, reorderEnabled, value, setVisible }) => {
 
   const styles = StyleSheet.create({
 
@@ -69,8 +70,8 @@ const YesNoQPlaceholder: React.FC<postProps> = ({ deleteEnabled, id, removeID, r
     <View pointerEvents={reorderEnabled ? 'none' : 'auto'} >
       <Pressable disabled={!deleteEnabled} style={styles.root} onPress={() => { removeID(id) }}>
         <View pointerEvents={deleteEnabled ? 'none' : 'auto'}>
-          <InputV2 textS={value.style} setVisible={setVisible} initialValue={value.question} value={value} onChangeText={(text) => { value.question = text }} ph='Enter your question...'></InputV2>
-          <YesNo value={value} ></YesNo>
+          <InputV2 C={C} textS={value.style} setVisible={setVisible} initialValue={value.question} value={value} onChangeText={(text) => { value.question = text }} ph='Enter your question...'></InputV2>
+          <YesNo C={C} value={value} ></YesNo>
 
         </View>
       </Pressable>

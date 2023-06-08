@@ -7,7 +7,7 @@ import FeedScreen from './src/screens/FeedScreen';
 import CreateScreen from './src/screens/CreateScreen';
 import FavouriteScreen from './src/screens/FavouriteScreen';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
-import { C, S } from './src/utils/Consts';
+import { S } from './src/utils/Consts';
 
 import { Image } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
@@ -23,8 +23,38 @@ if (Platform.OS === 'android') {
 
 export default function App () {
   const [logedin, setLogedin] = useState(false)
+  const [refresh, setRefresh] = useState(false);
+  const [C, setC] = useState({
+    white: '#fff',
+    black: '#000',
+    primary: '#1C6CCA',//-'#e57239', //'#60BF4D',
+    primaryLight: '#39ACE5',
+    secundary: '#B8B8B8',
+    bg1: '#D8E3EF',
+    bg2: '#f3f4f6',
+    bg: '#f0f9ff',
+    bgV2: '#323F46',
+    focusBg: '#B7EFAC',
+    //buttons
+    btn: '#E1EBF5',
+    btnT: '#B7EFAC',
+
+    //input
+    i: '#000',
+    iT: '#000',
+    iB: '#000',
+
+    //textview
+    tv: '#000',
+    tvT: '#000',
+
+    //popup
+    pop: '#000',
+    popS: '#00000080'
+  });
   //https://blog.jscrambler.com/getting-started-with-react-navigation-v6-and-typescript-in-react-native
   const Tab = createBottomTabNavigator();
+
   useEffect(() => {
 
     SecureStore.getItemAsync('token').then((item) => {
@@ -32,6 +62,12 @@ export default function App () {
         setLogedin(true);
       else
         setLogedin(false);
+    })
+    SecureStore.getItemAsync('c').then((item) => {
+      if (item && item != '')
+        setC(JSON.parse(item))
+      else
+        SecureStore.setItemAsync('C', JSON.stringify(C))
     })
   }, []);
   /*
@@ -97,29 +133,27 @@ export default function App () {
         >
           <Tab.Screen
             name="Feed"
-            component={FeedScreen}
             options={{ title: 'Feed' }}
             initialParams={{}}
 
-          />
+          >{(props) => <FeedScreen {...props} {...{ C: C }} />}</Tab.Screen>
           <Tab.Screen
             name="Create"
-            component={CreateScreen}
             options={{ title: 'Details' }}
             initialParams={{}}
-          />
+          >{(props) => <CreateScreen {...props} {...{ C: C }}></CreateScreen>}</Tab.Screen>
           <Tab.Screen
             name="LogIn"
             //component={LogInScreen}
             //children={(rute, navigation) => { <LogInScreen setLogedin={setLogedin}></LogInScreen> }}
             options={{ title: 'LogIn' }}
           >
-            {(props) => <Profile setLogedin={setLogedin}></Profile>}
+            {(props) => <Profile C={C} setRefresh={setRefresh} setLogedin={setLogedin}></Profile>}
           </Tab.Screen>
         </Tab.Navigator>
 
       </NavigationContainer>
       :
-      <LogInScreen setLogedin={setLogedin}></LogInScreen>
+      <LogInScreen C={C} setLogedin={setLogedin}></LogInScreen>
   );
 }

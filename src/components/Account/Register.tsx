@@ -7,11 +7,12 @@ import { Register as RegisterApi } from '../../utils/ApiCalls';
 type Props = {
     setRegister: (a: boolean) => void;
     setLogedin: (a: boolean) => void;
+    C: any;
 };
 
 
 
-const Register = ({ setLogedin, setRegister }: Props) => {
+const Register = ({ setLogedin, setRegister, C }: Props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -19,12 +20,12 @@ const Register = ({ setLogedin, setRegister }: Props) => {
         <View style={styles.root}>
             <View>
                 <Text style={{ alignSelf: 'center', marginTop: 5 * S.l, fontSize: 2 * S.l }}>Register</Text>
-                <InputV1 f={-1} mx={2 * S.l} onChangeText={(value) => { setUsername(value) }} ph={"Username"}></InputV1>
+                <InputV1 C={C} f={-1} mx={2 * S.l} onChangeText={(value) => { setUsername(value) }} ph={"Username"}></InputV1>
 
-                <InputV1 f={-1} mx={2 * S.l} onChangeText={(value) => { setPassword(value) }} ph={"Password"} ></InputV1>
-                <InputV1 f={-1} mx={2 * S.l} onChangeText={(value) => { setConfirmPassword(value) }} ph={"Confirm password"} ></InputV1>
-                <Button f={-1} my={S.m} w={'50%'} title='Register' onPress={() => { RegisterApi(username, password, confirmPassword) }}></Button>
-                <Button f={-1} my={S.m} w={'50%'} onPress={() => { setRegister(false) }} title='Login'></Button>
+                <InputV1 C={C} f={-1} mx={2 * S.l} onChangeText={(value) => { setPassword(value) }} ph={"Password"} ></InputV1>
+                <InputV1 C={C} f={-1} mx={2 * S.l} onChangeText={(value) => { setConfirmPassword(value) }} ph={"Confirm password"} ></InputV1>
+                <Button C={C} f={-1} my={S.m} w={'50%'} title='Register' onPress={() => { RegisterApi(username, password, confirmPassword) }}></Button>
+                <Button C={C} f={-1} my={S.m} w={'50%'} onPress={() => { setRegister(false) }} title='Login'></Button>
             </View>
         </View>
     );

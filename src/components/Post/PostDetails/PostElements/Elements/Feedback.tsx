@@ -8,16 +8,17 @@ type Props = {
     visible: boolean;
     setVisible: (value: boolean) => void;
     text: string;
+    C: any;
 };
 
 
-const Feedback = ({ visible, setVisible, text }: Props) => {
+const Feedback = ({ visible, setVisible, text, C }: Props) => {
     return (
         <Modal transparent={true} visible={visible} >
             <View style={{ width: '100%', height: '100%', backgroundColor: '#00000080' }}>
                 <View style={styles.modalView}>
                     <Text>{text}</Text>
-                    <ButtonV1 onPress={() => { setVisible(false); }} title="Close" ></ButtonV1>
+                    <ButtonV1 C={C} onPress={() => { setVisible(false); }} title="Close" ></ButtonV1>
                 </View>
             </View>
         </Modal>

@@ -5,12 +5,12 @@ import { PostElement, YesNoQElement } from '../../../../../utils/DataTypes';
 import Row from '../../../../BasicComponents/Row';
 import ButtonV1 from '../../../../BasicComponents/ButtonV1';
 import Feedback from './Feedback';
-import { C } from '../../../../../utils/Consts';
 
 type postProps = {
   value: YesNoQElement;
+  C: any;
 };
-const YesNoQ: React.FC<postProps> = ({ value }) => {
+const YesNoQ: React.FC<postProps> = ({ C, value }) => {
 
   const [visible, setVisible] = useState(false);
   const [text, setText] = useState("");
@@ -18,8 +18,8 @@ const YesNoQ: React.FC<postProps> = ({ value }) => {
   return (
     <View >
       <Text style={value.style}>{value.question}</Text>
-      <Row bg={C.bg} >
-        <ButtonV1 onPress={() => {
+      <Row C={C} bg={C.bg} >
+        <ButtonV1 C={C} onPress={() => {
           if (value.answer) {
             setText("Correct answer");
             setVisible(true);
@@ -29,7 +29,7 @@ const YesNoQ: React.FC<postProps> = ({ value }) => {
             setVisible(true);
           }
         }} title="Yes"></ButtonV1>
-        <ButtonV1 onPress={() => {
+        <ButtonV1 C={C} onPress={() => {
           if (!value.answer) {
             setText("Correct answer");
             setVisible(true);
@@ -40,7 +40,7 @@ const YesNoQ: React.FC<postProps> = ({ value }) => {
           }
         }} title="No" ></ButtonV1>
       </Row>
-      <Feedback text={text} visible={visible} setVisible={setVisible}></Feedback>
+      <Feedback C={C} text={text} visible={visible} setVisible={setVisible}></Feedback>
     </View>
   );
 };
