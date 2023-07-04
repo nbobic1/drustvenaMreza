@@ -54,7 +54,7 @@ export default function App () {
   });
   //https://blog.jscrambler.com/getting-started-with-react-navigation-v6-and-typescript-in-react-native
   const Tab = createBottomTabNavigator();
-
+  const recolor = (C1: any) => { SecureStore.setItemAsync('C', JSON.stringify(C1)); setRefresh(!refresh) }
   useEffect(() => {
 
     SecureStore.getItemAsync('token').then((item) => {

@@ -19,12 +19,13 @@ type Props = {
     search?: () => void,
     onChangeText?: (value: string) => void;
     C: any;
+    ver?: number;
 };
 
 
-const InputV1 = ({ C, mx, my, px, w, f, bR, bW, bC, ph, onChangeText, fontS, search, v }: Props) => {
+const InputV1 = ({ ver, C, mx, my, px, w, f, bR, bW, bC, ph, onChangeText, fontS, search, v }: Props) => {
     const [outlineColor, setOutlineColor] = useState(bC ? bC : C.secundary);
-    const [input, setInput] = useState("")
+    const [input, setInput] = useState(ver ? ver : "")
     const ref = useRef(null)
 
 
@@ -57,38 +58,73 @@ const InputV1 = ({ C, mx, my, px, w, f, bR, bW, bC, ph, onChangeText, fontS, sea
         }
     });
     const [backHandler, setBackHandler] = useState<NativeEventSubscription>()
-    return (
-        <View style={styles.root}>
-            <View style={styles.root2}>
+    if (ver)
+        return (
+            <View style={styles.root}>
+                <View style={styles.root2}>
 
-                <TextInput ref={ref} onChangeText={(text1) => { setInput(text1) }}
-                    style={styles.input}
-                    onFocus={() => {
-                        setOutlineColor(C.primary); setBackHandler(
-                            Keyboard.addListener('keyboardDidHide', () => {
-                                if (ref != null && ref.current != null)
-                                    ref.current.blur();
-                                else
-                                    backHandler?.remove();
-                            }))
-                    }}
-                    onBlur={() => { if (search) search(); backHandler?.remove() }}
-                    multiline={true}
-                    blurOnSubmit={true}
-                    onEndEditing={() => {
-                        setOutlineColor(C.secundary);
-                        if (onChangeText)
-                            onChangeText(input);
-                    }}
-                    placeholder={ph ? ph : ""}></TextInput>
-                {search && <Pressable onPress={search} style={{ justifyContent: 'center' }}><Image
-                    source={require('../../../assets/search.png')}
-                    fadeDuration={0}
-                    style={{ width: S.i, height: S.i }}
-                /></Pressable>}
+                    <TextInput ref={ref} onChangeText={(text1) => { setInput(text1) }}
+                        style={styles.input}
+                        defaultValue={input}
+                        onFocus={() => {
+                            setOutlineColor(C.primary); setBackHandler(
+                                Keyboard.addListener('keyboardDidHide', () => {
+                                    if (ref != null && ref.current != null)
+                                        ref.current.blur();
+                                    else
+                                        backHandler?.remove();
+                                }))
+                        }}
+                        onBlur={() => { if (search) search(); backHandler?.remove() }}
+                        multiline={true}
+                        blurOnSubmit={true}
+                        onEndEditing={() => {
+                            setOutlineColor(C.secundary);
+                            if (onChangeText)
+                                onChangeText(input);
+                        }}
+                        placeholder={ph ? ph : ""}></TextInput>
+                    {search && <Pressable onPress={search} style={{ justifyContent: 'center' }}><Image
+                        source={require('../../../assets/search.png')}
+                        fadeDuration={0}
+                        style={{ width: S.i, height: S.i }}
+                    /></Pressable>}
+                </View>
             </View>
-        </View>
-    );
+        );
+    else
+        return (
+            <View style={styles.root}>
+                <View style={styles.root2}>
+
+                    <TextInput ref={ref} onChangeText={(text1) => { setInput(text1) }}
+                        style={styles.input}
+                        onFocus={() => {
+                            setOutlineColor(C.primary); setBackHandler(
+                                Keyboard.addListener('keyboardDidHide', () => {
+                                    if (ref != null && ref.current != null)
+                                        ref.current.blur();
+                                    else
+                                        backHandler?.remove();
+                                }))
+                        }}
+                        onBlur={() => { if (search) search(); backHandler?.remove() }}
+                        multiline={true}
+                        blurOnSubmit={true}
+                        onEndEditing={() => {
+                            setOutlineColor(C.secundary);
+                            if (onChangeText)
+                                onChangeText(input);
+                        }}
+                        placeholder={ph ? ph : ""}></TextInput>
+                    {search && <Pressable onPress={search} style={{ justifyContent: 'center' }}><Image
+                        source={require('../../../assets/search.png')}
+                        fadeDuration={0}
+                        style={{ width: S.i, height: S.i }}
+                    /></Pressable>}
+                </View>
+            </View>
+        );
 };
 
 
