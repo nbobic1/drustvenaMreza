@@ -15,10 +15,10 @@ type Props = {
 const Feedback = ({ visible, setVisible, text, C }: Props) => {
     return (
         <Modal transparent={true} visible={visible} >
-            <View style={{ width: '100%', height: '100%', backgroundColor: '#00000080' }}>
+            <View style={{ width: '100%', height: '100%', backgroundColor: '#00000080', justifyContent: 'space-around' }}>
                 <View style={styles.modalView}>
-                    <Text>{text}</Text>
-                    <ButtonV1 C={C} onPress={() => { setVisible(false); }} title="Close" ></ButtonV1>
+                    <Text style={{ fontSize: 30, textAlign: 'center' }}>{text}</Text>
+                    <ButtonV1 C={C} f={-1} onPress={() => { setVisible(false); }} title="Close" ></ButtonV1>
                 </View>
             </View>
         </Modal>
@@ -31,9 +31,8 @@ const styles = StyleSheet.create({
     modalView: {//popup
         backgroundColor: '#fff',
         borderRadius: 10,
-        position: 'absolute',
         padding: 20,
-        bottom: 100,
+        width: '60%',
         alignSelf: 'center',
         elevation: 5,
         rowGap: 10,

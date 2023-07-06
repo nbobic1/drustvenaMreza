@@ -14,12 +14,14 @@ const YesNoQ: React.FC<postProps> = ({ C, value }) => {
 
   const [visible, setVisible] = useState(false);
   const [text, setText] = useState("");
+  value.answer = JSON.parse(value.answer)
   console.log("sto ne radiiii=", value.answer);
   return (
     <View >
       <Text style={value.style}>{value.question}</Text>
       <Row C={C} bg={C.bg} >
         <ButtonV1 C={C} onPress={() => {
+
           if (value.answer) {
             setText("Correct answer");
             setVisible(true);

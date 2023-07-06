@@ -25,7 +25,7 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled, C 
 
   const styles = StyleSheet.create({
     root: {
-      backgroundColor: C.white,
+      backgroundColor: C.bg,
       paddingTop: 10,
     },
     image: {
@@ -57,7 +57,7 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled, C 
   const [imgSrc, setImgSrc] = useState("");
   return (
     <View style={styles.root}>
-      <Row C={C} bC={C.primary} bW={2} bR={S.m} w={'93%'}>
+      <Row C={C} bg={C.bg} bC={C.primary} bW={2} bR={S.m} w={'93%'}>
         <ButtonV1 C={C} onPress={() => { setReorderEnabled(false); setDeleteEnabled(true) }} title="Delete"></ButtonV1>
         <ButtonV1 C={C} onPress={() => {
           Keyboard.dismiss(); setSaveVisible(true);
@@ -70,20 +70,20 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled, C 
         <ButtonV1 C={C} onPress={() => { setReorderEnabled(true); setDeleteEnabled(false) }} title="Reorder"></ButtonV1>
       </Row>
       <Row C={C} bg={C.primary} g={-1} px={-1} py={-1} >
-        <View style={{ height: 15, borderTopRightRadius: 50, flex: 3, backgroundColor: '#ffffff' }}>
+        <View style={{ height: 15, borderTopRightRadius: 50, flex: 3, backgroundColor: C.bg }}>
         </View>
-        <View style={{ flex: 3, height: 15, borderTopStartRadius: 50, backgroundColor: 'white' }}>
+        <View style={{ flex: 3, height: 15, borderTopStartRadius: 50, backgroundColor: C.bg }}>
         </View>
       </Row>
       <Modal transparent={true} visible={visible} >
         <View style={{ width: '100%', height: '100%', backgroundColor: '#00000080' }}>
           <View style={styles.modalView}>
             <Text style={{ alignSelf: 'center', textAlign: 'center', fontSize: 25, margin: 20 }}>Which item would you like to add?</Text>
-            <Row C={C} py={-1}>
+            <Row C={C} py={-1} bg={C.white}>
               <ButtonV1 C={C} onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, url: "", type: PostElementType.ImageElement }]); }} title="Media"></ButtonV1>
               <ButtonV1 C={C} onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, text: "", type: PostElementType.TextElement, style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } }]); }} title="Text"></ButtonV1>
             </Row>
-            <Row C={C} py={-1} >
+            <Row C={C} py={-1} bg={C.white}>
               <ButtonV1 C={C} onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, question: "", answer: true, type: PostElementType.YesNoQElement, style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } }]); }} title="Yes/No question"></ButtonV1>
               <ButtonV1 C={C} onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, question: "", answer: "", type: PostElementType.TextQElement, style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } }]); }} title="Text question"></ButtonV1>
             </Row>
@@ -108,7 +108,7 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled, C 
             <InputV1 C={C} onChangeText={(text) => { setTitle(text) }} ph='Title'></InputV1>
             <ButtonV1 C={C} onPress={() => { setPickerVisible(true) }} title="Add cover image" ></ButtonV1>
 
-            <Row C={C} px={-1}>
+            <Row C={C} px={-1} bg={C.white}>
               <ButtonV1 C={C} onPress={() => {
                 if (!Keyboard.isVisible()) {
                   setSaveVisible(false)

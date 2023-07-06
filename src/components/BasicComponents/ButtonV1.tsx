@@ -109,7 +109,7 @@ const Button = ({ C, children, mx, my, w, v, bC, bR, bW, px, f, bg, title, onPre
         return (
             <Pressable onPress={onPress} style={styles.root}>
                 {children ? children :
-                    <Text style={{ alignSelf: 'center', color: C.white }}>{title}</Text>}
+                    <Text style={{ alignSelf: 'center', color: C.btnText }}>{title}</Text>}
             </Pressable>
         );
     }

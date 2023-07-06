@@ -38,7 +38,7 @@ export default function App () {
     //buttons
     btn: '#E1EBF5',
     btnT: '#B7EFAC',
-
+    btnText: '#ffffff',
     //input
     i: '#000',
     iT: '#000',
@@ -63,7 +63,8 @@ export default function App () {
       else
         setLogedin(false);
     })
-    SecureStore.getItemAsync('c').then((item) => {
+    SecureStore.getItemAsync('C').then((item) => {
+      console.log("C=", item)
       if (item && item != '')
         setC(JSON.parse(item))
       else

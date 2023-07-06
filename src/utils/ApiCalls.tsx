@@ -1,5 +1,6 @@
 import { PostElement, PostData } from "./DataTypes";
-const HOST = 'http://192.168.1.4:8000';
+const HOST = 'http://192.168.1.13:8000';
+import uuid from 'react-native-uuid';
 var token = 'eyJ0eXAiOiJhdCtKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVWWljbEE4MFd3MXMzZnBWNFQ1TmtIdWpPNE5XM0JYZTM1RUFsOXNBeDBoQ0UwS1oiLCJpc3MiOiJodHRwczpcL1wvYXBpLmZsYXRpY29uLmNvbVwvb2F1dGhcL3Rva2VuIiwiZXhwIjoxNjg1ODcxOTMyLCJpYXQiOjE2ODU3ODU1MzIsImp0aSI6ImE3ODFiYjNkLTNhODItNGNlNC1hN2VmLTEyZDRmM2E3YWY1MyIsImNsaWVudF9pZCI6IlVZaWNsQTgwV3cxczNmcFY0VDVOa0h1ak80TlczQlhlMzVFQWw5c0F4MGhDRTBLWiJ9.0y6NtNik_Pt7vYcjw-6FfTSgRgfDiCWWtu0m_a6lioc';
 /*
 export const getMoviesFromApiAsync = async () => {
@@ -238,7 +239,7 @@ export const GetPosts = (token: string | null) => {
         }
       ).then(response => response.text())
         .then(result => {
-          console.log(result.slice(0, 40000));
+          console.log(result.slice(0, 30000));
           var obj = JSON.parse(result)
           var nizPermisa = []
           for (var i = 0; i < obj.count; i++) {
@@ -249,7 +250,7 @@ export const GetPosts = (token: string | null) => {
           })
         })
 
-        .catch(error => console.log('error', error.slice(0, 40000)));// const json = await response.json();
+        .catch(error => console.log('error', error.slice(0, 30000)));// const json = await response.json();
       //return json.data.slice(1, 10).map((a: any) => 'https://i.giphy.com/media/' + a.id + '/giphy.mp4');//array of movies
     } catch (error) {
 
@@ -395,7 +396,7 @@ export const CreateContent = async (token: string | null, element: PostElement) 
           {
             uri: element.url,
             type: 'image/' + p,
-            name: 'elementrl.' + p
+            name: uuid.v4() + p
           })
       }
       formdata.append("type", element.type.toString());
@@ -413,11 +414,11 @@ export const CreateContent = async (token: string | null, element: PostElement) 
         }
       ).then(response => response.text())
         .then(result => {
-          console.log('napravljen content;', JSON.stringify(result).slice(0, 40000));
+          console.log('napravljen content;', JSON.stringify(result).slice(0, 30000));
           resolve(JSON.parse(result).id)//result.id)
         }
         )
-        .catch(error => { console.log('eror  con=', error.slice(0, 40000)); throw new Error(error) });// const json = await response.json();
+        .catch(error => { console.log('eror  con=', error.slice(0, 30000)); throw new Error(error) });// const json = await response.json();
 
 
       /*

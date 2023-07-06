@@ -25,6 +25,24 @@ const ImageSearcher = ({ visible, setVisibile, C, setImgSrc }: Props) => {
   const [query, setQuery] = useState("");
   console.log("image=====", images)
   const [btn, setBtn] = useState("Image");
+
+  const styles = StyleSheet.create({
+    image: {
+      height: 150,
+      width: 150,
+      alignSelf: 'center',
+    },
+
+    modalView: {//popup
+      width: '90%',
+      height: '80%'
+      , backgroundColor: C.bg,
+      borderRadius: 10,
+      padding: 20,
+      alignSelf: 'center',
+      elevation: 5,
+    },
+  });
   if (showCamera) {
     return (<MyCamera C={C} close={setVisibile} setShowCamera={setShowCamera} showCamera={showCamera} setImg={setImgSrc}></MyCamera>)
 
@@ -47,7 +65,7 @@ const ImageSearcher = ({ visible, setVisibile, C, setImgSrc }: Props) => {
                     else if (btn == 'Icon') { searchForIcons(query).then(a => setImages(a)) }
                     else if (btn == 'Giff') { getGiffs(query).then(a => setImages(a)) }
                   }} ph="Search..." />
-                  <Row C={C} g={3}>
+                  <Row C={C} bg={C.bg} g={3}>
                     <ButtonV1 C={C} bg={btn != 'Image' ? C.white : C.primaryLight} v={"empty"} onPress={() => {
                       setBtn('Image');
                     }} title="Image"></ButtonV1>
@@ -124,22 +142,5 @@ const ImageSearcher = ({ visible, setVisibile, C, setImgSrc }: Props) => {
     );
 };
 
-const styles = StyleSheet.create({
-  image: {
-    height: 150,
-    width: 150,
-    alignSelf: 'center',
-  },
-
-  modalView: {//popup
-    width: '90%',
-    height: '80%'
-    , backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 20,
-    alignSelf: 'center',
-    elevation: 5,
-  },
-});
 
 export default ImageSearcher;

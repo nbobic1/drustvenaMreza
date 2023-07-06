@@ -22,7 +22,7 @@ const PostDetailsOptions = ({ C, setExtraData, items, hgh, setHgh, setScrollE, s
 
   var navigation = useNavigation();
   return (
-    <Row C={C}>
+    <Row C={C} bg={C.bg}>
       <ButtonV1 C={C} bg={C.primary} title='Edit' onPress={() => {
         setExtraData(items)
         navigation.navigate("Create", { items });

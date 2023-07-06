@@ -13,7 +13,8 @@ type Props = {
 const YesNo = ({ value, C }: Props) => {
     const [btn, setBtn] = useState(true);
     return (
-        <Row C={C}>
+        <Row C={C} bg={C.white}>
+
             <ButtonV1 C={C} bg={btn ? C.btnT : C.white} v={"empty"} onPress={() => {
                 value.answer = true;
                 setBtn(true);
