@@ -19,7 +19,7 @@ const Register = ({ setLogedin, setRegister, C }: Props) => {
     return (
         <View style={styles.root}>
             <View>
-                <Text style={{ alignSelf: 'center', marginTop: 5 * S.l, fontSize: 2 * S.l }}>Register</Text>
+                <Text style={[{ color: C.textColor }, { alignSelf: 'center', marginTop: 5 * S.l, fontSize: 2 * S.l }]} >Register</Text>
                 <InputV1 C={C} f={-1} mx={2 * S.l} onChangeText={(value) => { setUsername(value) }} ph={"Username"}></InputV1>
 
                 <InputV1 C={C} f={-1} mx={2 * S.l} onChangeText={(value) => { setPassword(value) }} ph={"Password"} ></InputV1>

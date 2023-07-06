@@ -18,7 +18,7 @@ const YesNoQ: React.FC<postProps> = ({ C, value }) => {
   console.log("sto ne radiiii=", value.answer);
   return (
     <View >
-      <Text style={value.style}>{value.question}</Text>
+      <Text style={[{ color: C.textColor }, value.style]}>{value.question}</Text>
       <Row C={C} bg={C.bg} >
         <ButtonV1 C={C} onPress={() => {
 

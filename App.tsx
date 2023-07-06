@@ -25,6 +25,7 @@ export default function App () {
   const [logedin, setLogedin] = useState(false)
   const [refresh, setRefresh] = useState(false);
   const [C, setC] = useState({
+    textColor: '#000000',
     white: '#fff',
     black: '#000',
     primary: '#1C6CCA',//-'#e57239', //'#60BF4D',
@@ -125,7 +126,7 @@ export default function App () {
 
             },
             tabBarLabel: () => {
-              return null// <View style={{ height: '100%', justifyContent: 'center' }}><Text style={{ textAlign: 'center' }}><MaterialIcons name="grid-on" size={S.i} color={'black'} /></Text></View> 
+              return null// <View style={{ height: '100%', justifyContent: 'center' }}><Text style={{color: C.textColor}}  style={{ textAlign: 'center' }}><MaterialIcons name="grid-on" size={S.i} color={'black'} /></Text></View> 
             },
             header: ({ navigation, route, options }) => {
               return (null);

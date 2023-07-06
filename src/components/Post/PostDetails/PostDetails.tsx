@@ -74,8 +74,8 @@ export default PostDetailsScreen;
     //nestedScrollEnabled={true}  
     >
 
-          <Text>Fakultet je ustvar i isto sto i srednja skola samo malo drukcije koncipiran. lkdsjagldjgaljdglajglajglkjgdlagjdklakjgldajgljglgjlajgagjčalgjaglgjalčgjalčgjalgjalgjalgjagjčgjačgjagjačgjag</Text>
-          <Text style={styles.title}>Slike</Text>
+          <Text style={{color: C.textColor}} >Fakultet je ustvar i isto sto i srednja skola samo malo drukcije koncipiran. lkdsjagldjgaljdglajglajglkjgdlagjdklakjgldajgljglgjlajgagjčalgjaglgjalčgjalčgjalgjalgjalgjagjčgjačgjagjačgjag</Text>
+          <Text style={{color: C.textColor}}  style={styles.title}>Slike</Text>
           <View style={{ width: '100%', padding: 10, }}>
             <FastImage
               style={styles.image}
@@ -86,8 +86,8 @@ export default PostDetailsScreen;
               resizeMode={FastImage.resizeMode.stretch}
             />
           </View>
-          <Text>Fakultet je ustvar i isto sto i srednja skola samo malo drukcije koncipiran. lkdsjagldjgaljdglajglajglkjgdlagjdklakjgldajgljglgjlajgagjčalgjaglgjalčgjalčgjalgjalgjalgjagjčgjačgjagjačgjag</Text>
-          <Text style={styles.title}>Slike</Text>
+          <Text style={{color: C.textColor}} >Fakultet je ustvar i isto sto i srednja skola samo malo drukcije koncipiran. lkdsjagldjgaljdglajglajglkjgdlagjdklakjgldajgljglgjlajgagjčalgjaglgjalčgjalčgjalgjalgjalgjagjčgjačgjagjačgjag</Text>
+          <Text style={{color: C.textColor}}  style={styles.title}>Slike</Text>
           <FastImage
             style={styles.image}
             source={{
@@ -96,8 +96,8 @@ export default PostDetailsScreen;
             }}
             resizeMode={FastImage.resizeMode.contain}
           />
-          <Text>Fakultet je ustvar i isto sto i srednja skola samo malo drukcije koncipiran. lkdsjagldjgaljdglajglajglkjgdlagjdklakjgldajgljglgjlajgagjčalgjaglgjalčgjalčgjalgjalgjalgjagjčgjačgjagjačgjag</Text>
-          <Text style={styles.title}>Slike</Text>
+          <Text style={{color: C.textColor}} >Fakultet je ustvar i isto sto i srednja skola samo malo drukcije koncipiran. lkdsjagldjgaljdglajglajglkjgdlagjdklakjgldajgljglgjlajgagjčalgjaglgjalčgjalčgjalgjalgjalgjagjčgjačgjagjačgjag</Text>
+          <Text style={{color: C.textColor}}  style={styles.title}>Slike</Text>
           <FastImage
             style={styles.image}
             source={{
@@ -106,8 +106,8 @@ export default PostDetailsScreen;
             }}
             resizeMode={FastImage.resizeMode.contain}
           />
-          <Text>Fakultet je ustvar i isto sto i srednja skola samo malo drukcije koncipiran. lkdsjagldjgaljdglajglajglkjgdlagjdklakjgldajgljglgjlajgagjčalgjaglgjalčgjalčgjalgjalgjalgjagjčgjačgjagjačgjag</Text>
-          <Text style={styles.title}>Video</Text>
+          <Text style={{color: C.textColor}} >Fakultet je ustvar i isto sto i srednja skola samo malo drukcije koncipiran. lkdsjagldjgaljdglajglajglkjgdlagjdklakjgldajgljglgjlajgagjčalgjaglgjalčgjalčgjalgjalgjalgjagjčgjačgjagjačgjag</Text>
+          <Text style={{color: C.textColor}}  style={styles.title}>Video</Text>
           <Video
             ref={video}
             source={{

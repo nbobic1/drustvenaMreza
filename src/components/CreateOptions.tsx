@@ -78,7 +78,7 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled, C 
       <Modal transparent={true} visible={visible} >
         <View style={{ width: '100%', height: '100%', backgroundColor: '#00000080' }}>
           <View style={styles.modalView}>
-            <Text style={{ alignSelf: 'center', textAlign: 'center', fontSize: 25, margin: 20 }}>Which item would you like to add?</Text>
+            <Text style={[{ color: C.textColor },{ alignSelf: 'center', textAlign: 'center', fontSize: 25, margin: 20 }]}>Which item would you like to add?</Text>
             <Row C={C} py={-1} bg={C.white}>
               <ButtonV1 C={C} onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, url: "", type: PostElementType.ImageElement }]); }} title="Media"></ButtonV1>
               <ButtonV1 C={C} onPress={() => { setDATA([...DATA, { index: DATA[DATA.length - 1].index + 1, text: "", type: PostElementType.TextElement, style: { textDecorationLine: 'none', fontWeight: '500', textAlign: 'center', fontSize: 18, fontFamily: 'normal' } }]); }} title="Text"></ButtonV1>
@@ -94,7 +94,7 @@ const CreateOptionns = ({ DATA, setDATA, setDeleteEnabled, setReorderEnabled, C 
       <Modal transparent={true} visible={saveVisible} >
         <View style={{ width: '100%', height: '100%', backgroundColor: '#00000080' }}>
           <View style={[styles.modalView, { padding: 20 }]}>
-            <Text style={{ alignSelf: 'center', fontSize: 28 }}>Fill post data to save it.</Text>
+            <Text style={[{ color: C.textColor },{ alignSelf: 'center', fontSize: 28 }]} >Fill post data to save it.</Text>
             {imgSrc == "" ? <View></View> :
               <FastImage
                 style={styles.image}

@@ -19,7 +19,7 @@ const FavouriteScreen = () => {
     // Camera permissions are not granted yet
     return (
       <View style={styles.containerC}>
-        <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+        <Text style={{ color: C.textColor }} style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
         <Button onPress={requestPermission} title="grant permission" />
       </View>
     );
@@ -39,10 +39,10 @@ const FavouriteScreen = () => {
 
             })
           }}>
-            <Text style={styles.text}>Click</Text>
+            <Text style={[{ color: C.textColor }, styles.text]}>Click</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-            <Text style={styles.text}>Flip Camera</Text>
+            <Text style={[{ color: C.textColor }, styles.text]}>Flip Camera</Text>
           </TouchableOpacity>
         </View>
       </Camera>

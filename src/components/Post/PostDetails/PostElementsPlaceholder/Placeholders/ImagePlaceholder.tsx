@@ -27,7 +27,7 @@ const ImagePlaceholder = ({ C, deleteEnabled, id, removeID, value, reorderEnable
     <View pointerEvents={reorderEnabled ? "none" : "auto"}>
       <Pressable disabled={!deleteEnabled} style={styles.root} onPress={() => { removeID(id) }}>
         <Pressable disabled={deleteEnabled} onPress={() => { setVisible(true) }}>
-          {imgSrc == "" ? <Text style={{ alignSelf: 'center', textAlignVertical: "center", height: '100%' }}>Tap to add media</Text> :
+          {imgSrc == "" ? <Text style={{ color: C.textColor, alignSelf: 'center', textAlignVertical: "center", height: '100%' }}>Tap to add media</Text> :
             imgSrc.includes('.mp4') ?
               <Video
                 source={{

@@ -27,7 +27,7 @@ const YesNoQ: React.FC<postProps> = ({
   console.log('moja==', JSON.stringify(value))
   return (
     <View >
-      <Text style={value.style}>{value.question} </Text>
+      <Text style={[value.style, { color: C.textColor }]} >{value.question} </Text>
       <InputV1 C={C} onChangeText={setAnswer} ph="Your answer..."></InputV1>
       <ButtonV1 C={C}
         w={'50%'}

@@ -25,11 +25,11 @@ const FontPicker = ({ textSt, setTextSt, C }: Props) => {
             <Modal visible={textSt != null ? true : false} >
                 <View style={{ width: '100%', height: '100%', backgroundColor: C.popS, justifyContent: 'center' }}>
                     <View style={styles.modalView}>
-                        <Text style={{ textAlign: 'center', fontSize: 20 }}>Adjust text</Text>
+                        <Text style={[{ color: C.textColor }, { textAlign: 'center', fontSize: 20 }]}>Adjust text</Text>
                         <Row C={C}>
-                            <ButtonV1 C={C} initialValue={textSt != null ? textSt.fontWeight == 'bold' : false} v={"switch"} onPress={() => { if (textSt.fontWeight == 'bold') textSt.fontWeight = '500'; else textSt.fontWeight = 'bold'; }} title=''><Text style={{ fontSize: S.l, fontWeight: 'bold', textAlign: 'center' }}>B</Text></ButtonV1>
-                            <ButtonV1 C={C} initialValue={textSt != null ? textSt.fontStyle == 'italic' : false} v={"switch"} onPress={() => { if (textSt.fontStyle == 'normal') textSt.fontStyle = 'italic'; else textSt.fontStyle = 'normal'; }} title='' ><Text style={{ fontSize: S.l, fontStyle: 'italic', textAlign: 'center' }}>I</Text></ButtonV1>
-                            <ButtonV1 C={C} initialValue={textSt != null ? textSt.textDecorationLine == 'underline' : false} v={"switch"} onPress={() => { if (textSt.textDecorationLine == 'underline') textSt.textDecorationLine = 'none'; else textSt.textDecorationLine = 'underline'; }} title='' ><Text style={{ fontSize: S.l, textDecorationLine: 'underline', textAlign: 'center' }}>U</Text></ButtonV1>
+                            <ButtonV1 C={C} initialValue={textSt != null ? textSt.fontWeight == 'bold' : false} v={"switch"} onPress={() => { if (textSt.fontWeight == 'bold') textSt.fontWeight = '500'; else textSt.fontWeight = 'bold'; }} title=''><Text style={{ color: C.textColor }} style={{ fontSize: S.l, fontWeight: 'bold', textAlign: 'center' }}>B</Text></ButtonV1>
+                            <ButtonV1 C={C} initialValue={textSt != null ? textSt.fontStyle == 'italic' : false} v={"switch"} onPress={() => { if (textSt.fontStyle == 'normal') textSt.fontStyle = 'italic'; else textSt.fontStyle = 'normal'; }} title='' ><Text style={{ color: C.textColor }} style={{ fontSize: S.l, fontStyle: 'italic', textAlign: 'center' }}>I</Text></ButtonV1>
+                            <ButtonV1 C={C} initialValue={textSt != null ? textSt.textDecorationLine == 'underline' : false} v={"switch"} onPress={() => { if (textSt.textDecorationLine == 'underline') textSt.textDecorationLine = 'none'; else textSt.textDecorationLine = 'underline'; }} title='' ><Text style={{ color: C.textColor }} style={{ fontSize: S.l, textDecorationLine: 'underline', textAlign: 'center' }}>U</Text></ButtonV1>
                         </Row>
                         <Row C={C}>
                             <ButtonV1 C={C} initialValue={textSt != null ? (textSt.textAlign == 'left') : false} v={"switch1"} onPress={() => { textSt != null ? textSt.textAlign = 'left' : true; setAlign(!align); }} title='' ><Feather style={{ alignSelf: 'center' }} name="align-left" size={24} color="black" /></ButtonV1>
@@ -37,8 +37,8 @@ const FontPicker = ({ textSt, setTextSt, C }: Props) => {
                             <ButtonV1 C={C} initialValue={textSt != null ? (textSt.textAlign == 'right') : false} v={"switch1"} onPress={() => { textSt != null ? textSt.textAlign = 'right' : true; setAlign(!align); }} title='' ><Feather style={{ alignSelf: 'center' }} name="align-right" size={24} color="black" /></ButtonV1>
                         </Row>
                         <View style={{ flexDirection: 'row', width: '100%', paddingHorizontal: 2 * S.l }}>
-                            <Text style={{ fontSize: 15, alignSelf: 'flex-start', verticalAlign: 'middle', height: '100%', }}>A</Text>
-                            <Text style={{ fontSize: 40, flex: 1, verticalAlign: 'bottom', textAlign: 'right' }}>A</Text>
+                            <Text style={[{ color: C.textColor }, { fontSize: 15, alignSelf: 'flex-start', verticalAlign: 'middle', height: '100%', }]} >A</Text>
+                            <Text style={[{ color: C.textColor }, { fontSize: 40, flex: 1, verticalAlign: 'bottom', textAlign: 'right' }]} >A</Text>
                         </View>
                         <Slider
                             minimumValue={1}
@@ -49,7 +49,7 @@ const FontPicker = ({ textSt, setTextSt, C }: Props) => {
                             thumbTintColor={C.primary}
                             minimumTrackTintColor={C.primary}
                         ></Slider>
-                        <Text style={{ textAlign: 'center', fontSize: 20, fontFamily: '' }}>Font:</Text>
+                        <Text style={[{ color: C.textColor }, { textAlign: 'center', fontSize: 20, fontFamily: '' }]}>Font:</Text>
                         <Picker
                             style={{ flex: 1, backgroundColor: C.bg, borderRadius: 10, flexGrow: 0 }}
                             mode={"dropdown"}

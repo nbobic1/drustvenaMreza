@@ -28,9 +28,9 @@ const PostElements = ({ element, C }: Props) => {
   else if (element.type == PostElementType.TextQElement)
     return (<TextQ C={C} value={element}></TextQ>);
   else if (element.type == PostElementType.TextElement)
-    return (<Text style={element.style}>{element.text}</Text>);
+    return (<Text style={[{ color: C.textColor }, element.style]}>{element.text}</Text>);
   else
-    return (<Text>ldsafdlja</Text>);
+    return (<Text style={{ color: C.textColor }} >ldsafdlja</Text>);
 };
 
 const styles = StyleSheet.create({

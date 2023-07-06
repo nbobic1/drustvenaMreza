@@ -72,7 +72,7 @@ const Post: React.FC<postProps> = ({ C, data, setScrollE, refi, index, flatListH
             }}
             resizeMode={FastImage.resizeMode.stretch}
           />
-          <Text style={styles.description} >{data.title}</Text>
+          <Text style={[{ color: C.textColor }, styles.description]} >{data.title}</Text>
         </Pressable>
         {details[0] != 0 ? <PostDetailsScreen C={C} setExtraData={setExtraData} hgh={hgh} setDetails={setDetails} setHgh={setHgh} setScrollE={setScrollE} items={data.content} height={flatListHeight - 230 - S.m}></PostDetailsScreen> : <View></View> /*200 je slika, 30 text ispod nje, 30 back button*/}
 

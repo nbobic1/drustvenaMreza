@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { Keyboard, NativeEventSubscription, Pressable, StyleSheet, TextInput, View } from 'react-native'
-import { C, S } from '../../utils/Consts';
+import { S } from '../../utils/Consts';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 import { Image } from 'react-native';

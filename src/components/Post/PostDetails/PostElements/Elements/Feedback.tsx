@@ -17,7 +17,7 @@ const Feedback = ({ visible, setVisible, text, C }: Props) => {
         <Modal transparent={true} visible={visible} >
             <View style={{ width: '100%', height: '100%', backgroundColor: '#00000080', justifyContent: 'space-around' }}>
                 <View style={styles.modalView}>
-                    <Text style={{ fontSize: 30, textAlign: 'center' }}>{text}</Text>
+                    <Text style={{ color: C.textColor, fontSize: 30, textAlign: 'center' }}>{text}</Text>
                     <ButtonV1 C={C} f={-1} onPress={() => { setVisible(false); }} title="Close" ></ButtonV1>
                 </View>
             </View>

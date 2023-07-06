@@ -24,8 +24,8 @@ const LogIn = ({ setLogedin, setRegister, C }: Props) => {
             <View >
 
 
-                <Text style={{ alignSelf: 'center', fontSize: 2 * S.l }}>LogIn</Text>
-                <Text style={{ alignSelf: 'center', fontSize: S.l }}>{message}</Text>
+                <Text style={[{ color: C.textColor }, { alignSelf: 'center', fontSize: 2 * S.l }]} >LogIn</Text>
+                <Text style={[{ color: C.textColor }, { alignSelf: 'center', fontSize: S.l }]} >{message}</Text>
                 <InputV1 C={C} onChangeText={(value) => { setEmail(value) }} f={-1} mx={2 * S.l} ph={"Username"}></InputV1>
 
                 <InputV1 C={C} onChangeText={(vale) => { setPassword(vale) }} f={-1} mx={2 * S.l} ph={"Password"}></InputV1>

@@ -11,9 +11,9 @@ type postProps = {
 const Kraj: React.FC<postProps> = ({ hgh, setHgh, setScrollE, setDetails }) => {
   if (hgh == 400) {
     return (
-    <TouchableOpacity onPress={() => { setHgh(200); setDetails([0]); setScrollE(true) }}>
-      <Text style={styles.description} >Back</Text>
-    </TouchableOpacity>
+      <TouchableOpacity onPress={() => { setHgh(200); setDetails([0]); setScrollE(true) }}>
+        <Text style={styles.description} >Back</Text>
+      </TouchableOpacity>
     );
   }
   else return <View></View>;

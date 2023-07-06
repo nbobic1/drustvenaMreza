@@ -87,6 +87,6 @@ const FeedScreen = ({ navigation, route, C }) => {
   );
 };
 
-//  <Text style={styles.navElement} onPress={()=>setVisible(true)} >popup</Text>
+//  <Text style={{color: C.textColor}}  style={styles.navElement} onPress={()=>setVisible(true)} >popup</Text>
 
 export default FeedScreen;

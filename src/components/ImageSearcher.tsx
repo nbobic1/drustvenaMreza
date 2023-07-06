@@ -58,7 +58,7 @@ const ImageSearcher = ({ visible, setVisibile, C, setImgSrc }: Props) => {
                 height: '100%',
               }}>
                 <View style={{ flexGrow: 0, flexShrink: 0, }}>
-                  <Text style={{ fontSize: S.l, textAlign: 'center' }}>Search and pick an image</Text>
+                  <Text style={[{ color: C.textColor }, { fontSize: S.l, textAlign: 'center' }]} >Search and pick an image</Text>
                   <InputV1 C={C} f={-1} onChangeText={text => setQuery(text)} search={() => {
                     console.log('searcham', query, btn)
                     if (btn == 'Image') getPexelImages(query, setImages);

@@ -28,7 +28,7 @@ const MyCamera = ({ showCamera, C, setShowCamera, setImg, close }: Props) => {
         // Camera permissions are not granted yet
         return (
             <View style={styles.containerC}>
-                <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+                <Text style={{ color: C.textColor, textAlign: 'center' }}>We need your permission to show the camera</Text>
                 <Button onPress={requestPermission} title="grant permission" />
             </View>
         );
@@ -51,15 +51,15 @@ const MyCamera = ({ showCamera, C, setShowCamera, setImg, close }: Props) => {
                                 close(false);
                             })
                         }}>
-                            <Text style={styles.text}>Click</Text>
+                            <Text style={{ color: C.textColor }} style={styles.text}>Click</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-                            <Text style={styles.text}>Flip</Text>
+                            <Text style={{ color: C.textColor }} style={styles.text}>Flip</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.button} onPress={() => {
                             setShowCamera(false)
                         }}>
-                            <Text style={styles.text}>Cancle</Text>
+                            <Text style={{ color: C.textColor }} style={styles.text}>Cancle</Text>
                         </TouchableOpacity>
                     </View>
                 </Camera>
