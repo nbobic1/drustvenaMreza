@@ -5,3 +5,9 @@ Kako je već rečeno, naše rješenje ovog problema je mobilna aplikacija koja �
 edukaciji i organizaciji. Mobilna aplikacija je namjenjena za korištenje na mobilnim telefonima i
 tabletima, a samim tim edukativni materijal i rasporedi će biti svima na dohvat ruke. U nastavku
 ćemo opisati mobilnu aplikaciju koja je nastala kao rješenje.
+
+Run with:
+//configure environment for android development
+
+npm i
+npm run android
